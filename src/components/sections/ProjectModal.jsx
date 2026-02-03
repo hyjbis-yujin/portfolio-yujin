@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import { X, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 // Placeholder images if real ones missing
-import logoBuff from '@/assets/sections/project/logo-buff.png'
+import logoBuff from '@/assets/images/projects/logo-buff.png'
 
 const ProjectModal = ({ project, onClose }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0)

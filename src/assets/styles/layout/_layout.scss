@@ -56,15 +56,15 @@
 
         // Modifier Classes for Icons
         &.btn-home {
-            background-image: url('@/assets/common/icons/icon-home.png');
+            background-image: url('@/assets/icons/default/home.png');
         }
 
         &.btn-mail {
-            background-image: url('@/assets/common/icons/icon-mail.png');
+            background-image: url('@/assets/icons/default/mail.png');
         }
 
         &.btn-github {
-            background-image: url('@/assets/common/icons/icon-github.png');
+            background-image: url('@/assets/icons/default/github.png');
             width: 25px; // Updated Size
             height: 23px; // Updated Size
         }

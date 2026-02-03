@@ -206,11 +206,11 @@
 
                 // Specific Icon
                 &.icon-shortcut {
-                    background-image: url('@/assets/sections/home/icons/icon-arrow.png');
+                    background-image: url('@/assets/icons/default/arrow.png');
                 }
 
                 &:hover {
-                    background-image: url('@/assets/sections/home/icons/icon-arrow-hover.png');
+                    background-image: url('@/assets/icons/hover/arrow.png');
                 }
             }
         }
@@ -228,7 +228,7 @@
 
             // Specific Icon
             &.btn-arrow-icon {
-                background-image: url('@/assets/sections/home/icons/icon-btn-arrow.png');
+                background-image: url('@/assets/images/ui/btn-arrow.png');
                 transition: background-image 0.2s; // Smooth transition
             }
         }
@@ -265,7 +265,7 @@
 
             // Specific Icons (via Classes)
             &.tool-ai {
-                background-image: url('@/assets/sections/home/icons/icon-tool-ai.png');
+                background-image: url('@/assets/icons/default/tool-ai.png');
                 background-size: 28px 28px;
             }
 

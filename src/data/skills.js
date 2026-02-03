@@ -1,3 +1,39 @@
+// Language
+import html5 from '@/assets/icons/default/html5.svg'
+import html5Hover from '@/assets/icons/hover/html5.svg'
+import css3 from '@/assets/icons/default/css3.svg'
+import css3Hover from '@/assets/icons/hover/css3.svg'
+import js from '@/assets/icons/default/js.svg'
+import jsHover from '@/assets/icons/hover/js.svg'
+import ts from '@/assets/icons/default/ts.svg'
+import tsHover from '@/assets/icons/hover/ts.svg'
+
+// Front
+import reactIcon from '@/assets/icons/default/react.svg'
+import reactHover from '@/assets/icons/hover/react.svg'
+import buildTools from '@/assets/icons/default/build-tools.svg'
+import buildToolsHover from '@/assets/icons/hover/build-tools.svg'
+import scss from '@/assets/icons/default/scss.svg'
+import scssHover from '@/assets/icons/hover/scss.svg'
+import nextjs from '@/assets/icons/default/next.svg'
+import nextjsHover from '@/assets/icons/hover/next.svg'
+import tailwind from '@/assets/icons/default/tailwind.svg'
+import tailwindHover from '@/assets/icons/hover/tailwind.svg'
+import zustand from '@/assets/icons/default/zustand.svg'
+import zustandHover from '@/assets/icons/hover/zustand.svg'
+
+// Tool
+import figma from '@/assets/icons/default/figma.svg'
+import figmaHover from '@/assets/icons/hover/figma.svg'
+import ps from '@/assets/icons/default/ps.svg'
+import psHover from '@/assets/icons/hover/ps.svg'
+import ai from '@/assets/icons/default/ai.svg'
+import aiHover from '@/assets/icons/hover/ai.svg'
+import git from '@/assets/icons/default/git.svg'
+import gitHover from '@/assets/icons/hover/git.svg'
+import vscode from '@/assets/icons/default/vscode.svg'
+import vscodeHover from '@/assets/icons/hover/vscode.svg'
+
 export const skills = [
     // Language
     {
@@ -7,8 +43,8 @@ export const skills = [
         category: 'language',
         desc: '시맨틱 마크업과 웹 접근성을 준수하여 구조적인 웹 페이지를 설계합니다.',
         featured: false,
-        icon: '/assets/icons/skills/logo-html5.svg',
-        hoverIcon: '/assets/icons/skills/logo-html5-hover.svg'
+        icon: html5,
+        hoverIcon: html5Hover
     },
     {
         id: 'css3',
@@ -17,8 +53,8 @@ export const skills = [
         category: 'language',
         desc: 'Flex/Grid를 활용한 레이아웃 설계 및 다양한 디바이스에 대응하는 반응형 웹을 구현합니다.',
         featured: true,
-        icon: '/assets/icons/skills/logo-css3.svg',
-        hoverIcon: '/assets/icons/skills/logo-css3-hover.svg'
+        icon: css3,
+        hoverIcon: css3Hover
     },
     {
         id: 'js',
@@ -27,8 +63,8 @@ export const skills = [
         category: 'language',
         desc: 'ES6+ 문법을 적극 활용하며, 비동기 통신 및 DOM 조작을 효율적으로 처리합니다.',
         featured: true,
-        icon: '/assets/icons/skills/logo-js.svg',
-        hoverIcon: '/assets/icons/skills/logo-js-hover.svg'
+        icon: js,
+        hoverIcon: jsHover
     },
     {
         id: 'ts',
@@ -37,8 +73,8 @@ export const skills = [
         category: 'language',
         desc: '정적 타입을 도입하여 런타임 오류를 방지하고 유지보수성을 높인 코드를 작성합니다.',
         featured: true,
-        icon: '/assets/icons/skills/logo-ts.svg',
-        hoverIcon: '/assets/icons/skills/logo-ts-hover.svg'
+        icon: ts,
+        hoverIcon: tsHover
     },
 
     // Front
@@ -49,8 +85,8 @@ export const skills = [
         category: 'front',
         desc: 'Hooks와 컴포넌트 생명주기를 이해하고, 재사용 가능한 UI 컴포넌트를 설계합니다.',
         featured: true,
-        icon: '/assets/icons/skills/logo-react.svg',
-        hoverIcon: '/assets/icons/skills/logo-react-hover.svg'
+        icon: reactIcon,
+        hoverIcon: reactHover
     },
     {
         id: 'gulp-webpack',
@@ -59,8 +95,8 @@ export const skills = [
         category: 'front',
         desc: 'Vite, Webpack 등 번들러 환경을 최적화하고 개발 효율을 높이는 설정을 관리합니다.',
         featured: true,
-        icon: '/assets/icons/skills/logo-build-tools.svg',
-        hoverIcon: '/assets/icons/skills/logo-build-tools-hover.svg'
+        icon: buildTools,
+        hoverIcon: buildToolsHover
     },
     {
         id: 'scss',
@@ -69,8 +105,8 @@ export const skills = [
         category: 'front',
         desc: '변수, Mixin, 중첩 규칙을 활용하여 스타일 코드의 재사용성과 가독성을 높입니다.',
         featured: false,
-        icon: '/assets/icons/skills/logo-scss.svg',
-        hoverIcon: '/assets/icons/skills/logo-scss-hover.svg'
+        icon: scss,
+        hoverIcon: scssHover
     },
     {
         id: 'nextjs',
@@ -79,8 +115,8 @@ export const skills = [
         category: 'front',
         desc: 'SSR과 SSG를 이해하고 SEO 친화적인 웹 애플리케이션을 구축합니다.',
         featured: true,
-        icon: '/assets/icons/skills/logo-next.svg',
-        hoverIcon: '/assets/icons/skills/logo-next-hover.svg'
+        icon: nextjs,
+        hoverIcon: nextjsHover
     },
     {
         id: 'tailwind',
@@ -89,8 +125,8 @@ export const skills = [
         category: 'front',
         desc: 'Utility-First 접근 방식으로 빠르고 일관된 스타일링을 구현합니다.',
         featured: true,
-        icon: '/assets/icons/skills/logo-tailwind.svg',
-        hoverIcon: '/assets/icons/skills/logo-tailwind-hover.svg'
+        icon: tailwind,
+        hoverIcon: tailwindHover
     },
     {
         id: 'zustand',
@@ -99,8 +135,8 @@ export const skills = [
         category: 'front',
         desc: '간결한 Flux 패턴으로 전역 상태를 효율적으로 관리합니다.',
         featured: false,
-        icon: '/assets/icons/skills/logo-zustand.svg',
-        hoverIcon: '/assets/icons/skills/logo-zustand-hover.svg'
+        icon: zustand,
+        hoverIcon: zustandHover
     },
 
     // Tool
@@ -111,8 +147,8 @@ export const skills = [
         category: 'tool',
         desc: '디자인 시안을 정확하게 코드로 구현하며, 디자이너와의 원활한 협업이 가능합니다.',
         featured: true,
-        icon: '/assets/icons/skills/logo-figma.svg',
-        hoverIcon: '/assets/icons/skills/logo-figma-hover.svg'
+        icon: figma,
+        hoverIcon: figmaHover
     },
     {
         id: 'ps',
@@ -121,8 +157,8 @@ export const skills = [
         category: 'tool',
         desc: '이미지 편집 및 보정을 수행하고, 다양한 디자인 포맷을 웹 환경에 맞게 최적화합니다.',
         featured: true,
-        icon: '/assets/icons/skills/logo-ps.svg',
-        hoverIcon: '/assets/icons/skills/logo-ps-hover.svg'
+        icon: ps,
+        hoverIcon: psHover
     },
     {
         id: 'ai',
@@ -131,8 +167,8 @@ export const skills = [
         category: 'tool',
         desc: '벡터 기반의 아이콘 및 로고를 제작하고 SVG를 최적화하여 웹에 적용합니다.',
         featured: true,
-        icon: '/assets/icons/skills/logo-ai.svg',
-        hoverIcon: '/assets/icons/skills/logo-ai-hover.svg'
+        icon: ai,
+        hoverIcon: aiHover
     },
     {
         id: 'git',
@@ -141,8 +177,8 @@ export const skills = [
         category: 'tool',
         desc: 'Git Flow 브랜치 전략을 이해하고, Pull Request 기반의 코드 리뷰와 협업을 진행합니다.',
         featured: true,
-        icon: '/assets/icons/skills/logo-git.svg',
-        hoverIcon: '/assets/icons/skills/logo-git-hover.svg'
+        icon: git,
+        hoverIcon: gitHover
     },
     {
         id: 'vscode',
@@ -151,7 +187,7 @@ export const skills = [
         category: 'tool',
         desc: '다양한 확장 프로그램과 단축키를 활용하여 개발 생산성을 극대화합니다.',
         featured: false,
-        icon: '/assets/icons/skills/logo-vscode.svg',
-        hoverIcon: '/assets/icons/skills/logo-vscode-hover.svg'
+        icon: vscode,
+        hoverIcon: vscodeHover
     }
 ]

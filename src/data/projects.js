@@ -1,7 +1,7 @@
-import logoBuff from '@/assets/sections/project/logo-buff.png'
-import project01 from '@/assets/sections/project/project-01.jpg'
-import project02 from '@/assets/sections/project/project-02.jpg'
-import project03 from '@/assets/sections/project/project-03.jpg'
+import logoBuff from '@/assets/images/projects/logo-buff.png'
+import project01 from '@/assets/images/projects/project-01.jpg'
+import project02 from '@/assets/images/projects/project-02.jpg'
+import project03 from '@/assets/images/projects/project-03.jpg'
 
 export const projects = [
     {

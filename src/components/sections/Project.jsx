@@ -1,8 +1,7 @@
 import React, { useState, useMemo, useRef } from 'react'
 import { cn } from '@/lib/utils'
 // import { ChevronLeft, ChevronRight } from 'lucide-react' // Removed
-import iconArrow from '@/assets/sections/project/icon-arrow.png'
-import logoBuff from '@/assets/sections/project/logo-buff.png'
+import logoBuff from '@/assets/images/projects/logo-buff.png'
 import ProjectModal from './ProjectModal'
 
 // Swiper
