@@ -11,6 +11,7 @@ import { Navigation } from 'swiper/modules'
 import 'swiper/css'
 
 import { projects } from '@/data/projects'
+import Section from '@/components/common/Section'
 
 const Project = ({ selectedProject, onClose, onOpenProject }) => {
     const [filter, setFilter] = useState('All')
@@ -57,7 +58,7 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
     }
 
     return (
-        <section id="project" className="section">
+        <Section id="project">
             <div className="project-container">
                 {/* Prev Arrow */}
                 <button
@@ -198,7 +199,7 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                     onClose={onClose}
                 />
             )}
-        </section>
+        </Section>
     )
 }
 

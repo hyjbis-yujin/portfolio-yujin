@@ -1,0 +1,294 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use './shared' as *; // Import shared for internal-scroll
+
+// Project Section
+#project {
+    // Section Background to #171717? 
+    // The user said "Section entire background color: #171717".
+    // This usually means the whole section block.
+    // However, global background is typically set in body.
+    // Let's set it here locally if possible or assume container level.
+    // Assuming default is dark charocal/black.
+    background-color: #171717; // Explicit request
+
+    .project-container {
+        @include internal-scroll;
+        padding-right: 0; // Remove right padding
+        max-width: 1400px; // Slightly wider for arrows
+        width: 100%;
+        display: flex;
+        flex-direction: row; // Row layout for Arrow-Content-Arrow
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        @include mq-tablet {
+            gap: 2rem;
+        }
+    }
+
+    // New Central Wrapper for Header + Swiper
+    .project-center-column {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        width: 100%;
+        min-width: 0; // Prevent flex overflow
+        gap: 4.5rem; // Space between Header and Grid
+    }
+
+    // Swiper Area specific
+    .project-swiper-area {
+        width: 100%;
+        position: relative;
+        overflow: visible;
+
+        // Flex layout for relative positioning of arrows
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem; // Gap between arrows and swiper
+
+        @include mq-tablet {
+            gap: 2rem;
+        }
+    }
+
+    .project-swiper {
+        flex: 1; // Take remaining space
+        width: 100%; // Ensure it fills flex child width
+        height: auto;
+        overflow: hidden;
+        border-radius: 30px;
+        min-width: 0; // Fix flexbox overflow issue
+    }
+}
+
+.filter-btn {
+    width: 124px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+    border-radius: 9999px; // Pill shape
+    background-color: #434343;
+    color: #CCCCCC;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    gap: 6px; // Gap for count
+
+    .count {
+        display: flex;
+        width: 27px;
+        height: 27px;
+        padding: 3px;
+        font-size: 12px;
+        align-items: center;
+        justify-content: center;
+        background: #00000021;
+        border-radius: 100%;
+        margin-left: 4px; // Fine tune spacing
+    }
+
+    &:hover {
+        background-color: #555555;
+    }
+
+    &.active {
+        background-color: #2CB1EA;
+        color: #FFFFFF;
+        font-weight: 600;
+
+        .count {
+            background: rgba(255, 255, 255, 0.2); // Lighten bg on active
+            color: #FFFFFF;
+        }
+    }
+}
+
+.slider-arrow {
+    position: relative; // Changed to relative
+    top: 57px; // Added as requested
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s;
+    z-index: 20;
+    display: block;
+    flex-shrink: 0;
+    outline: none;
+
+    // Specific Size Requested
+    width: 20px;
+    height: 46px;
+
+    // Background Image
+    background-image: url('@/assets/sections/project/icon-arrow.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    &:hover:not(.swiper-button-disabled) {
+        background-image: url('@/assets/sections/project/icons/icon-arrow-hover.png');
+    }
+
+    &.swiper-button-disabled {
+        opacity: 0.3;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    // Previous Absolute Positioning Removed
+
+
+    &.arrow-next {
+        transform: rotate(180deg); // Keep rotation
+    }
+}
+
+// Header Area: Title + Desc + Filter
+.project-header-area {
+    display: flex;
+    flex-direction: row; // Explicit row
+    justify-content: space-between; // Space between Title/Desc and Filter
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+    flex-wrap: wrap;
+
+    .header-left {
+        display: flex;
+        flex-direction: row; // Explicit row for alignment
+        gap: 1rem; // Reduced gap for "next to" feel
+        align-items: baseline; // Align text baselines
+        flex-wrap: wrap; // Allow wrap on very small screens if needed
+
+        .section-title {
+            margin: 0;
+            white-space: nowrap; // Keep title on one line
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: #888888;
+            font-weight: 400;
+            margin: 0;
+        }
+    }
+
+    .filter-group {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: nowrap; // Force single line
+    }
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem; // Updated Gap
+    width: 100%;
+
+    @include mq-tablet {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.project-card {
+    background-color: #212121; // Updated BG
+    border-radius: 30px; // Updated Radius to 30px
+    padding: 0;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0;
+    height: 230px;
+    min-height: 230px;
+    transition: transform 0.2s;
+    overflow: hidden;
+    position: relative; // Context for absolute if needed
+
+    // Left Image Area
+    .card-image-area {
+        width: 40%;
+        background-color: transparent; // Removed BG
+        flex-shrink: 0;
+        position: relative; // Context for overlay pill
+        display: flex; // Center the logo
+        align-items: center;
+        justify-content: center;
+
+        .image-overlay-pill {
+            position: absolute;
+            top: 25px; // Updated Top
+            left: 25px; // Updated Left
+            z-index: 2;
+
+            .type-pill {
+                // background-color: #1a1a1a; // Removed
+                color: #FFFFFF;
+                font-size: 14px;
+                padding: 10px 16px;
+                border-radius: 9999px;
+                font-weight: 400; // Updated Weight
+                border: 3px solid #3c3c3c; // Added Border
+            }
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2a2a2a 0%, #333333 100%);
+        }
+    }
+
+    // Right Content Area
+    .card-content-area {
+        width: 60%;
+        padding: 45px 30px 30px 0; // Updated Padding (Top 45px)
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem; // Main Gap
+        flex-grow: 1;
+
+        .card-title {
+            font-size: 17px; // Updated Font Size
+            font-weight: 500; // Updated Weight
+            color: #FFFFFF;
+            margin: 0;
+        }
+
+        .card-desc {
+            font-size: 16px;
+            color: #9C9C9C;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 0.5rem; // Spacer
+
+            .tag {
+                background-color: #323232; // Updated BG
+                color: #FFFFFF;
+                font-size: 14px;
+                padding: 10px 16px;
+                border-radius: 11px;
+                white-space: nowrap;
+                font-weight: 400;
+            }
+        }
+    }
+}

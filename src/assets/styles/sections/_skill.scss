@@ -1,0 +1,247 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Skill Section
+#skill {
+    // Mobile: Auto height, allow scroll
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // Always center content
+
+    @include mq-desktop {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .section-title {
+        margin-bottom: 0;
+    }
+
+    .skill-container {
+        width: 100%;
+        max-width: 1300px;
+        height: auto;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; // Center vertically
+        gap: 2rem;
+        padding-bottom: 4rem; // Buffer for mobile
+
+        @include mq-desktop {
+            height: auto; // Let content determine height, so parent #skill centers it
+            justify-content: center;
+            gap: 4rem;
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+    }
+
+    // 1. Fixed Header (Title + Tabs)
+    .skill-header {
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        width: 100%;
+        background-color: transparent;
+        z-index: 10;
+
+        @include mq-desktop {
+            gap: 2.5rem;
+        }
+    }
+
+    .skill-tabs {
+        display: flex;
+        flex-wrap: wrap; // Allow wrap on very small screens
+        justify-content: center;
+        gap: 0.5rem;
+
+        @include mq-tablet {
+            gap: 0.8rem;
+        }
+    }
+
+    .tab-btn {
+        width: auto; // Mobile auto width
+        min-width: 80px;
+        height: 44px; // Touch target
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1.2rem;
+        border-radius: 9999px;
+        background-color: #434343;
+        color: #CCCCCC;
+        border: none;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        @include mq-desktop {
+            width: 124px;
+            height: 50px;
+        }
+
+        @include hover-supported {
+            &:hover {
+                background-color: #555555;
+            }
+        }
+
+        &.active {
+            background-color: #2CB1EA;
+            color: #ffffff;
+            font-weight: 600;
+        }
+    }
+
+    .skill-desc-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #9C9C9C;
+        margin-bottom: 1rem;
+        font-size: 14px;
+        text-align: center;
+        word-break: keep-all;
+
+        @include mq-desktop {
+            margin-bottom: 2rem;
+            font-size: 15px;
+        }
+
+        svg {
+            color: #2CB1EA;
+            min-width: 20px; // Prevent shrink
+        }
+    }
+
+    // 2. Content Area
+    .skill-list-wrap {
+        flex: 1; // Stretch to fill
+        width: 100%;
+        overflow-y: visible;
+        padding: 0;
+    }
+
+    .skill-grid {
+        display: grid;
+        grid-template-columns: 1fr; // Mobile 1 col
+        gap: 1rem;
+        width: 100%;
+
+        @include mq-tablet {
+            grid-template-columns: repeat(2, 1fr); // Tablet 2 cols
+            gap: 1.25rem;
+        }
+
+        @include mq-desktop {
+            // Keep 2 cols maybe? Or 3 if space allows?
+            // User design previously had 2 cols but wide cards. 
+            // Maintaining 2 cols for skills is usually safe.
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+    }
+
+    .skill-card {
+        background-color: #212121;
+        border-radius: 20px;
+        padding: 24px; // Mobile comfort
+        border: 1px solid transparent;
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        align-items: flex-start;
+        text-align: left;
+        transition: all 0.3s ease;
+        height: auto;
+        min-height: 100px; // Min height for consistency
+
+        @include mq-desktop {
+            padding: 30px;
+            gap: 20px;
+            height: 100%;
+        }
+
+        // Hover Interaction using hover-supported
+        @include hover-supported {
+
+            &:hover,
+            &:focus-visible {
+                transform: translateY(-2px);
+                border-color: rgba(255, 255, 255, 0.1);
+                background-color: #2a2a2a;
+                outline: none;
+
+                .skill-icon-wrapper {
+                    .icon-default {
+                        opacity: 0;
+                    }
+
+                    .icon-hover {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        .skill-icon-box {
+            width: 48px;
+            height: 48px;
+            background-color: #393939;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #ffffff;
+            // padding: 10px; // Ensure padding for image? No, box is small.
+        }
+
+        svg {
+            width: 24px; // Smaller Icon
+            height: 24px;
+        }
+
+        // For custom image icons
+        .tool-box-mini {
+            // inherit size
+        }
+    }
+
+    .skill-content {
+        display: flex;
+        flex-direction: column;
+        gap: 6px; // Tighter text gap
+        flex-grow: 1;
+        padding-top: 2px; // Visual alignment with icon top
+    }
+
+    .skill-name {
+        font-size: 16px; // Slightly smaller title
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0;
+        line-height: 1.3;
+    }
+
+    .skill-text {
+        font-size: 14px; // Compact text
+        color: #9C9C9C;
+        line-height: 1.5;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; // Limit to 2 lines
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-break: keep-all; // Better for Korean
+    }
+}

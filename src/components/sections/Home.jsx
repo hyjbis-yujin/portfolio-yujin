@@ -2,6 +2,7 @@ import { skills } from '@/data/skills'
 import { projects } from '@/data/projects'
 import { smoothScrollTo } from '@/lib/smoothScroll'
 import SkillIcon from '@/components/common/SkillIcon'
+import Section from '@/components/common/Section'
 
 const Home = ({ onOpenProject }) => {
     // 1. Filter Featured Skills
@@ -18,7 +19,7 @@ const Home = ({ onOpenProject }) => {
     }
 
     return (
-        <section id="home" className="section">
+        <Section id="home">
             <div className="home-container">
                 {/* Center: Hero Grid */}
                 <div className="home-grid">
@@ -143,7 +144,7 @@ const Home = ({ onOpenProject }) => {
                     </div>
                 </div>
             </div>
-        </section >
+        </Section>
     )
 }
 

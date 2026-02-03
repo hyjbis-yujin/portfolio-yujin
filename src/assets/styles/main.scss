@@ -1,11 +1,19 @@
-@use 'variables' as *;
-@use 'mixins' as *;
-@use 'fonts'; // Imported Fonts
-@use 'base';
-@use 'components/layout';
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+@use 'base/fonts';
+@use 'base/base';
+@use 'layout/layout';
 @use 'components/ui';
-@use 'components/sections';
-@use 'components/modal'; // Modal Styles
+@use 'components/modal';
+
+// Sections
+@use 'sections/shared';
+@use 'sections/home';
+@use 'sections/about';
+@use 'sections/skill';
+@use 'sections/career';
+@use 'sections/project';
+@use 'sections/contact';
 
 // Global utilities if needed
 .container {

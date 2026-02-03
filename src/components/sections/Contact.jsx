@@ -2,6 +2,7 @@ import React from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Github, Mail, Copy, Check } from 'lucide-react'
 import { toast } from 'sonner'
+import Section from '@/components/common/Section'
 
 const Contact = () => {
     const handleCopyEmail = () => {
@@ -12,7 +13,7 @@ const Contact = () => {
     }
 
     return (
-        <section id="contact" className="section" style={{ overflow: 'hidden' }}>
+        <Section id="contact" className="contact-section-overflow">
             {/* Decorative Background Removed */}
 
             <div className="contact-container">
@@ -53,7 +54,7 @@ const Contact = () => {
                     <br /> Copyright ⓒ YUJIN
                 </div>
             </footer>
-        </section>
+        </Section>
     )
 }
 

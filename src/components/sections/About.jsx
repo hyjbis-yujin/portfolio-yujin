@@ -1,10 +1,11 @@
 import React from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { User, Code, Zap } from 'lucide-react'
+import Section from '@/components/common/Section'
 
 const About = () => {
     return (
-        <section id="about" className="section">
+        <Section id="about">
             <div className="about-container">
 
                 {/* Header */}
@@ -70,7 +71,7 @@ const About = () => {
                 </div>
 
             </div>
-        </section>
+        </Section>
     )
 }
 

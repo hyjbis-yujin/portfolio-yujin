@@ -3,6 +3,7 @@ import { Code2, Monitor, PenTool } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { skills } from '@/data/skills'
 import SkillIcon from '@/components/common/SkillIcon'
+import Section from '@/components/common/Section'
 
 // Category Config (Labels and Icons)
 const CATEGORY_CONFIG = {
@@ -20,7 +21,7 @@ const Skill = () => {
     }, [activeTab])
 
     return (
-        <section id="skill" className="section">
+        <Section id="skill">
             <div className="skill-container">
                 {/* Fixed Header Area */}
                 <div className="skill-header">
@@ -69,7 +70,7 @@ const Skill = () => {
                 </div>
 
             </div>
-        </section>
+        </Section>
     )
 }
 

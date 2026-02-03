@@ -1,8 +1,9 @@
 import React from 'react'
+import Section from '@/components/common/Section'
 
 const Career = () => {
   return (
-    <section id="career" className="section">
+    <Section id="career">
       <div className="career-container">
 
         {/* Section Header */}
@@ -60,7 +61,7 @@ const Career = () => {
         </div>
 
       </div>
-    </section>
+    </Section>
   )
 }
 

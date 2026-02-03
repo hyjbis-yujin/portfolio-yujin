@@ -1,0 +1,518 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Home Section
+#home {
+    .home-grid {
+        width: 100%;
+        max-width: 80rem; // ~1280px
+        display: grid;
+        // Mobile: Single column
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        align-items: center;
+
+        // Restore Tablet+ Layout (768px+)
+        @include mq-tablet {
+            grid-template-columns: repeat(12, 1fr);
+            gap: 4rem; // Slightly reduced from 5rem for tablet
+            align-items: center;
+        }
+
+        @include mq-desktop {
+            gap: 5rem;
+        }
+    }
+
+    .home-title-area {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.5rem;
+        text-align: center; // Mobile center
+
+        @include mq-desktop {
+            grid-column: span 5;
+            text-align: left;
+            gap: 1rem;
+        }
+
+        h1 {
+            font-family: $font-pixel;
+            // Fluid Typography: 32px ~ 70px
+            font-size: clamp(32px, 5vw + 1rem, 70px);
+            font-weight: normal;
+            line-height: 1.1;
+            letter-spacing: -0.05em;
+            word-break: keep-all; // Prevent awkward breaks
+        }
+
+        .highlight {
+            color: $primary-color;
+        }
+    }
+
+    .home-panels-area {
+        display: grid;
+        grid-template-columns: 1fr; // Mobile 1 col
+        gap: 1rem;
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto; // Center on mobile
+
+        @include mq-tablet {
+            grid-template-columns: repeat(2, 1fr); // Tablet 2 cols
+            gap: 1.25rem;
+        }
+
+        @include mq-desktop {
+            grid-column: span 7;
+            margin: 0; // Reset margin
+        }
+
+        .home-panel {
+            background-color: #212121;
+            border-radius: 20px;
+            padding: 24px; // Mobile Padding
+            display: flex;
+            flex-direction: column;
+            border: none;
+            box-shadow: none;
+
+            @include mq-tablet {
+                padding: 30px;
+            }
+
+            @include mq-desktop {
+                padding: 35px;
+            }
+        }
+
+        // Panel 01: Profile
+        .profile-panel {
+            grid-column: span 1;
+
+            @include mq-tablet {
+                grid-column: span 2;
+            }
+
+            padding-left: 24px; // Reset mobile
+
+            @include mq-tablet {
+                padding-left: 3rem;
+            }
+
+            flex-direction: column; // Mobile Stack
+            align-items: flex-start;
+            gap: 1.5rem;
+
+            @include mq-tablet {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            // Desktop: Restore space-between layout
+            @include mq-desktop {
+                justify-content: space-between;
+            }
+
+            .profile-info {
+                display: flex;
+                flex-direction: column;
+                gap: 0.25rem;
+
+                .profile-name {
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: #FFFFFF;
+                }
+
+                .profile-email {
+                    font-size: clamp(14px, 2vw, 16px);
+                    color: #5A5A5A;
+                    font-weight: 500;
+                    word-break: break-all;
+                }
+            }
+
+            .profile-actions {
+                display: flex;
+                flex-direction: row; // Mobile Row
+                gap: 10px;
+                width: 100%;
+
+                @include mq-tablet {
+                    flex-direction: column;
+                    width: auto;
+                }
+
+                .panel-btn {
+                    flex: 1; // Stretch on mobile
+                    height: 48px; // Min touch target
+                    background-color: #323232;
+                    color: #FFFFFF;
+                    border: none;
+                    border-radius: 13px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: background 0.2s;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    @include mq-tablet {
+                        width: 155px;
+                        height: 50px;
+                        flex: none;
+                    }
+
+                    @include hover-supported {
+                        &:hover {
+                            background-color: #4c4c4c;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Panel Header (Common)
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.8rem;
+
+            .panel-title {
+                font-size: 17px;
+                font-weight: 600;
+                color: #2CB1EA; // Point color
+            }
+
+            .shortcut-btn {
+                background: none;
+                border: none;
+                // color: #FFFFFF; // Removed color as no text
+                // opacity: 0.5; // Removed opacity
+                cursor: pointer;
+                transition: all 0.3s ease; // Restored smooth transition
+
+                // BG Config
+                width: 21px; // Fixed Size
+                height: 13px; // Fixed Size
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: contain; // or 21px 13px
+
+                // Specific Icon
+                &.icon-shortcut {
+                    background-image: url('@/assets/sections/home/icons/icon-arrow.png');
+                }
+
+                &:hover {
+                    background-image: url('@/assets/sections/home/icons/icon-arrow-hover.png');
+                }
+            }
+        }
+
+        // Button Icons
+        .btn-icon {
+            display: inline-block;
+            width: 15px; // Updated to 15px
+            height: 15px; // Updated to 15px
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            margin-right: 8px;
+            vertical-align: middle;
+
+            // Specific Icon
+            &.btn-arrow-icon {
+                background-image: url('@/assets/sections/home/icons/icon-btn-arrow.png');
+                transition: background-image 0.2s; // Smooth transition
+            }
+        }
+
+        // Hover Effect on Button Parent - Moved to .panel-btn block
+    }
+}
+
+// Panel 02: Tools
+.tools-panel {
+    height: 100%; // Ensure fills grid cell
+
+    .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px; // Adjusted for fit
+
+        .tool-box {
+            width: 55px; // Fixed size requested
+            height: 55px; // Fixed size requested
+            background-color: #393939;
+            border-radius: 15px; // Fixed radius requested
+
+            // Flex for Lucide/Text centering
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+
+            // BG Image Props
+            background-repeat: no-repeat;
+            background-position: center;
+            // background-size: 32px 32px; // Default, can be overridden inline
+
+            // Specific Icons (via Classes)
+            &.tool-ai {
+                background-image: url('@/assets/sections/home/icons/icon-tool-ai.png');
+                background-size: 28px 28px;
+            }
+
+            // SVG styling for Lucide fallbacks
+            svg {
+                width: 28px; // Updated to 28px
+                height: 28px; // Updated to 28px
+                color: #D6D6D6;
+            }
+
+            // Tool Labels (Text)
+            .tool-label {
+                color: #BEBEBE;
+                font-weight: 700;
+                font-size: 14px; // Explicit font size good practice
+            }
+
+            // Count Card
+            &.more-box {
+                font-size: 16px;
+                font-weight: 600;
+                color: #FFFFFF;
+                background-color: #393939;
+            }
+        }
+    }
+}
+
+// Panel 03: About
+.about-panel {
+    height: 100%; // Match height with Tools panel
+
+    .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        .tag {
+            background-color: #2C2C2C;
+            color: #FFFFFF;
+            font-size: 14px;
+            padding: 8px 16px; // Adjust padding to look like pill
+            border-radius: 9999px;
+            white-space: nowrap;
+        }
+    }
+}
+
+// Panel 04: Project
+.project-panel {
+    grid-column: span 1;
+
+    @include mq-tablet {
+        grid-column: span 2;
+    }
+
+    position: relative;
+    overflow: hidden;
+    height: clamp(200px, 30vw, 240px); // Fluid height
+
+    // Desktop: Fixed height to match original design
+    @include mq-desktop {
+        height: 240px;
+    }
+
+    .project-header {
+        z-index: 5;
+        position: relative;
+        display: flex;
+        justify-content: flex-start !important;
+        gap: 1rem;
+        align-items: baseline;
+        flex-wrap: wrap; // Allow wrap for small screens
+
+        .panel-title {
+            color: #2CB1EA;
+        }
+
+        .project-desc {
+            font-size: 14px;
+            color: #9C9C9C;
+        }
+    }
+
+    .project-stack {
+        position: relative;
+        height: 100%;
+        margin-top: 1rem;
+        display: flex;
+
+        .stack-card {
+            // Mobile: Responsive width based on container, capped at 217px
+            width: clamp(160px, 45%, 217px);
+            height: clamp(80px, 20vw, 104px);
+
+            // Desktop: Fixed dimensions
+            @include mq-desktop {
+                width: 217px;
+                height: 104px;
+            }
+
+            background-color: #323232;
+            border-radius: 12px;
+            position: absolute;
+            bottom: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s,
+            z-index 0.2s;
+
+            // Stacking Logic (Calculated with SCSS for responsiveness)
+            // We assume 3 cards + 1 more button
+            // Left offset needs to be fluid.
+            // Simplified: just use percentages for responsive steps or fixed calc if container constrained.
+
+            // Since container is responsive, % is safer but calc is more precise for 'visible overlap'.
+            // Let's use a simpler overlap logic usable on mobile.
+
+            &:nth-child(1) {
+                left: 0;
+                z-index: 1;
+            }
+
+            &:nth-child(2) {
+                left: 20%;
+                z-index: 2;
+
+                @include mq-tablet {
+                    left: 30%;
+                }
+
+                // Desktop: Use calc for precise positioning
+                @include mq-desktop {
+                    left: calc((100% - 217px) / 3 * 1);
+                }
+            }
+
+            &:nth-child(3) {
+                left: 40%;
+                z-index: 3;
+
+                @include mq-tablet {
+                    left: 60%;
+                }
+
+                // Desktop: Use calc for precise positioning
+                @include mq-desktop {
+                    left: calc((100% - 217px) / 3 * 2);
+                }
+            }
+
+            // Project Preview Styles
+            &.project-preview-card {
+                background-size: cover;
+                background-position: center;
+                cursor: pointer;
+                overflow: hidden;
+
+                .card-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: rgba(0, 0, 0, 0.6);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                }
+
+                .preview-title {
+                    color: white;
+                    font-weight: 700;
+                    font-size: clamp(12px, 2vw, 16px);
+                    text-align: center;
+                    padding: 0 0.5rem;
+                }
+
+                @include hover-supported {
+                    &:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+                        z-index: 10 !important;
+
+                        .card-overlay {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+
+            // Glass Overlay
+            &.glass-overlay {
+                left: 60%;
+                z-index: 4;
+
+                @include mq-tablet {
+                    left: 90%;
+                    transform: translateX(-100%);
+                }
+
+                // Desktop: Precise calc positioning
+                @media (min-width: 1000px) {
+                    left: calc((100% - 217px) / 3 * 3);
+                    transform: none;
+                }
+
+                // Dock right on tablet
+
+                background: #ffffff1f;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, .18);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+
+                span {
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #FFFFFF;
+                    letter-spacing: 0.05em;
+                }
+
+                @include hover-supported {
+                    transition: transform 0.3s ease;
+
+                    // Mobile default behavior (Just lift, no X translate)
+                    &:hover {
+                        transform: translateY(-5px);
+                    }
+
+                    // Tablet specific behavior (Maintain translate-x)
+                    @include mq-tablet {
+                        &:hover {
+                            transform: translateY(-5px) translateX(-100%);
+                        }
+                    }
+
+                    // Desktop specific behavior (Reset to just lift)
+                    @media (min-width: 1000px) {
+
+                        // Lowered slightly to catch 1010px issue
+                        &:hover {
+                            transform: translateY(-5px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

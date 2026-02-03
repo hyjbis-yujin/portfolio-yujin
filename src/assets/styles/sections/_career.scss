@@ -1,0 +1,125 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use './shared' as *; // Import shared for internal-scroll
+
+// Career Section
+#career {
+    .career-container {
+        @include internal-scroll;
+        max-width: 1000px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+
+        .text-center {
+            text-align: center;
+            margin-bottom: 0;
+        }
+    }
+
+    .career-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+
+        @include mq-desktop {
+            grid-template-columns: repeat(2, 1fr); // Desktop only 2
+        }
+
+        @include mq-tablet {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .info-card-container {
+        background-color: #212121;
+        border-radius: 20px; // Mobile radius
+
+        @include mq-tablet {
+            border-radius: 27px 54px 27px 27px;
+        }
+
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        border: none;
+        overflow: hidden;
+    }
+
+    .container-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #FFFFFF;
+        margin-bottom: 0;
+        padding: 20px 24px; // Mobile padding
+
+        @include mq-tablet {
+            padding: 28px 40px;
+        }
+    }
+
+    .info-items {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        background-color: #2f2f2f;
+        padding: 24px; // Mobile padding
+        flex-grow: 1;
+        border-radius: 20px;
+
+        @include mq-tablet {
+            border-radius: 27px;
+            padding: 40px;
+        }
+    }
+
+    .info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: flex-start;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #525252;
+
+        &:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+    }
+
+    .item-org {
+        font-size: 17px;
+        font-weight: 600;
+        color: #2CB1EA;
+    }
+
+    .item-desc {
+        font-size: 16px;
+        color: #9C9C9C;
+        line-height: 1.5;
+        word-break: keep-all;
+    }
+
+    .item-badges {
+        display: flex;
+        gap: 8px;
+        margin-top: 0.5rem;
+        flex-wrap: wrap;
+
+        .badge-pill {
+            background-color: #3B3B3B;
+            color: #fff;
+            font-size: 13px;
+            padding: 10px 20px;
+            border-radius: 99px;
+        }
+    }
+
+    // Date
+    .item-date {
+        font-size: 13px;
+        color: #7A7A7A;
+    }
+}
