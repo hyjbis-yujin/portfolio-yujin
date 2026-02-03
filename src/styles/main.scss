@@ -1,0 +1,54 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'fonts'; // Imported Fonts
+@use 'base';
+@use 'components/layout';
+@use 'components/ui';
+@use 'components/sections';
+@use 'components/modal'; // Modal Styles
+
+// Global utilities if needed
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+// Helper classes matching common design needs
+.section-title {
+  font-family: $font-title; // Yuseol
+  font-size: 34px; // Updated to 34px as requested
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.text-muted {
+  color: $secondary-color;
+}
+
+// Custom Cursor (Desktop Only)
+@media (pointer: fine) {
+  body {
+    cursor: url('/cursor.svg') 0 0, auto; // Default Custom Cursor
+  }
+
+  // Pointer Cursor (Clickable elements)
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea,
+  .card,
+  .glass-overlay,
+  .tab-item,
+  .project-preview-card {
+    cursor: url('/cursor.svg') 0 0, pointer;
+    // User requested: "Basic state: default cursor", "Clickable: pointer cursor". 
+    // If no separate pointer image provided, usually users want the Same image or System pointer.
+    // User said: "Use ONLY provided images". Only cursor.png provided.
+    // Let's use cursor.png effectively replacing the system cursor entirely.
+  }
+}

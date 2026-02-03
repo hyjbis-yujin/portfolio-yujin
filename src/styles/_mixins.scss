@@ -1,0 +1,76 @@
+@use 'variables' as *;
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin glass-effect {
+    background: $card-bg;
+    backdrop-filter: blur(10px);
+    border: 1px solid $border-color;
+}
+
+@mixin text-gradient($start, $end) {
+    background: linear-gradient(to right, $start, $end);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+// Breakpoints
+// Mobile: 0 ~ 767px (Default)
+// Tablet: 768px ~ 1023px
+// Desktop: 1024px ~ 1439px
+// Wide: 1440px +
+
+@mixin mq-tablet {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin mq-desktop {
+    @media (min-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin mq-wide {
+    @media (min-width: 1440px) {
+        @content;
+    }
+}
+
+// Mobile Only (max-width 767px) - Use sparingly, mostly for resets
+@mixin mq-mobile-only {
+    @media (max-width: 767px) {
+        @content;
+    }
+}
+
+// Hover Interaction (Disable on touch devices)
+@mixin hover-supported {
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            @content;
+        }
+    }
+}
+
+@mixin hide-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+
+    &::-webkit-scrollbar {
+        display: none;
+        /* Chrome, Safari, Opera */
+    }
+}

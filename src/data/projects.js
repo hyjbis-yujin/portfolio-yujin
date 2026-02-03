@@ -1,0 +1,272 @@
+import logoBuff from '@/assets/sections/project/logo-buff.png'
+import project01 from '@/assets/sections/project/project-01.jpg'
+import project02 from '@/assets/sections/project/project-02.jpg'
+import project03 from '@/assets/sections/project/project-03.jpg'
+
+export const projects = [
+    {
+        id: 1,
+        type: 'Company',
+        title: '중앙청소년유해환경감시단',
+        desc: '청소년 보호 및 유해환경 감시를 위한 공식 웹사이트 및 관리 시스템.',
+        tags: ['React', 'Node.js', 'MongoDB'],
+        // Expanded Data
+        images: [project01, project01, project01], // Authentic images
+        links: { git: 'https://github.com', demo: 'https://demo.com' },
+        meta: {
+            main: 'Public Service',
+            scale: '관공서 프로젝트',
+            contribution: 'Design 80% / Dev 100%',
+            stack: 'React, Node.js',
+            framework: 'Express',
+            library: 'Mongoose'
+        },
+        highlights: [
+            '청소년 보호 활동 홍보 및 정보 접근성 강화',
+            '전국 감시단 네트워크 및 활동 보고 관리 시스템 구축',
+            '반응형 웹 설계를 통한 다양한 디바이스 지원'
+        ]
+    },
+    {
+        id: 2,
+        type: 'Company',
+        title: 'i-GEST 진단 플랫폼',
+        desc: '차세대 고감도 반도체 기반 진단 기기 및 데이터 분석 플랫폼.',
+        tags: ['Vue', 'D3.js', 'Firebase'],
+        images: [project02, project02, project02],
+        links: { git: 'https://github.com', demo: 'https://demo.com' },
+        meta: {
+            main: 'BioTech Platform',
+            scale: '기업 프로젝트',
+            contribution: 'Frontend 100%',
+            stack: 'Vue.js, Firebase',
+            framework: 'Vuex',
+            library: 'D3.js'
+        },
+        highlights: [
+            '진단 데이터의 실시간 시각화 및 분석 대시보드 제공',
+            '사용자 친화적인 UI/UX로 복잡한 데이터를 직관적으로 표현',
+            '글로벌 서비스를 위한 다국어 지원 시스템 구축'
+        ]
+    },
+    {
+        id: 3,
+        type: 'Company',
+        title: '네이처이앤티 제보 시스템',
+        desc: '윤리경영 실천을 위한 부정/비리 제보 및 익명 신고 시스템.',
+        tags: ['HTML', 'SCSS', 'Javascript'],
+        images: [project03, project03],
+        links: { git: 'https://github.com', demo: '#' },
+        meta: {
+            main: 'Reporting System',
+            scale: '기업 프로젝트',
+            contribution: 'All 100%',
+            stack: 'HTML5, SCSS, JS',
+            framework: '-',
+            library: '-'
+        },
+        highlights: [
+            '익명성 보장을 위한 철저한 보안 프로세스 및 UI 설계',
+            '제보 접수 및 처리 현황 확인을 위한 프로세스 최적화',
+            '기업 아이덴티티를 반영한 깔끔하고 신뢰감 있는 디자인'
+        ]
+    },
+    {
+        id: 4,
+        type: 'Toy',
+        title: '로컬 배달 추적 서비스',
+        desc: '소상공인을 위한 모바일 우선 실시간 배달 추적 솔루션.',
+        tags: ['React Native', 'Redux', 'API'],
+        images: [logoBuff, logoBuff],
+        links: { git: '#', demo: '#' },
+        meta: {
+            main: 'Mobile App',
+            scale: '스타트업 MVP',
+            contribution: 'Dev 50%',
+            stack: 'React Native',
+            framework: 'Expo',
+            library: 'Redux Toolkit'
+        },
+        highlights: [
+            'iOS 및 Android 크로스 플랫폼 앱 개발 및 배포',
+            'Google Maps API 연동을 통한 실시간 위치 추적 기능 구현',
+            '주문 상태 변경에 따른 푸시 알림 시스템 구축'
+        ]
+    },
+    {
+        id: 5,
+        type: 'Toy',
+        title: '3D 웹 시뮬레이션',
+        desc: '물리 엔진을 활용하여 현실적인 움직임을 구현한 3D 웹 경험.',
+        tags: ['Three.js', 'Cannon.js', 'WebGL'],
+        images: [logoBuff],
+        links: { git: '#', demo: '#' },
+        meta: {
+            main: '3D Web',
+            scale: '개인 스터디',
+            contribution: 'All 100%',
+            stack: 'Three.js, WebGL',
+            framework: 'React Three Fiber',
+            library: 'Cannon.js'
+        },
+        highlights: [
+            'Cannon.js 물리 엔진을 활용한 충돌 및 중력 시뮬레이션 구현',
+            '웹 성능을 고려한 3D 모델링 최적화 및 로우 폴리 리소스 사용',
+            '몰입감 있는 조명 효과 및 그림자 렌더링 처리'
+        ]
+    },
+    {
+        id: 6,
+        type: 'Company',
+        title: '콘텐츠 관리 백오피스',
+        desc: '사용자 데이터 관리 및 콘텐츠 검수를 위한 사내 관리자 도구.',
+        tags: ['Next.js', 'Typescript', 'AntD'],
+        images: [logoBuff, logoBuff],
+        links: { git: '#', demo: '#' },
+        meta: {
+            main: 'Web App',
+            scale: '사내 도구',
+            contribution: 'Frontend 80%',
+            stack: 'Next.js, TypeScript',
+            framework: 'NextAuth',
+            library: 'Ant Design'
+        },
+        highlights: [
+            '기존 레거시 대시보드를 Next.js 기반으로 마이그레이션',
+            'RBAC(역할 기반 접근 제어) 시스템 설계를 통한 보안 강화',
+            'SWC 컴파일러 도입으로 빌드 및 배포 시간 40% 단축'
+        ]
+    },
+    {
+        id: 7,
+        type: 'Toy',
+        title: '웹 오디오 비주얼라이저',
+        desc: '오디오 시각화 기능을 갖춘 미니멀 디자인의 웹 뮤직 플레이어.',
+        tags: ['Vanilla JS', 'Web Audio API'],
+        images: [logoBuff],
+        links: { git: '#', demo: '#' },
+        meta: {
+            main: 'Web App',
+            scale: '개인 프로젝트',
+            contribution: 'All 100%',
+            stack: 'Javascript',
+            framework: '-',
+            library: 'Web Audio API'
+        },
+        highlights: [
+            'Canvas API와 Web Audio API를 연동한 실시간 파형 시각화',
+            '오디오 버퍼링 최적화를 통한 끊김 없는(Gapless) 재생 구현',
+            '사용자 경험을 최우선으로 한 미니멀 UI/UX 디자인'
+        ]
+    },
+    {
+        id: 8,
+        type: 'Toy',
+        title: '개발자 커뮤니티 플랫폼',
+        desc: '개발자들이 코드 스니펫을 공유하고 소통하는 지식 공유 플랫폼.',
+        tags: ['React', 'Supabase', 'Tailwind'],
+        images: [logoBuff, logoBuff],
+        links: { git: '#', demo: '#' },
+        meta: {
+            main: 'Web Platform',
+            scale: '사이드 프로젝트',
+            contribution: 'Fullstack 50%',
+            stack: 'React, Supabase',
+            framework: 'TailwindCSS',
+            library: 'Prism.js'
+        },
+        highlights: [
+            'Supabase를 활용한 백엔드 구축 및 소셜 로그인 연동',
+            'Prism.js를 적용한 코드 구문 강조(Syntax Highlighting) 기능',
+            '실시간 댓글 및 알림 기능을 통한 유저 인터랙션 강화'
+        ]
+    },
+    {
+        id: 9,
+        type: 'Company',
+        title: '금융 차트 위젯',
+        desc: '금융 뉴스 사이트 등에 임베드 가능한 경량화 주식 차트 위젯.',
+        tags: ['Preact', 'Lightweight Charts'],
+        images: [logoBuff],
+        links: { git: '#', demo: '#' },
+        meta: {
+            main: 'Embeddable Widget',
+            scale: 'B2B Product',
+            contribution: 'Frontend 100%',
+            stack: 'Preact, TS',
+            framework: '-',
+            library: 'Lightweight Charts'
+        },
+        highlights: [
+            'Preact 도입 및 코드 최적화로 번들 사이즈 30kb 미만 달성',
+            'IE11 등 레거시 브라우저 지원을 위한 크로스 브라우징 처리',
+            'WebSocket을 통한 실시간 주가 데이터 스트리밍 처리'
+        ]
+    },
+    {
+        id: 10,
+        type: 'Toy',
+        title: '테크 블로그 테마',
+        desc: '개발자 및 테크니컬 라이터를 위한 Gatsby 기반 블로그 테마.',
+        tags: ['Gatsby', 'GraphQL', 'MDX'],
+        images: [logoBuff],
+        links: { git: '#', demo: '#' },
+        meta: {
+            main: 'SSG Theme',
+            scale: '개인 프로젝트',
+            contribution: 'All 100%',
+            stack: 'Gatsby, React',
+            framework: '-',
+            library: 'MDX'
+        },
+        highlights: [
+            'MDX를 활용하여 재사용 가능한 커스텀 컴포넌트 시스템 구축',
+            'Lighthouse 기준 SEO 및 웹 접근성 점수 최적화 (100점 달성)',
+            'NPM 패키지 배포 및 사용자 가이드 문서화'
+        ]
+    },
+    {
+        id: 11,
+        type: 'Toy',
+        title: '실시간 축제 지도',
+        desc: '도시 축제 및 행사 정보를 지도상에서 실시간으로 확인하는 서비스.',
+        tags: ['Leaflet', 'Socket.io', 'Express'],
+        images: [logoBuff, logoBuff],
+        links: { git: '#', demo: '#' },
+        meta: {
+            main: 'Map App',
+            scale: '해커톤 프로젝트',
+            contribution: 'Frontend 60%',
+            stack: 'React, Leaflet',
+            framework: '-',
+            library: 'React-Leaflet'
+        },
+        highlights: [
+            'Leaflet을 활용한 대화형 지도 및 커스텀 마커 클러스터링',
+            'Socket.io로 축제 현장의 실시간 혼잡도 정보 업데이트 구현',
+            '대량의 마커 렌더링 시 발생하는 성능 이슈 최적화'
+        ]
+    },
+    {
+        id: 12,
+        type: 'Company',
+        title: '사내 디자인 시스템',
+        desc: '자사 제품들의 일관된 UI/UX 경험을 위한 핵심 컴포넌트 라이브러리.',
+        tags: ['Storybook', 'Rollup', 'SASS'],
+        images: [logoBuff],
+        links: { git: '#', demo: '#' },
+        meta: {
+            main: 'Component Library',
+            scale: '사내 도구',
+            contribution: 'Lead 100%',
+            stack: 'React, SASS',
+            framework: 'Storybook',
+            library: 'Rollup'
+        },
+        highlights: [
+            '30개 이상의 핵심 UI 컴포넌트 개발 및 Storybook 문서화',
+            'Jest/Testing Library를 활용한 자동화 테스트 및 CI/CD 구축',
+            'Design Token 시스템 도입으로 제품 간 스타일 일관성 확보'
+        ]
+    }
+]

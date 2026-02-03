@@ -1,0 +1,1539 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// =========================================
+// Shared Icon Styles
+// =========================================
+// =========================================
+// Shared Icon Styles & Global
+// =========================================
+.tool-box-mini {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.tool-ai {
+    background-image: url('@/assets/sections/home/icons/icon-tool-ai.png');
+    background-size: 28px 28px !important;
+}
+
+.skill-icon-text {
+    font-weight: 700;
+    font-size: 13px;
+    color: #aeaeae;
+}
+
+// Global Section Layout
+.section {
+    // Mobile/Tablet: Natural scroll
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    padding: 80px 16px; // Mobile padding
+    @include flex-center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden; // Keep hidden x-overflow
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+    // Desktop+: Snap & Full Page
+    @include mq-desktop {
+        height: 100vh;
+        padding: 4rem 2rem;
+        scroll-snap-align: start;
+    }
+}
+
+// Internal Scroll Mixin - mostly for desktop panels
+@mixin internal-scroll {
+    max-height: 100%;
+    overflow-y: auto;
+    width: 100%;
+    padding-right: 6px;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+    }
+
+    @include hover-supported {
+        &::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+    }
+}
+
+// Home Section
+#home {
+    .home-grid {
+        width: 100%;
+        max-width: 80rem; // ~1280px
+        display: grid;
+        // Mobile: Single column
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        align-items: center;
+
+        // Restore Tablet+ Layout (768px+)
+        @include mq-tablet {
+            grid-template-columns: repeat(12, 1fr);
+            gap: 4rem; // Slightly reduced from 5rem for tablet
+            align-items: center;
+        }
+
+        @include mq-desktop {
+            gap: 5rem;
+        }
+    }
+
+    .home-title-area {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.5rem;
+        text-align: center; // Mobile center
+
+        @include mq-desktop {
+            grid-column: span 5;
+            text-align: left;
+            gap: 1rem;
+        }
+
+        h1 {
+            font-family: $font-pixel;
+            // Fluid Typography: 32px ~ 70px
+            font-size: clamp(32px, 5vw + 1rem, 70px);
+            font-weight: normal;
+            line-height: 1.1;
+            letter-spacing: -0.05em;
+            word-break: keep-all; // Prevent awkward breaks
+        }
+
+        .highlight {
+            color: $primary-color;
+        }
+    }
+
+    .home-panels-area {
+        display: grid;
+        grid-template-columns: 1fr; // Mobile 1 col
+        gap: 1rem;
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto; // Center on mobile
+
+        @include mq-tablet {
+            grid-template-columns: repeat(2, 1fr); // Tablet 2 cols
+            gap: 1.25rem;
+        }
+
+        @include mq-desktop {
+            grid-column: span 7;
+            margin: 0; // Reset margin
+        }
+
+        .home-panel {
+            background-color: #212121;
+            border-radius: 20px;
+            padding: 24px; // Mobile Padding
+            display: flex;
+            flex-direction: column;
+            border: none;
+            box-shadow: none;
+
+            @include mq-tablet {
+                padding: 30px;
+            }
+
+            @include mq-desktop {
+                padding: 35px;
+            }
+        }
+
+        // Panel 01: Profile
+        .profile-panel {
+            grid-column: span 1;
+
+            @include mq-tablet {
+                grid-column: span 2;
+            }
+
+            padding-left: 24px; // Reset mobile
+
+            @include mq-tablet {
+                padding-left: 3rem;
+            }
+
+            flex-direction: column; // Mobile Stack
+            align-items: flex-start;
+            gap: 1.5rem;
+
+            @include mq-tablet {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            // Desktop: Restore space-between layout
+            @include mq-desktop {
+                justify-content: space-between;
+            }
+
+            .profile-info {
+                display: flex;
+                flex-direction: column;
+                gap: 0.25rem;
+
+                .profile-name {
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: #FFFFFF;
+                }
+
+                .profile-email {
+                    font-size: clamp(14px, 2vw, 16px);
+                    color: #5A5A5A;
+                    font-weight: 500;
+                    word-break: break-all;
+                }
+            }
+
+            .profile-actions {
+                display: flex;
+                flex-direction: row; // Mobile Row
+                gap: 10px;
+                width: 100%;
+
+                @include mq-tablet {
+                    flex-direction: column;
+                    width: auto;
+                }
+
+                .panel-btn {
+                    flex: 1; // Stretch on mobile
+                    height: 48px; // Min touch target
+                    background-color: #323232;
+                    color: #FFFFFF;
+                    border: none;
+                    border-radius: 13px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: background 0.2s;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    @include mq-tablet {
+                        width: 155px;
+                        height: 50px;
+                        flex: none;
+                    }
+
+                    @include hover-supported {
+                        &:hover {
+                            background-color: #4c4c4c;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Panel Header (Common)
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.8rem;
+
+            .panel-title {
+                font-size: 17px;
+                font-weight: 600;
+                color: #2CB1EA; // Point color
+            }
+
+            .shortcut-btn {
+                background: none;
+                border: none;
+                // color: #FFFFFF; // Removed color as no text
+                // opacity: 0.5; // Removed opacity
+                cursor: pointer;
+                transition: all 0.3s ease; // Restored smooth transition
+
+                // BG Config
+                width: 21px; // Fixed Size
+                height: 13px; // Fixed Size
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: contain; // or 21px 13px
+
+                // Specific Icon
+                &.icon-shortcut {
+                    background-image: url('@/assets/sections/home/icons/icon-arrow.png');
+                }
+
+                &:hover {
+                    background-image: url('@/assets/sections/home/icons/icon-arrow-hover.png');
+                }
+            }
+        }
+
+        // Button Icons
+        .btn-icon {
+            display: inline-block;
+            width: 15px; // Updated to 15px
+            height: 15px; // Updated to 15px
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            margin-right: 8px;
+            vertical-align: middle;
+
+            // Specific Icon
+            &.btn-arrow-icon {
+                background-image: url('@/assets/sections/home/icons/icon-btn-arrow.png');
+                transition: background-image 0.2s; // Smooth transition
+            }
+        }
+
+        // Hover Effect on Button Parent - Moved to .panel-btn block
+    }
+}
+
+// Panel 02: Tools
+.tools-panel {
+    height: 100%; // Ensure fills grid cell
+
+    .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px; // Adjusted for fit
+
+        .tool-box {
+            width: 55px; // Fixed size requested
+            height: 55px; // Fixed size requested
+            background-color: #393939;
+            border-radius: 15px; // Fixed radius requested
+
+            // Flex for Lucide/Text centering
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+
+            // BG Image Props
+            background-repeat: no-repeat;
+            background-position: center;
+            // background-size: 32px 32px; // Default, can be overridden inline
+
+            // Specific Icons (via Classes)
+            &.tool-ai {
+                background-image: url('@/assets/sections/home/icons/icon-tool-ai.png');
+                background-size: 28px 28px;
+            }
+
+            // SVG styling for Lucide fallbacks
+            svg {
+                width: 28px; // Updated to 28px
+                height: 28px; // Updated to 28px
+                color: #D6D6D6;
+            }
+
+            // Tool Labels (Text)
+            .tool-label {
+                color: #BEBEBE;
+                font-weight: 700;
+                font-size: 14px; // Explicit font size good practice
+            }
+
+            // Count Card
+            &.more-box {
+                font-size: 16px;
+                font-weight: 600;
+                color: #FFFFFF;
+                background-color: #393939;
+            }
+        }
+    }
+}
+
+// Panel 03: About
+.about-panel {
+    height: 100%; // Match height with Tools panel
+
+    .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        .tag {
+            background-color: #2C2C2C;
+            color: #FFFFFF;
+            font-size: 14px;
+            padding: 8px 16px; // Adjust padding to look like pill
+            border-radius: 9999px;
+            white-space: nowrap;
+        }
+    }
+}
+
+// Panel 04: Project
+.project-panel {
+    grid-column: span 1;
+
+    @include mq-tablet {
+        grid-column: span 2;
+    }
+
+    position: relative;
+    overflow: hidden;
+    height: clamp(200px, 30vw, 240px); // Fluid height
+
+    // Desktop: Fixed height to match original design
+    @include mq-desktop {
+        height: 240px;
+    }
+
+    .project-header {
+        z-index: 5;
+        position: relative;
+        display: flex;
+        justify-content: flex-start !important;
+        gap: 1rem;
+        align-items: baseline;
+        flex-wrap: wrap; // Allow wrap for small screens
+
+        .panel-title {
+            color: #2CB1EA;
+        }
+
+        .project-desc {
+            font-size: 14px;
+            color: #9C9C9C;
+        }
+    }
+
+    .project-stack {
+        position: relative;
+        height: 100%;
+        margin-top: 1rem;
+        display: flex;
+
+        .stack-card {
+            // Mobile: Responsive width based on container, capped at 217px
+            width: clamp(160px, 45%, 217px);
+            height: clamp(80px, 20vw, 104px);
+
+            // Desktop: Fixed dimensions
+            @include mq-desktop {
+                width: 217px;
+                height: 104px;
+            }
+
+            background-color: #323232;
+            border-radius: 12px;
+            position: absolute;
+            bottom: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s,
+            z-index 0.2s;
+
+            // Stacking Logic (Calculated with SCSS for responsiveness)
+            // We assume 3 cards + 1 more button
+            // Left offset needs to be fluid.
+            // Simplified: just use percentages for responsive steps or fixed calc if container constrained.
+
+            // Since container is responsive, % is safer but calc is more precise for 'visible overlap'.
+            // Let's use a simpler overlap logic usable on mobile.
+
+            &:nth-child(1) {
+                left: 0;
+                z-index: 1;
+            }
+
+            &:nth-child(2) {
+                left: 20%;
+                z-index: 2;
+
+                @include mq-tablet {
+                    left: 30%;
+                }
+
+                // Desktop: Use calc for precise positioning
+                @include mq-desktop {
+                    left: calc((100% - 217px) / 3 * 1);
+                }
+            }
+
+            &:nth-child(3) {
+                left: 40%;
+                z-index: 3;
+
+                @include mq-tablet {
+                    left: 60%;
+                }
+
+                // Desktop: Use calc for precise positioning
+                @include mq-desktop {
+                    left: calc((100% - 217px) / 3 * 2);
+                }
+            }
+
+            // Project Preview Styles
+            &.project-preview-card {
+                background-size: cover;
+                background-position: center;
+                cursor: pointer;
+                overflow: hidden;
+
+                .card-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: rgba(0, 0, 0, 0.6);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                }
+
+                .preview-title {
+                    color: white;
+                    font-weight: 700;
+                    font-size: clamp(12px, 2vw, 16px);
+                    text-align: center;
+                    padding: 0 0.5rem;
+                }
+
+                @include hover-supported {
+                    &:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+                        z-index: 10 !important;
+
+                        .card-overlay {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+
+            // Glass Overlay
+            &.glass-overlay {
+                left: 60%;
+                z-index: 4;
+
+                @include mq-tablet {
+                    left: 90%;
+                    transform: translateX(-100%);
+                }
+
+                // Desktop: Precise calc positioning
+                @media (min-width: 1000px) {
+                    left: calc((100% - 217px) / 3 * 3);
+                    transform: none;
+                }
+
+                // Dock right on tablet
+
+                background: #ffffff1f;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, .18);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+
+                span {
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #FFFFFF;
+                    letter-spacing: 0.05em;
+                }
+
+                @include hover-supported {
+                    transition: transform 0.3s ease;
+
+                    // Mobile default behavior (Just lift, no X translate)
+                    &:hover {
+                        transform: translateY(-5px);
+                    }
+
+                    // Tablet specific behavior (Maintain translate-x)
+                    @include mq-tablet {
+                        &:hover {
+                            transform: translateY(-5px) translateX(-100%);
+                        }
+                    }
+
+                    // Desktop specific behavior (Reset to just lift)
+                    @media (min-width: 1000px) {
+
+                        // Lowered slightly to catch 1010px issue
+                        &:hover {
+                            transform: translateY(-5px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+// About Section
+#about {
+    .about-container {
+        max-width: 1300px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(2rem, 5vw, 4rem);
+
+        .about-desc {
+            text-align: center;
+            font-size: clamp(15px, 2vw, 17px);
+            color: #868686;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            word-break: keep-all; // Good for Korean
+            padding: 0 1rem;
+        }
+    }
+
+    .grid-3 {
+        display: grid;
+        grid-template-columns: 1fr; // Mobile 1 col
+        gap: 2rem;
+
+        @include mq-tablet {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        @include mq-desktop {
+            gap: 2rem;
+        }
+
+        >div {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            position: relative;
+            padding: 1rem; // Add padding for touch targets
+
+            // Divider - Desktop Only
+            &::after {
+                display: none; // Hidden on mobile
+
+                @include mq-tablet {
+                    display: block;
+                    content: '';
+                    position: absolute;
+                    right: -1.5rem; // Adjusted
+                    top: 50%;
+                    transform: translateY(-50%);
+                    height: 60px;
+                    border-right: 1px solid #4E4E4E;
+                }
+
+                @include mq-desktop {
+                    right: -1.5rem;
+                    height: 60px;
+                }
+            }
+
+            &:last-child::after {
+                display: none;
+            }
+
+            .icon-box {
+                background-color: transparent;
+                padding: 0;
+                margin-bottom: 1rem;
+                display: flex; // Changed to flex for better center
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+
+            .card-title {
+                font-size: clamp(18px, 3vw, 21px);
+                color: #2CB1EA;
+                font-weight: 600;
+                text-align: center;
+                margin-bottom: 0.5rem;
+            }
+
+            p {
+                font-size: clamp(14px, 2vw, 16px) !important;
+                color: #FFFFFF !important;
+                opacity: 1;
+                line-height: 1.5;
+                text-align: center;
+                word-break: keep-all;
+            }
+        }
+    }
+}
+
+// Career Section
+#career {
+    .career-container {
+        @include internal-scroll;
+        max-width: 1000px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+
+        .text-center {
+            text-align: center;
+            margin-bottom: 0;
+        }
+    }
+
+    .career-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+
+        @include mq-desktop {
+            grid-template-columns: repeat(2, 1fr); // Desktop only 2, Tablet 1 stack might be better for text heavy content, but 2 is OK if space allows
+            // User said Tablet 2 col usually.
+        }
+
+        @include mq-tablet {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .info-card-container {
+        background-color: #212121;
+        border-radius: 20px; // Mobile radius
+
+        @include mq-tablet {
+            border-radius: 27px 54px 27px 27px;
+        }
+
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        border: none;
+        overflow: hidden;
+    }
+
+    .container-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #FFFFFF;
+        margin-bottom: 0;
+        padding: 20px 24px; // Mobile padding
+
+        @include mq-tablet {
+            padding: 28px 40px;
+        }
+    }
+
+    .info-items {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        background-color: #2f2f2f;
+        padding: 24px; // Mobile padding
+        flex-grow: 1;
+        border-radius: 20px;
+
+        @include mq-tablet {
+            border-radius: 27px;
+            padding: 40px;
+        }
+    }
+
+    .info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #525252;
+
+        &:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+    }
+
+    .item-org {
+        font-size: 17px;
+        font-weight: 600;
+        color: #2CB1EA;
+    }
+
+    .item-desc {
+        font-size: 15px;
+        color: #9C9C9C;
+        line-height: 1.5;
+        word-break: keep-all;
+    }
+
+    .item-badges {
+        display: flex;
+        gap: 8px;
+        margin-top: 0.5rem;
+        flex-wrap: wrap;
+
+        .badge-pill {
+            background-color: #3B3B3B;
+            color: #FFFFFF;
+            font-size: 13px;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+    }
+}
+
+// Skill Section
+#skill {
+    // Mobile: Auto height, allow scroll
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // Always center content
+
+    @include mq-desktop {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .section-title {
+        margin-bottom: 0;
+    }
+
+    .skill-container {
+        width: 100%;
+        max-width: 1300px;
+        height: auto;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; // Center vertically
+        gap: 2rem;
+        padding-bottom: 4rem; // Buffer for mobile
+
+        @include mq-desktop {
+            height: auto; // Let content determine height, so parent #skill centers it
+            justify-content: center;
+            gap: 4rem;
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+    }
+
+    // 1. Fixed Header (Title + Tabs)
+    .skill-header {
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        width: 100%;
+        background-color: transparent;
+        z-index: 10;
+
+        @include mq-desktop {
+            gap: 2.5rem;
+        }
+    }
+
+    .skill-tabs {
+        display: flex;
+        flex-wrap: wrap; // Allow wrap on very small screens
+        justify-content: center;
+        gap: 0.5rem;
+
+        @include mq-tablet {
+            gap: 0.8rem;
+        }
+    }
+
+    .tab-btn {
+        width: auto; // Mobile auto width
+        min-width: 80px;
+        height: 44px; // Touch target
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1.2rem;
+        border-radius: 9999px;
+        background-color: #434343;
+        color: #CCCCCC;
+        border: none;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        @include mq-desktop {
+            width: 124px;
+            height: 50px;
+        }
+
+        @include hover-supported {
+            &:hover {
+                background-color: #555555;
+            }
+        }
+
+        &.active {
+            background-color: #2CB1EA;
+            color: #ffffff;
+            font-weight: 600;
+        }
+    }
+
+    .skill-desc-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #9C9C9C;
+        margin-bottom: 1rem;
+        font-size: 14px;
+        text-align: center;
+        word-break: keep-all;
+
+        @include mq-desktop {
+            margin-bottom: 2rem;
+            font-size: 15px;
+        }
+
+        svg {
+            color: #2CB1EA;
+            min-width: 20px; // Prevent shrink
+        }
+    }
+
+    // 2. Content Area
+    .skill-list-wrap {
+        flex: 1; // Stretch to fill
+        width: 100%;
+        overflow-y: visible;
+        padding: 0;
+    }
+
+    .skill-grid {
+        display: grid;
+        grid-template-columns: 1fr; // Mobile 1 col
+        gap: 1rem;
+        width: 100%;
+
+        @include mq-tablet {
+            grid-template-columns: repeat(2, 1fr); // Tablet 2 cols
+            gap: 1.25rem;
+        }
+
+        @include mq-desktop {
+            // Keep 2 cols maybe? Or 3 if space allows?
+            // User design previously had 2 cols but wide cards. 
+            // Maintaining 2 cols for skills is usually safe.
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+    }
+
+    .skill-card {
+        background-color: #212121;
+        border-radius: 20px;
+        padding: 24px; // Mobile comfort
+        border: 1px solid transparent;
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        align-items: flex-start;
+        text-align: left;
+        transition: all 0.3s ease;
+        height: auto;
+        min-height: 100px; // Min height for consistency
+
+        @include mq-desktop {
+            padding: 30px;
+            gap: 20px;
+            height: 100%;
+        }
+
+        // Hover Interaction using hover-supported
+        @include hover-supported {
+
+            &:hover,
+            &:focus-visible {
+                transform: translateY(-2px);
+                border-color: rgba(255, 255, 255, 0.1);
+                background-color: #2a2a2a;
+                outline: none;
+
+                .skill-icon-wrapper {
+                    .icon-default {
+                        opacity: 0;
+                    }
+
+                    .icon-hover {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        .skill-icon-box {
+            width: 48px;
+            height: 48px;
+            background-color: #393939;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #ffffff;
+            // padding: 10px; // Ensure padding for image? No, box is small.
+        }
+
+        svg {
+            width: 24px; // Smaller Icon
+            height: 24px;
+        }
+
+        // For custom image icons
+        .tool-box-mini {
+            // inherit size
+        }
+    }
+
+    .skill-content {
+        display: flex;
+        flex-direction: column;
+        gap: 6px; // Tighter text gap
+        flex-grow: 1;
+        padding-top: 2px; // Visual alignment with icon top
+    }
+
+    .skill-name {
+        font-size: 16px; // Slightly smaller title
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0;
+        line-height: 1.3;
+    }
+
+    .skill-text {
+        font-size: 14px; // Compact text
+        color: #9C9C9C;
+        line-height: 1.5;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; // Limit to 2 lines
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-break: keep-all; // Better for Korean
+    }
+}
+
+
+// Project Section
+#project {
+    // Section Background to #171717? 
+    // The user said "Section entire background color: #171717".
+    // This usually means the whole section block.
+    // However, global background is typically set in body.
+    // Let's set it here locally if possible or assume container level.
+    // Assuming default is dark charocal/black.
+    background-color: #171717; // Explicit request
+
+    .project-container {
+        @include internal-scroll;
+        padding-right: 0; // Remove right padding
+        max-width: 1400px; // Slightly wider for arrows
+        width: 100%;
+        display: flex;
+        flex-direction: row; // Row layout for Arrow-Content-Arrow
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        @include mq-tablet {
+            gap: 2rem;
+        }
+    }
+
+    // New Central Wrapper for Header + Swiper
+    .project-center-column {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        width: 100%;
+        min-width: 0; // Prevent flex overflow
+        gap: 4.5rem; // Space between Header and Grid
+    }
+
+    // Swiper Area specific
+    .project-swiper-area {
+        width: 100%;
+        position: relative;
+        overflow: visible;
+
+        // Flex layout for relative positioning of arrows
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem; // Gap between arrows and swiper
+
+        @include mq-tablet {
+            gap: 2rem;
+        }
+    }
+
+    .project-swiper {
+        flex: 1; // Take remaining space
+        width: 100%; // Ensure it fills flex child width
+        height: auto;
+        overflow: hidden;
+        border-radius: 30px;
+        min-width: 0; // Fix flexbox overflow issue
+    }
+
+    // ... (header area remains) ...
+}
+
+.filter-btn {
+    width: 124px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+    border-radius: 9999px; // Pill shape
+    background-color: #434343;
+    color: #CCCCCC;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    gap: 6px; // Gap for count
+
+    .count {
+        display: flex;
+        width: 27px;
+        height: 27px;
+        padding: 3px;
+        font-size: 12px;
+        align-items: center;
+        justify-content: center;
+        background: #00000021;
+        border-radius: 100%;
+        margin-left: 4px; // Fine tune spacing
+    }
+
+    &:hover {
+        background-color: #555555;
+    }
+
+    &.active {
+        background-color: #2CB1EA;
+        color: #FFFFFF;
+        font-weight: 600;
+
+        .count {
+            background: rgba(255, 255, 255, 0.2); // Lighten bg on active
+            color: #FFFFFF;
+        }
+    }
+}
+
+// ... (slider wrapper remains) ...
+
+.slider-arrow {
+    position: relative; // Changed to relative as requested
+    // top/transform removed as we use flexbox align-items: center
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s;
+    z-index: 20;
+    display: block;
+    flex-shrink: 0;
+    outline: none;
+
+    // Specific Size Requested
+    width: 20px;
+    height: 46px;
+
+    // Background Image
+    background-image: url('@/assets/sections/project/icon-arrow.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    &:hover:not(.swiper-button-disabled) {
+        background-image: url('@/assets/sections/project/icons/icon-arrow-hover.png');
+    }
+
+    &.swiper-button-disabled {
+        opacity: 0.3;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    &.arrow-prev {
+        // No extra positioning needed with flex gap
+    }
+
+    &.arrow-next {
+        transform: rotate(180deg); // Keep rotation
+        // Removed absolute positioning logic
+    }
+}
+
+// Header Area: Title + Desc + Filter
+.project-header-area {
+    display: flex;
+    flex-direction: row; // Explicit row
+    justify-content: space-between; // Space between Title/Desc and Filter
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+    flex-wrap: wrap;
+
+    .header-left {
+        display: flex;
+        flex-direction: row; // Explicit row for alignment
+        gap: 1rem; // Reduced gap for "next to" feel
+        align-items: baseline; // Align text baselines
+        flex-wrap: wrap; // Allow wrap on very small screens if needed
+
+        .section-title {
+            margin: 0;
+            white-space: nowrap; // Keep title on one line
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: #888888;
+            font-weight: 400;
+            margin: 0;
+        }
+    }
+
+    .filter-group {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: nowrap; // Force single line
+    }
+}
+
+
+.filter-btn {
+    width: 124px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+    border-radius: 9999px; // Pill shape
+    background-color: #434343;
+    color: #CCCCCC;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    gap: 6px; // Gap for count
+
+    .count {
+        display: flex;
+        width: 27px;
+        height: 27px;
+        padding: 3px;
+        font-size: 12px;
+        align-items: center;
+        justify-content: center;
+        background: #00000021;
+        border-radius: 100%;
+        margin-left: 2px; // Fine tune spacing
+    }
+
+    &:hover {
+        background-color: #555555;
+    }
+
+    &.active {
+        background-color: #2CB1EA;
+        color: #FFFFFF;
+        font-weight: 600;
+
+        .count {
+            background: rgba(255, 255, 255, 0.2); // Lighten bg on active
+            color: #FFFFFF;
+        }
+    }
+}
+
+// ... (slider wrapper remains) ...
+
+.slider-arrow {
+    position: relative; // Changed to relative
+    top: 57px; // Added as requested
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s;
+    z-index: 20;
+    display: block;
+    flex-shrink: 0;
+    outline: none;
+
+    // Specific Size Requested
+    width: 20px;
+    height: 46px;
+
+    // Background Image
+    background-image: url('@/assets/sections/project/icon-arrow.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    &:hover:not(.swiper-button-disabled) {
+        background-image: url('@/assets/sections/project/icons/icon-arrow-hover.png');
+    }
+
+    &.swiper-button-disabled {
+        opacity: 0.3;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    // Previous Absolute Positioning Removed
+    &.arrow-prev {
+        // No extra positioning needed with flex gap
+    }
+
+    &.arrow-next {
+        transform: rotate(180deg); // Keep rotation
+    }
+}
+
+
+
+
+
+
+
+
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem; // Updated Gap
+    width: 100%;
+
+    @include mq-tablet {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.project-card {
+    background-color: #212121; // Updated BG
+    border-radius: 30px; // Updated Radius to 30px
+    padding: 0;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0;
+    height: 230px;
+    min-height: 230px;
+    transition: transform 0.2s;
+    overflow: hidden;
+    position: relative; // Context for absolute if needed
+
+    // Left Image Area
+    .card-image-area {
+        width: 40%;
+        background-color: transparent; // Removed BG
+        flex-shrink: 0;
+        position: relative; // Context for overlay pill
+        display: flex; // Center the logo
+        align-items: center;
+        justify-content: center;
+
+        .image-overlay-pill {
+            position: absolute;
+            top: 25px; // Updated Top
+            left: 25px; // Updated Left
+            z-index: 2;
+
+            .type-pill {
+                // background-color: #1a1a1a; // Removed
+                color: #FFFFFF;
+                font-size: 14px;
+                padding: 10px 16px;
+                border-radius: 9999px;
+                font-weight: 400; // Updated Weight
+                border: 3px solid #3c3c3c; // Added Border
+            }
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2a2a2a 0%, #333333 100%);
+        }
+    }
+
+    // Right Content Area
+    .card-content-area {
+        width: 60%;
+        padding: 45px 30px 30px 0; // Updated Padding (Top 45px)
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem; // Main Gap
+        flex-grow: 1;
+
+        .card-title {
+            font-size: 17px; // Updated Font Size
+            font-weight: 500; // Updated Weight
+            color: #FFFFFF;
+            margin: 0;
+        }
+
+        .card-desc {
+            font-size: 16px;
+            color: #9C9C9C;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 0.5rem; // Spacer
+
+            .tag {
+                background-color: #323232; // Updated BG
+                color: #FFFFFF;
+                font-size: 14px;
+                padding: 10px 16px;
+                border-radius: 11px;
+                white-space: nowrap;
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+// Contact Section
+#contact {
+    .contact-container {
+        max-width: 1300px;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 4rem; // Updated Gap (Desc-Buttons)
+        position: relative;
+        z-index: 10;
+    }
+
+    .contact-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+
+        @include mq-tablet {
+            flex-direction: row;
+        }
+    }
+
+    .btn-contact {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        font-weight: 400;
+        font-size: 16px;
+        border: 3px solid #323232;
+        transition: all 0.2s;
+        background-color: transparent; // Base transparent
+        color: #ffffff; // Enforce white text for both
+
+        &.email {
+            // background-color removed
+            // color removed (handled by base)
+
+            &:hover {
+                background-color: transparent; // No BG on hover
+                border-color: #ffffff; // White border on hover
+            }
+        }
+
+        &.github {
+            // background-color removed
+            // color removed
+
+            &:hover {
+                background-color: transparent; // No BG on hover
+                border-color: #ffffff; // White border on hover
+            }
+        }
+    }
+
+    footer {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+
+        .footer-container {
+            width: 1300px;
+            padding: 50px 0; // Padding moved to inner
+            font-size: 16px;
+            color: #434343;
+            border-top: 1px solid #212121; // Border moved to inner
+            text-align: center;
+        }
+    }
+}
+
+// Utility for centering icon in card header
+.icon-box {
+    padding: 1rem;
+    border-radius: 50%;
+    background-color: rgba($primary-color, 0.1);
+    color: $primary-color;
+    margin-bottom: 1rem;
+    display: inline-flex;
+}

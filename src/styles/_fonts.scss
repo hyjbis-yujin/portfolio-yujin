@@ -1,0 +1,103 @@
+/* 머니그라피 폰트-Pixel */
+@font-face {
+    font-family: "Moneygraphy-Pixel";
+    font-weight: normal;
+    font-display: swap;
+    font-style: normal;
+    src:
+        //IE6-IE8
+        url("/fonts/Moneygraphy/Moneygraphy-Pixel.eot") format("embedded-opentype"),
+        //Pretty Modern Browsers
+        url("/fonts/Moneygraphy/Moneygraphy-Pixel.woff") format("woff"),
+        //Safari, Android, iOS
+        url("/fonts/Moneygraphy/Moneygraphy-Pixel.ttf") format("truetype");
+}
+
+/* 머니그라피 폰트-Rounded */
+@font-face {
+    font-family: "Moneygraphy-Rounded";
+    font-weight: normal;
+    font-display: swap;
+    font-style: normal;
+    src:
+        //IE6-IE8
+        url("/fonts/Moneygraphy/Moneygraphy-Rounded.eot") format("embedded-opentype"),
+        //Pretty Modern Browsers
+        url("/fonts/Moneygraphy/Moneygraphy-Rounded.woff") format("woff"),
+        //Safari, Android, iOS
+        url("/fonts/Moneygraphy/Moneygraphy-Rounded.ttf") format("truetype");
+}
+
+/* 유설체 폰트 */
+@font-face {
+    font-family: "Yuseol";
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2508-2@1.0/YooSeol.woff2") format("woff2");
+}
+
+/* 페이퍼로지 */
+
+@font-face {
+    font-family: "Paperlogy";
+    font-weight: 100;
+    font-display: swap;
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-1Thin.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Paperlogy";
+    font-weight: 200;
+    font-display: swap;
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-2ExtraLight.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Paperlogy";
+    font-weight: 300;
+    font-display: swap;
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-3Light.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Paperlogy";
+    font-weight: 400;
+    font-display: swap;
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Paperlogy";
+    font-weight: 500;
+    font-display: swap;
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Paperlogy";
+    font-weight: 600;
+    font-display: swap;
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Paperlogy";
+    font-weight: 700;
+    font-display: swap;
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Paperlogy";
+    font-weight: 800;
+    font-display: swap;
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Paperlogy";
+    font-weight: 900;
+    font-display: swap;
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-9Black.woff2") format("woff2");
+}
