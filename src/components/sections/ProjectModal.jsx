@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { X, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -16,6 +16,21 @@ const ProjectModal = ({ project, onClose }) => {
         logoBuff  // Fallback 3
     ]
 
+    const handleClose = useCallback(() => {
+        setIsClosing(true)
+        setTimeout(() => {
+            onClose()
+        }, 300) // Match animation duration
+    }, [onClose])
+
+    const nextImage = useCallback(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % images.length)
+    }, [images.length])
+
+    const prevImage = useCallback(() => {
+        setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)
+    }, [images.length])
+
     useEffect(() => {
         // Lock body scroll
         document.body.style.overflow = 'hidden'
@@ -32,28 +47,13 @@ const ProjectModal = ({ project, onClose }) => {
             document.body.style.overflow = 'unset'
             window.removeEventListener('keydown', handleKeyDown)
         }
-    }, [])
-
-    const handleClose = () => {
-        setIsClosing(true)
-        setTimeout(() => {
-            onClose()
-        }, 300) // Match animation duration
-    }
+    }, [handleClose, nextImage, prevImage])
 
     // Backdrop click
     const handleBackdropClick = (e) => {
         if (e.target === e.currentTarget) {
             handleClose()
         }
-    }
-
-    const nextImage = () => {
-        setCurrentImageIndex((prev) => (prev + 1) % images.length)
-    }
-
-    const prevImage = () => {
-        setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)
     }
 
     // Portal to body
