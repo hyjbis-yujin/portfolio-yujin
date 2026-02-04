@@ -1,18 +1,18 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-// Home Section
+/* === Home Section === */
 #home {
     .home-grid {
         width: 100%;
-        max-width: 80rem; // ~1280px
+        max-width: 80rem;
         display: grid;
         // Mobile: Single column
         grid-template-columns: 1fr;
         gap: 3rem;
         align-items: center;
 
-        // Restore Tablet+ Layout (768px+)
+        // Tablet Layout
         @include mq-tablet {
             grid-template-columns: repeat(12, 1fr);
             gap: 4rem; // Slightly reduced from 5rem for tablet
@@ -73,7 +73,7 @@
         .home-panel {
             background-color: #212121;
             border-radius: 20px;
-            padding: 24px; // Mobile Padding
+            padding: 24px;
             display: flex;
             flex-direction: column;
             border: none;
@@ -88,7 +88,7 @@
             }
         }
 
-        // Panel 01: Profile
+        /* === Profile Panel === */
         .profile-panel {
             grid-column: span 1;
 
@@ -176,7 +176,7 @@
             }
         }
 
-        // Panel Header (Common)
+        /* === Panel Header === */
         .panel-header {
             display: flex;
             justify-content: space-between;
@@ -198,8 +198,8 @@
                 transition: all 0.3s ease; // Restored smooth transition
 
                 // BG Config
-                width: 21px; // Fixed Size
-                height: 13px; // Fixed Size
+                width: 21px;
+                height: 13px;
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: contain; // or 21px 13px
@@ -237,7 +237,7 @@
     }
 }
 
-// Panel 02: Tools
+/* === Tools Panel === */
 .tools-panel {
     height: 100%; // Ensure fills grid cell
 
@@ -247,10 +247,10 @@
         gap: 8px; // Adjusted for fit
 
         .tool-box {
-            width: 55px; // Fixed size requested
-            height: 55px; // Fixed size requested
+            width: 55px;
+            height: 55px;
             background-color: #393939;
-            border-radius: 15px; // Fixed radius requested
+            border-radius: 15px;
 
             // Flex for Lucide/Text centering
             display: flex;
@@ -294,7 +294,7 @@
     }
 }
 
-// Panel 03: About
+/* === About Panel === */
 .about-panel {
     height: 100%; // Match height with Tools panel
 
@@ -314,7 +314,7 @@
     }
 }
 
-// Panel 04: Project
+/* === Project Panel === */
 .project-panel {
     grid-column: span 1;
 

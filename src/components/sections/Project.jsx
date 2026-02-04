@@ -4,7 +4,6 @@ import { cn } from '@/lib/utils'
 import logoBuff from '@/assets/images/projects/logo-buff.png'
 import ProjectModal from './ProjectModal'
 
-// Swiper
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import 'swiper/css'
@@ -14,29 +13,23 @@ import Section from '@/components/common/Section'
 
 const Project = ({ selectedProject, onClose, onOpenProject }) => {
     const [filter, setFilter] = useState('All')
-    // Remove local selectedProject state
 
-    // Swiper Refs
     const swiperRef = useRef(null)
     const [isBeginning, setIsBeginning] = useState(true)
     const [isEnd, setIsEnd] = useState(false)
 
-    // Filter Logic
     const filteredProjects = useMemo(() => {
         if (filter === 'All') return projects
         return projects.filter(p => p.type === filter)
     }, [filter])
 
-    // Tabs
     const tabs = ['All', 'Company', 'Toy']
 
-    // Counts
     const getCount = (type) => {
         if (type === 'All') return projects.length
         return projects.filter(p => p.type === type).length
     }
 
-    // Handlers
     const handlePrev = () => {
         if (swiperRef.current) swiperRef.current.slidePrev()
     }
@@ -45,11 +38,6 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
         if (swiperRef.current) swiperRef.current.slideNext()
     }
 
-    // Modal Handlers
-    // Use onOpenProject prop if available, otherwise local... actually we need to standarize.
-    // If App passes onOpenProject, use it.
-
-    // Fallback if not provided (though App provides it)
     const handleCardClick = (project) => {
         if (onOpenProject) {
             onOpenProject(project)
@@ -100,18 +88,13 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                         </div>
                     </div>
 
-                    {/* Swiper Area */}
+                    {/* === Swiper Area === */}
                     <div className="project-swiper-area">
                         <Swiper
                             modules={[Navigation]}
                             spaceBetween={20}
                             slidesPerView={1}
                             allowTouchMove={true}
-                            // Using standard grid breaks - 1 card per row usually? 
-                            // Or the 2x2 logic? 
-                            // The SCSS uses CSS Grid inside `.project-grid`. 
-                            // The original "chunking" logic was to group 4 items into ONE slide.
-                            // Let's reimplement chunking logic below in render.
 
                             onSwiper={(swiper) => {
                                 swiperRef.current = swiper
@@ -124,11 +107,7 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                             }}
                             className="project-swiper"
                         >
-                            {/* 
-                                Chunking Logic:
-                                We need to split `filteredProjects` into chunks of 4 if the layout demands it.
-                                Let's assume we want 4 cards per slide (2x2 grid in SCSS).
-                            */}
+                            {/* Chunking: Split into slides of 4 items */}
                             {Array.from({ length: Math.ceil(filteredProjects.length / 4) }).map((_, i) => (
                                 <SwiperSlide key={i}>
                                     <div className="project-grid">
@@ -191,7 +170,6 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                 />
             </div>
 
-            {/* Modal - Controlled via Props */}
             {selectedProject && (
                 <ProjectModal
                     project={selectedProject}

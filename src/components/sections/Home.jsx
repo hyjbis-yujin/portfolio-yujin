@@ -5,15 +5,12 @@ import SkillIcon from '@/components/common/SkillIcon'
 import Section from '@/components/common/Section'
 
 const Home = ({ onOpenProject }) => {
-    // 1. Filter Featured Skills
     const featuredSkills = skills.filter(skill => skill.featured)
 
-    // 2. Slice for Display (Show max 9 items)
     const MAX_VISIBLE = 9
     const visibleSkills = featuredSkills.slice(0, MAX_VISIBLE)
     const remainingCount = featuredSkills.length - visibleSkills.length
 
-    // Scroll Handler
     const handleScrollTo = (id) => {
         smoothScrollTo(`#${id}`)
     }
@@ -21,7 +18,6 @@ const Home = ({ onOpenProject }) => {
     return (
         <Section id="home">
             <div className="home-container">
-                {/* Center: Hero Grid */}
                 <div className="home-grid">
 
                     {/* Title Area */}
@@ -35,7 +31,7 @@ const Home = ({ onOpenProject }) => {
                     {/* Panels Area */}
                     <div className="home-panels-area">
 
-                        {/* Panel 01: Profile */}
+                        {/* === Profile Panel === */}
                         <div className="home-panel profile-panel">
                             <div className="profile-info">
                                 <span className="profile-name">Han Yu Jin</span>
@@ -53,7 +49,7 @@ const Home = ({ onOpenProject }) => {
                             </div>
                         </div>
 
-                        {/* Panel 02: Tools */}
+                        {/* === Tools Panel === */}
                         <div className="home-panel tools-panel">
                             <div className="panel-header">
                                 <span className="panel-title">Tools I use</span>
@@ -70,7 +66,7 @@ const Home = ({ onOpenProject }) => {
                                             icon={skill.icon}
                                             hoverIcon={skill.hoverIcon}
                                             alt={skill.label}
-                                            size={40} // Default size
+                                            size={40}
                                         />
                                     </div>
                                 ))}
@@ -80,7 +76,7 @@ const Home = ({ onOpenProject }) => {
                             </div>
                         </div>
 
-                        {/* Panel 03: About (Tags) */}
+                        {/* === About Panel === */}
                         <div className="home-panel about-panel">
                             <div className="panel-header">
                                 <span className="panel-title">About me</span>
@@ -100,14 +96,13 @@ const Home = ({ onOpenProject }) => {
                             </div>
                         </div>
 
-                        {/* Panel 04: Project */}
+                        {/* === Project Panel === */}
                         <div className="home-panel project-panel">
                             <div className="panel-header project-header">
                                 <span className="panel-title">Project</span>
                                 <span className="project-desc">기획부터 개발 및 배포까지 전 과정을 주도적으로 수행하며 도전을 해결한 프로젝트</span>
                             </div>
                             <div className="project-stack">
-                                {/* Map First 3 Projects */}
                                 {projects.slice(0, 3).map((project, index) => (
                                     <div
                                         key={project.id}

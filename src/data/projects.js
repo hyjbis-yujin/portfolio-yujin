@@ -10,7 +10,6 @@ export const projects = [
         title: '중앙청소년유해환경감시단',
         desc: '청소년 보호 및 유해환경 감시를 위한 공식 웹사이트 및 관리 시스템.',
         tags: ['React', 'Node.js', 'MongoDB'],
-        // Expanded Data
         images: [project01, project01, project01], // Authentic images
         links: { git: 'https://github.com', demo: 'https://demo.com' },
         meta: {

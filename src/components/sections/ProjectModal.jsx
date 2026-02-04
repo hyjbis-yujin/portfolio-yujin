@@ -2,18 +2,16 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { X, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
-// Placeholder images if real ones missing
 import logoBuff from '@/assets/images/projects/logo-buff.png'
 
 const ProjectModal = ({ project, onClose }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
     const [isClosing, setIsClosing] = useState(false)
 
-    // Dummy images if project doesn't have them
     const images = project.images || [
-        logoBuff, // Fallback 1
-        logoBuff, // Fallback 2
-        logoBuff  // Fallback 3
+        logoBuff,
+        logoBuff,
+        logoBuff
     ]
 
     const handleClose = useCallback(() => {
@@ -32,10 +30,8 @@ const ProjectModal = ({ project, onClose }) => {
     }, [images.length])
 
     useEffect(() => {
-        // Lock body scroll
         document.body.style.overflow = 'hidden'
 
-        // ECS Key listener
         const handleKeyDown = (e) => {
             if (e.key === 'Escape') handleClose()
             if (e.key === 'ArrowLeft') prevImage()
@@ -74,7 +70,7 @@ const ProjectModal = ({ project, onClose }) => {
                     <X />
                 </button>
 
-                {/* Left: Image Slider */}
+                {/* === Image Slider === */}
                 <div className="modal-left-section">
                     <div className="modal-main-image-wrapper">
                         <img
@@ -84,10 +80,6 @@ const ProjectModal = ({ project, onClose }) => {
                     </div>
 
                     <div className="modal-slider-controls">
-                        {/* 
-                            Left/Right buttons are optional if we have thumbnails,
-                            but user asked for buttons.
-                        */}
                         <button className="btn-slide prev" onClick={prevImage} aria-label="Previous image"></button>
                         <div className="thumbnails-track">
                             {images.map((img, idx) => (
@@ -104,7 +96,7 @@ const ProjectModal = ({ project, onClose }) => {
                     </div>
                 </div>
 
-                {/* Right: Content */}
+                {/* === Content === */}
                 <div className="modal-right-section">
 
                     {/* Header */}
@@ -146,13 +138,7 @@ const ProjectModal = ({ project, onClose }) => {
                         <span className="meta-value">{project.meta?.stack || 'HTML, CSS3, Javascript'}</span>
                     </div>
 
-                    {/* Extra Meta (Framework/Lib) - If needed, user image shows them separately */}
                     <div className="meta-wrapper">
-                        {/* We can mix this into the grid above or keep separate. 
-                             The design has 2 cols. 
-                             Let's stick to the single grid for now as per code structure, 
-                             or update if needed. The CSS handles layout.
-                         */}
                     </div>
 
                     {/* Highlights */}
