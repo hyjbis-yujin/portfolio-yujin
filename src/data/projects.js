@@ -72,7 +72,7 @@ export const projects = [
     },
     {
         id: 4,
-        type: 'Toy',
+        type: 'Personal',
         title: '로컬 배달 추적 서비스',
         desc: '소상공인을 위한 모바일 우선 실시간 배달 추적 솔루션.',
         tags: ['React Native', 'Redux', 'API'],
@@ -94,7 +94,7 @@ export const projects = [
     },
     {
         id: 5,
-        type: 'Toy',
+        type: 'Personal',
         title: '3D 웹 시뮬레이션',
         desc: '물리 엔진을 활용하여 현실적인 움직임을 구현한 3D 웹 경험.',
         tags: ['Three.js', 'Cannon.js', 'WebGL'],
@@ -138,7 +138,7 @@ export const projects = [
     },
     {
         id: 7,
-        type: 'Toy',
+        type: 'Personal',
         title: '웹 오디오 비주얼라이저',
         desc: '오디오 시각화 기능을 갖춘 미니멀 디자인의 웹 뮤직 플레이어.',
         tags: ['Vanilla JS', 'Web Audio API'],
@@ -160,7 +160,7 @@ export const projects = [
     },
     {
         id: 8,
-        type: 'Toy',
+        type: 'Personal',
         title: '개발자 커뮤니티 플랫폼',
         desc: '개발자들이 코드 스니펫을 공유하고 소통하는 지식 공유 플랫폼.',
         tags: ['React', 'Supabase', 'Tailwind'],
@@ -204,7 +204,7 @@ export const projects = [
     },
     {
         id: 10,
-        type: 'Toy',
+        type: 'Personal',
         title: '테크 블로그 테마',
         desc: '개발자 및 테크니컬 라이터를 위한 Gatsby 기반 블로그 테마.',
         tags: ['Gatsby', 'GraphQL', 'MDX'],
@@ -226,7 +226,7 @@ export const projects = [
     },
     {
         id: 11,
-        type: 'Toy',
+        type: 'Personal',
         title: '실시간 축제 지도',
         desc: '도시 축제 및 행사 정보를 지도상에서 실시간으로 확인하는 서비스.',
         tags: ['Leaflet', 'Socket.io', 'Express'],
