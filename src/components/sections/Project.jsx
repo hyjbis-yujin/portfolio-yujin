@@ -75,12 +75,10 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                     {/* Header Area */}
                     <div className="project-header-area">
                         <div className="header-left">
-                            <SectionHeader
-                                title="Project"
-                                description="비즈니스 목표를 달성한 실무 및 개인 프로젝트 경험입니다."
-                                align="left"
-                                className="mb-0"
-                            />
+                            <h2 className="section-title">Project</h2>
+                            <p className="section-desc">
+                                비즈니스 목표를 달성한 실무 및 개인 프로젝트 경험입니다.
+                            </p>
                         </div>
 
                         {/* Filter Tabs */}
