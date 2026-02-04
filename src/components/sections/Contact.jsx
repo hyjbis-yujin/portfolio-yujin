@@ -1,6 +1,4 @@
 import React from 'react'
-import { Card, CardContent } from '@/components/ui/card'
-import { Github, Mail, Copy, Check } from 'lucide-react'
 import { toast } from 'sonner'
 import Section from '@/components/common/Section'
 
