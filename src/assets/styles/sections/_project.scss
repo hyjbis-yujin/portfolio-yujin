@@ -236,13 +236,12 @@
             z-index: 2;
 
             .type-pill {
-                // background-color: #1a1a1a; // Removed
-                color: #FFFFFF;
-                font-size: 14px;
+                color: #fff;
+                font-size: 13px;
                 padding: 10px 16px;
                 border-radius: 9999px;
-                font-weight: 400; // Updated Weight
-                border: 3px solid #3c3c3c; // Added Border
+                font-weight: 500;
+                border: 1px solid #565656;
             }
         }
 
