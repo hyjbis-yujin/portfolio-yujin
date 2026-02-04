@@ -1,6 +1,5 @@
 import React, { useState, useMemo, useRef } from 'react'
 import { cn } from '@/lib/utils'
-// import { ChevronLeft, ChevronRight } from 'lucide-react' // Removed
 import logoBuff from '@/assets/images/projects/logo-buff.png'
 import ProjectModal from './ProjectModal'
 
@@ -10,6 +9,7 @@ import 'swiper/css'
 
 import { projects } from '@/data/projects'
 import Section from '@/components/common/Section'
+import SectionHeader from '@/components/ui/SectionHeader'
 
 const Project = ({ selectedProject, onClose, onOpenProject }) => {
     const [filter, setFilter] = useState('All')
@@ -44,6 +44,20 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
         }
     }
 
+    // Localized labels for tabs
+    const getTabLabel = (tab) => {
+        if (tab === 'All') return 'All'
+        if (tab === 'Company') return 'Company'
+        if (tab === 'Toy') return 'Toy'
+        return tab
+    }
+
+    // Localized label for card pill
+    const getCardPillLabel = (type) => {
+        if (type === 'Company') return 'Company'
+        return 'Toy'
+    }
+
     return (
         <Section id="project">
             <div className="project-container">
@@ -61,10 +75,12 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                     {/* Header Area */}
                     <div className="project-header-area">
                         <div className="header-left">
-                            <h2 className="section-title">Project</h2>
-                            <p className="section-desc">
-                                비즈니스 목표를 달성한 실무 및 개인 프로젝트 경험입니다.
-                            </p>
+                            <SectionHeader
+                                title="Project"
+                                description="비즈니스 목표를 달성한 실무 및 개인 프로젝트 경험입니다."
+                                align="left"
+                                className="mb-0"
+                            />
                         </div>
 
                         {/* Filter Tabs */}
@@ -82,7 +98,7 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                                         filter === tab && "active"
                                     )}
                                 >
-                                    {tab === 'All' ? '전체' : tab === 'Company' ? '실무' : '토이'} <span className="count">{getCount(tab)}</span>
+                                    {getTabLabel(tab)} <span className="count">{getCount(tab)}</span>
                                 </button>
                             ))}
                         </div>
@@ -108,6 +124,7 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                             className="project-swiper"
                         >
                             {/* Chunking: Split into slides of 4 items */}
+                            {/* Note: This grid logic is preserved as requested to maintain layout structure */}
                             {Array.from({ length: Math.ceil(filteredProjects.length / 4) }).map((_, i) => (
                                 <SwiperSlide key={i}>
                                     <div className="project-grid">
@@ -125,7 +142,7 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                                                 {/* Left: Image / Logo */}
                                                 <div className="card-image-area">
                                                     <div className="image-overlay-pill">
-                                                        <span className="type-pill">{item.type === 'Company' ? '실무' : '토이'}</span>
+                                                        <span className="type-pill">{getCardPillLabel(item.type)}</span>
                                                     </div>
                                                     {/* Logo Implementation */}
                                                     <img
