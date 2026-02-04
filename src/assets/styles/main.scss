@@ -36,6 +36,17 @@
   text-align: center;
 }
 
+.section-desc {
+  text-align: center;
+  font-size: clamp(15px, 2vw, 17px);
+  color: #868686;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+  word-break: keep-all;
+  padding: 0 1rem;
+}
+
 .text-muted {
   color: $secondary-color;
 }
