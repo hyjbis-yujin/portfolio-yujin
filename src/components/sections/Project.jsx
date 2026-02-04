@@ -23,7 +23,7 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
         return projects.filter(p => p.type === filter)
     }, [filter])
 
-    const tabs = ['All', 'Company', 'Toy']
+    const tabs = ['All', 'Company', 'Personal']
 
     const getCount = (type) => {
         if (type === 'All') return projects.length
@@ -48,14 +48,14 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
     const getTabLabel = (tab) => {
         if (tab === 'All') return 'All'
         if (tab === 'Company') return 'Company'
-        if (tab === 'Toy') return 'Toy'
+        if (tab === 'Personal') return 'Personal'
         return tab
     }
 
     // Localized label for card pill
     const getCardPillLabel = (type) => {
         if (type === 'Company') return 'Company'
-        return 'Toy'
+        return 'Personal'
     }
 
     return (
