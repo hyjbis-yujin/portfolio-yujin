@@ -23,7 +23,7 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
         return projects.filter(p => p.type === filter)
     }, [filter])
 
-    const tabs = ['All', 'Company', 'Personal']
+    const tabs = ['All', 'Company', 'Toy']
 
     const getCount = (type) => {
         if (type === 'All') return projects.length
@@ -48,7 +48,7 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
     const getTabLabel = (tab) => {
         if (tab === 'All') return 'All'
         if (tab === 'Company') return 'Company'
-        if (tab === 'Personal') return 'Personal'
+        if (tab === 'Toy') return 'Personal'
         return tab
     }
 
