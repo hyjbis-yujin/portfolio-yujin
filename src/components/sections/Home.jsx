@@ -109,9 +109,7 @@ const Home = ({ onOpenProject }) => {
                                         className="stack-card project-preview-card"
                                         onClick={() => onOpenProject(project)}
                                         style={{
-                                            backgroundImage: `url(${project.images[0]})`,
-                                            zIndex: index + 1,
-                                            left: `calc((100% - 217px) / 3 * ${index})`
+                                            '--project-bg': `url(${project.images[0]})`
                                         }}
                                     >
                                         {/* Hover Overlay Title */}
@@ -125,11 +123,6 @@ const Home = ({ onOpenProject }) => {
                                 <div
                                     className="stack-card glass-overlay"
                                     onClick={() => handleScrollTo('project')}
-                                    style={{
-                                        cursor: 'pointer',
-                                        zIndex: 4,
-                                        left: `calc((100% - 217px) / 3 * 3)`
-                                    }}
                                 >
                                     <span>MORE +</span>
                                 </div>

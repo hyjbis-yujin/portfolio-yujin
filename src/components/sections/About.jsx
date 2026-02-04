@@ -19,7 +19,7 @@ const About = () => {
                 {/* Cards Grid */}
                 <div className="grid-3">
                     {/* Card 1 */}
-                    <Card style={{ textAlign: 'center' }}>
+                    <Card className="about-card">
                         <CardHeader className="flex-col items-center gap-4">
                             <div className="icon-box">
                                 <User size={32} />
@@ -36,7 +36,7 @@ const About = () => {
                     </Card>
 
                     {/* Card 2 */}
-                    <Card style={{ textAlign: 'center' }}>
+                    <Card className="about-card">
                         <CardHeader className="flex-col items-center gap-4">
                             <div className="icon-box">
                                 <Code size={32} />
@@ -53,7 +53,7 @@ const About = () => {
                     </Card>
 
                     {/* Card 3 */}
-                    <Card style={{ textAlign: 'center' }}>
+                    <Card className="about-card">
                         <CardHeader className="flex-col items-center gap-4">
                             <div className="icon-box">
                                 <Zap size={32} />

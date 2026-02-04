@@ -12,6 +12,26 @@
         gap: 4rem; // Updated Gap (Desc-Buttons)
         position: relative;
         z-index: 10;
+
+        .contact-message-box {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-title {
+            font-size: 40px;
+            margin-bottom: 0;
+        }
+
+        .contact-desc {
+            font-size: 18px;
+            color: #818181;
+            line-height: 1.8;
+            margin: 0 auto;
+            width: fit-content;
+            word-break: keep-all;
+        }
     }
 
     .contact-buttons {

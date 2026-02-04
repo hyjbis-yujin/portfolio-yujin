@@ -17,11 +17,11 @@ const Contact = () => {
             {/* Decorative Background Removed */}
 
             <div className="contact-container">
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                    <h2 className="section-title" style={{ fontSize: '40px', marginBottom: 0 }}>
+                <div className="contact-message-box">
+                    <h2 className="section-title contact-title">
                         감사합니다.
                     </h2>
-                    <p style={{ fontSize: '18px', color: '#818181', lineHeight: 1.8, margin: '0 auto', width: 'fit-content', wordBreak: 'keep-all' }}>
+                    <p className="contact-desc">
                         실제 사용 환경을 고려해 구조와 구현을 단계적으로 정리한 프로젝트들입니다.<br />
                         이러한 경험을 바탕으로 더 안정적인 결과를 만들어가고자 합니다.
                     </p>

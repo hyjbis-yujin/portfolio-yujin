@@ -173,6 +173,8 @@
         .section-title {
             margin: 0;
             white-space: nowrap; // Keep title on one line
+            text-align: left;
+            margin-bottom: 0;
         }
 
         .section-desc {
@@ -215,6 +217,7 @@
     transition: transform 0.2s;
     overflow: hidden;
     position: relative; // Context for absolute if needed
+    cursor: pointer;
 
     // Left Image Area
     .card-image-area {
@@ -241,6 +244,12 @@
                 font-weight: 400; // Updated Weight
                 border: 3px solid #3c3c3c; // Added Border
             }
+        }
+
+        .project-logo {
+            width: 99px;
+            height: 25px;
+            object-fit: contain;
         }
 
         .img-placeholder {

@@ -418,6 +418,7 @@
 
             // Project Preview Styles
             &.project-preview-card {
+                background-image: var(--project-bg);
                 background-size: cover;
                 background-position: center;
                 cursor: pointer;

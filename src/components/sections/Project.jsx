@@ -61,7 +61,7 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                     {/* Header Area */}
                     <div className="project-header-area">
                         <div className="header-left">
-                            <h2 className="section-title" style={{ marginBottom: 0, textAlign: 'left' }}>Project</h2>
+                            <h2 className="section-title">Project</h2>
                             <p className="section-desc">
                                 비즈니스 목표를 달성한 실무 및 개인 프로젝트 경험입니다.
                             </p>
@@ -118,7 +118,6 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                                                 onClick={() => handleCardClick(item)} // Click trigger
                                                 role="button"
                                                 tabIndex={0}
-                                                style={{ cursor: 'pointer' }}
                                                 onKeyDown={(e) => {
                                                     if (e.key === 'Enter') handleCardClick(item)
                                                 }}
@@ -133,11 +132,6 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                                                         src={logoBuff}
                                                         alt="Project Logo"
                                                         className="project-logo"
-                                                        style={{
-                                                            width: '99px',
-                                                            height: '25px',
-                                                            objectFit: 'contain'
-                                                        }}
                                                     />
                                                 </div>
 
