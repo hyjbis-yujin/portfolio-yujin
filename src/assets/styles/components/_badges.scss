@@ -1,0 +1,44 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Badge
+.badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    padding: 0.125rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: colors 0.2s;
+
+    &:focus {
+        outline: 2px solid $text-color;
+        outline-offset: 2px;
+    }
+
+    &.default {
+        border-color: transparent;
+        background-color: $primary-color;
+        color: $bg-color; // Text on primary
+
+        &:hover {
+            background-color: rgba($primary-color, 0.8);
+        }
+    }
+
+    &.secondary {
+        border-color: transparent;
+        background-color: $secondary-color;
+        color: $text-color;
+
+        &:hover {
+            background-color: rgba($secondary-color, 0.8);
+        }
+    }
+
+    &.outline {
+        color: $text-color;
+        border-color: $text-color; // Or subtle border
+    }
+}

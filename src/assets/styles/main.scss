@@ -3,7 +3,11 @@
 @use 'base/fonts';
 @use 'base/base';
 @use 'layout/layout';
-@use 'components/ui';
+@use 'components/cards';
+@use 'components/badges';
+@use 'components/tabs';
+@use 'components/dialog';
+@use 'components/icons';
 @use 'components/modal';
 
 // Sections
