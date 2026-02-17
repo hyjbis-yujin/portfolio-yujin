@@ -1,103 +1,133 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-// About Section
-#about {
-    .about-container {
-        max-width: 1300px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: clamp(2rem, 5vw, 4rem);
+$about-card-bg: #212121;
+$about-card-height: 500px;
+$about-card-width: 440px;
 
-        .about-desc {
-            text-align: center;
-            font-size: clamp(15px, 2vw, 17px);
-            color: #868686;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
-            word-break: keep-all; // Good for Korean
-            padding: 0 1rem;
-        }
+#about {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: $bg-color;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 0 2rem;
+}
+
+.card-index {
+    position: absolute;
+    bottom: 2rem;
+    font-size: 0.9rem;
+    color: rgba($text-color, 0.5);
+    font-family: $font-pixel;
+}
+
+.about-header-wrapper {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    width: 100%;
+    pointer-events: none;
+}
+
+.about-deck-container {
+    position: relative;
+    height: 480px;
+    width: 100%;
+    margin-top: 4rem;
+    cursor: pointer;
+}
+
+.about-card-motion-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    max-width: $about-card-width;
+    height: $about-card-height;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    perspective: 1000px;
+}
+
+.about-card {
+    width: 100%;
+    height: 100%;
+    background-color: $about-card-bg;
+    border: 1px solid $border-color;
+    border-radius: 27px;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+
+    .icon-box {
+        margin-bottom: 1.5rem;
+        color: $primary-color;
+        background: rgba($primary-color, 0.1);
+        padding: 1.2rem;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    .grid-3 {
-        display: grid;
-        grid-template-columns: 1fr; // Mobile 1 col
-        gap: 2rem;
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: $text-color;
+        margin-bottom: 1rem;
+        letter-spacing: -0.01em;
+    }
 
-        @include mq-tablet {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
-        }
+    p {
+        font-size: 1rem;
+        color: rgba($text-color, 0.7);
+        line-height: 1.6;
+        word-break: keep-all;
+        margin: 0;
+        opacity: 0.9;
+    }
+}
 
-        @include mq-desktop {
-            gap: 2rem;
-        }
+// Mobile adjustments
+@include mq-mobile-only {
+    .about-deck-container {
+        height: 450px;
+    }
 
-        >div {
-            background: transparent;
-            border: none;
-            box-shadow: none;
-            position: relative;
-            padding: 1rem; // Add padding for touch targets
+    .about-card-motion-wrapper {
+        max-width: 320px;
+    }
 
-            // Divider - Desktop Only
-            &::after {
-                display: none; // Hidden on mobile
-
-                @include mq-tablet {
-                    display: block;
-                    content: '';
-                    position: absolute;
-                    right: -1.5rem; // Adjusted
-                    top: 50%;
-                    transform: translateY(-50%);
-                    height: 60px;
-                    border-right: 1px solid #4E4E4E;
-                }
-
-                @include mq-desktop {
-                    right: -1.5rem;
-                    height: 60px;
-                }
-            }
-
-            &:last-child::after {
-                display: none;
-            }
-
-            .icon-box {
-                background-color: transparent;
-                padding: 0;
-                margin-bottom: 1rem;
-                display: flex; // Changed to flex for better center
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-            }
-
-            .card-title {
-                font-size: clamp(18px, 3vw, 21px);
-                color: #2CB1EA;
-                font-weight: 600;
-                text-align: center;
-                margin-bottom: 0.5rem;
-            }
-
-            p {
-                font-size: clamp(14px, 2vw, 16px) !important;
-                color: #FFFFFF !important;
-                opacity: 1;
-                line-height: 1.5;
-                text-align: center;
-                word-break: keep-all;
-            }
-        }
+    .about-header-wrapper {
+        top: 5rem;
     }
 
     .about-card {
-        text-align: center;
+        border-radius: 20px;
     }
 }

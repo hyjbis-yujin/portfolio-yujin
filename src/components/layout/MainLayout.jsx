@@ -18,7 +18,7 @@ const MainLayout = ({ children }) => {
             </main>
 
             {/* Background/Noise overlay could go here if design needed it */}
-            <Toaster position="bottom-right" theme="dark" />
+            {/* <Toaster position="bottom-right" theme="dark" /> */}
         </div>
     )
 }

@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from 'react'
+import { motion } from 'framer-motion'
+import { gridStagger, gridItemFade } from '@/styles/animations'
 import { Code2, Monitor, PenTool } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { skills } from '@/data/skills'
@@ -12,63 +14,85 @@ const CATEGORY_CONFIG = {
     tool: { label: 'Tool', icon: <PenTool size={16} /> }
 }
 
-const Skill = () => {
-    const [activeTab, setActiveTab] = useState('language')
+import { useSkillState } from '@/hooks/useSkillState'
 
-    // Filter skills based on active tab
-    const filteredSkills = useMemo(() => {
-        return skills.filter(skill => skill.category === activeTab)
-    }, [activeTab])
+const Skill = () => {
+    const { activeTab, setActiveTab, filteredSkills, tabs } = useSkillState()
+
+    // Animation Variants
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.1
+            }
+        }
+    }
+
+    const cardVariants = {
+        hidden: { opacity: 0, y: 20, scale: 1 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            transition: { type: "tween", duration: 0.4, ease: "easeOut" }
+        }
+    }
 
     return (
         <Section id="skill">
             <div className="skill-container">
-                {/* Fixed Header Area */}
                 <div className="skill-header">
                     <h2 className="section-title">Skill</h2>
-
-                    {/* Tabs */}
-                    <div className="skill-tabs">
-                        {Object.keys(CATEGORY_CONFIG).map(catKey => (
+                    <div className="skill-tabs" role="tablist">
+                        {tabs.map(tab => (
                             <button
-                                key={catKey}
-                                onClick={() => setActiveTab(catKey)}
-                                className={cn(
-                                    "tab-btn",
-                                    activeTab === catKey && "active"
-                                )}
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id)}
+                                className={cn("tab-btn", tab.isActive && "active")}
+                                role="tab"
+                                aria-selected={tab.isActive}
                             >
-                                {CATEGORY_CONFIG[catKey].label}
+                                {tab.label}
                             </button>
                         ))}
                     </div>
                 </div>
 
-                {/* Scrollable Content Area */}
                 <div className="skill-list-wrap">
-                    <div className="skill-grid">
+                    <motion.div
+                        className="skill-grid"
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.4, margin: "-10% 0px -10% 0px" }}
+                        key={activeTab}
+                    >
                         {filteredSkills.map((item) => (
-                            <div key={item.id} className="skill-card">
-                                {/* Left: Icon Slot */}
+                            <motion.div
+                                key={item.id}
+                                className="skill-card"
+                                variants={cardVariants}
+                                aria-label={`${item.label}: ${item.desc}`}
+                            >
                                 <div className="skill-icon-box">
                                     <SkillIcon
                                         icon={item.icon}
                                         hoverIcon={item.hoverIcon}
                                         alt={item.key}
-                                        size={24} // Adjusted size for skill card
+                                        size={24}
                                     />
                                 </div>
-
-                                {/* Right: Content */}
                                 <div className="skill-content">
                                     <h3 className="skill-name">{item.key}</h3>
                                     <p className="skill-text">{item.desc}</p>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                 </div>
-
             </div>
         </Section>
     )

@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useRef } from 'react'
+import React from 'react'
+import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import logoBuff from '@/assets/images/projects/logo-buff.png'
 import ProjectModal from './ProjectModal'
@@ -11,48 +12,45 @@ import { projects } from '@/data/projects'
 import Section from '@/components/common/Section'
 import SectionHeader from '@/components/ui/SectionHeader'
 
-const Project = ({ selectedProject, onClose, onOpenProject }) => {
-    const [filter, setFilter] = useState('All')
+import { useProjectState } from '@/hooks/useProjectState'
 
-    const swiperRef = useRef(null)
-    const [isBeginning, setIsBeginning] = useState(true)
-    const [isEnd, setIsEnd] = useState(false)
-
-    const filteredProjects = useMemo(() => {
-        if (filter === 'All') return projects
-        return projects.filter(p => p.type === filter)
-    }, [filter])
-
-    const tabs = ['All', 'Company', 'Personal']
-
-    const getCount = (type) => {
-        if (type === 'All') return projects.length
-        return projects.filter(p => p.type === type).length
-    }
-
-    const handlePrev = () => {
-        if (swiperRef.current) swiperRef.current.slidePrev()
-    }
-
-    const handleNext = () => {
-        if (swiperRef.current) swiperRef.current.slideNext()
-    }
-
-    const handleCardClick = (project) => {
-        if (onOpenProject) {
-            onOpenProject(project)
+// Animation Variants matching Skill section for consistency
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.1
         }
     }
+}
 
-    // Localized labels for tabs
-    const getTabLabel = (tab) => {
-        return tab
+const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { type: "tween", duration: 0.4, ease: "easeOut" }
     }
+}
 
-    // Localized label for card pill
-    const getCardPillLabel = (type) => {
-        return type
-    }
+const Project = ({ selectedProject, onClose, onOpenProject }) => {
+    const {
+        filter,
+        setFilter,
+        filteredProjects,
+        tabs,
+        getCount,
+        handlePrev,
+        handleNext,
+        handleCardClick,
+        onSwiper,
+        onSlideChange,
+        isBeginning,
+        isEnd,
+        slides
+    } = useProjectState({ onOpenProject })
 
     return (
         <Section id="project">
@@ -62,14 +60,12 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                     className={cn("slider-arrow arrow-prev", isBeginning && "swiper-button-disabled")}
                     onClick={handlePrev}
                     disabled={isBeginning}
-                    aria-label="Previous Project"
+                    aria-label="Previous Page"
                 />
 
-                {/* Center Column */}
                 <div className="project-center-column">
-
                     {/* Header Area */}
-                    <div className="project-header-area">
+                    <header className="project-header-area">
                         <div className="header-left">
                             <h2 className="section-title">Project</h2>
                             <p className="section-desc">
@@ -78,25 +74,20 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                         </div>
 
                         {/* Filter Tabs */}
-                        <div className="filter-group">
+                        <div className="filter-group" role="tablist">
                             {tabs.map(tab => (
                                 <button
                                     key={tab}
-                                    onClick={() => {
-                                        setFilter(tab)
-                                        // Reset Swiper to start when filter changes
-                                        if (swiperRef.current) swiperRef.current.slideTo(0)
-                                    }}
-                                    className={cn(
-                                        "filter-btn",
-                                        filter === tab && "active"
-                                    )}
+                                    onClick={() => setFilter(tab)}
+                                    className={cn("filter-btn", filter === tab && "active")}
+                                    role="tab"
+                                    aria-selected={filter === tab}
                                 >
-                                    {getTabLabel(tab)} <span className="count">{getCount(tab)}</span>
+                                    {tab} <span className="count">{getCount(tab)}</span>
                                 </button>
                             ))}
                         </div>
-                    </div>
+                    </header>
 
                     {/* === Swiper Area === */}
                     <div className="project-swiper-area">
@@ -105,43 +96,41 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                             spaceBetween={20}
                             slidesPerView={1}
                             allowTouchMove={true}
-
-                            onSwiper={(swiper) => {
-                                swiperRef.current = swiper
-                                setIsBeginning(swiper.isBeginning)
-                                setIsEnd(swiper.isEnd)
-                            }}
-                            onSlideChange={(swiper) => {
-                                setIsBeginning(swiper.isBeginning)
-                                setIsEnd(swiper.isEnd)
-                            }}
+                            onSwiper={onSwiper}
+                            onSlideChange={onSlideChange}
                             className="project-swiper"
                         >
-                            {/* Chunking: Split into slides of 4 items */}
-                            {/* Note: This grid logic is preserved as requested to maintain layout structure */}
-                            {Array.from({ length: Math.ceil(filteredProjects.length / 4) }).map((_, i) => (
-                                <SwiperSlide key={i}>
-                                    <div className="project-grid">
+                            {slides.map((_, i) => (
+                                <SwiperSlide key={`slide-${i}`}>
+                                    <motion.div
+                                        className="project-grid"
+                                        variants={containerVariants}
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true, amount: 0.4, margin: "-10% 0px -10% 0px" }}
+                                        key={filter} // Re-animate on filter change
+                                    >
                                         {filteredProjects.slice(i * 4, (i + 1) * 4).map((item) => (
-                                            <div
+                                            <motion.article
                                                 key={item.id}
                                                 className="project-card"
-                                                onClick={() => handleCardClick(item)} // Click trigger
+                                                onClick={() => handleCardClick(item)}
                                                 role="button"
                                                 tabIndex={0}
                                                 onKeyDown={(e) => {
                                                     if (e.key === 'Enter') handleCardClick(item)
                                                 }}
+                                                aria-label={`${item.title} 프로젝트 상세보기`}
+                                                variants={cardVariants}
                                             >
                                                 {/* Left: Image / Logo */}
                                                 <div className="card-image-area">
                                                     <div className="image-overlay-pill">
-                                                        <span className="type-pill">{getCardPillLabel(item.type)}</span>
+                                                        <span className="type-pill">{item.type}</span>
                                                     </div>
-                                                    {/* Logo Implementation */}
                                                     <img
                                                         src={logoBuff}
-                                                        alt="Project Logo"
+                                                        alt={`${item.title} 로고`}
                                                         className="project-logo"
                                                     />
                                                 </div>
@@ -150,20 +139,19 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                                                 <div className="card-content-area">
                                                     <h3 className="card-title">{item.title}</h3>
                                                     <p className="card-desc">{item.desc}</p>
-                                                    <div className="tags-container">
+                                                    <div className="tags-container" role="list">
                                                         {item.tags.map(tag => (
-                                                            <span key={tag} className="tag">{tag}</span>
+                                                            <span key={tag} className="tag" role="listitem">{tag}</span>
                                                         ))}
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </motion.article>
                                         ))}
-                                    </div>
+                                    </motion.div>
                                 </SwiperSlide>
                             ))}
                         </Swiper>
                     </div>
-
                 </div>
 
                 {/* Next Arrow */}
@@ -171,7 +159,7 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                     className={cn("slider-arrow arrow-next", isEnd && "swiper-button-disabled")}
                     onClick={handleNext}
                     disabled={isEnd}
-                    aria-label="Next Project"
+                    aria-label="Next Page"
                 />
             </div>
 

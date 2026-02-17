@@ -180,11 +180,11 @@
 // Right Section: Content
 .modal-right-section {
     flex: 1;
-    padding: 4rem; // Updated padding
+    padding: 4rem 3rem 2.5rem;
     overflow-y: hidden; // Disable internal scroll
     display: flex;
     flex-direction: column;
-    gap: 1.8rem;
+    gap: 3rem;
 
     // Header: Title + Buttons
     .modal-header-group {
@@ -222,63 +222,40 @@
         }
     }
 
-    // Meta Grid Table
+    // Meta Grid Table (Refactored)
     .modal-meta-grid {
         display: grid;
-        grid-template-columns: auto 1fr; // Label | Value
-        // column-gap removed
-        row-gap: 0.8rem; // Updated row gap
-        align-items: baseline;
+        grid-template-columns: repeat(2, 1fr); // 2 Columns
+        gap: 15px 30px;
+        width: 100%;
+        align-items: start; // Align items to start
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
         .meta-label {
-            font-size: 16px;
-            font-weight: 500; // Updated Weight to 500
+            font-size: $font-size-base;
+            font-weight: 500;
             color: #fff;
             min-width: 80px;
+            flex-shrink: 0;
         }
 
         .meta-value {
-            font-size: 15px;
-            color: #9C9C9C;
-            line-height: 1.5;
+            font-size: $font-size-sm;
+            color: $secondary-color;
         }
 
-        // Split Layout for Meta (2 Columns visually)
-        // We can use sub-grids or just CSS Grid areas if needed. 
-        // For simplicity, let's use a 4-column grid for the "2-column look"
-        // But the design shows: Main | Value | Framework | Value
-        // Let's refactor .modal-meta-grid to be a wrapper of two lists or a 4-col grid.
-    }
-
-    .meta-wrapper {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-
-        .meta-column {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-
-            .meta-row {
-                display: flex;
-                gap: 1.5rem;
-
-                .meta-label {
-                    color: #fff;
-                    font-weight: 700;
-                    font-size: 16px;
-                    width: 60px; // Fixed label width
-                    flex-shrink: 0;
-                }
-
-                .meta-value {
-                    color: #999;
-                    font-size: 15px;
-                }
-            }
+        // Mobile Responsive: 1 Column below 768px
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: 16px;
         }
     }
+
 
 
     // Highlights
@@ -289,7 +266,7 @@
 
         .highlight-title {
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             color: #fff;
         }
 
@@ -303,7 +280,8 @@
                 align-items: flex-start;
                 gap: 0.8rem;
                 font-size: 15px;
-                color: #ccc;
+                color: #9C9C9C;
+                font-weight: 400;
                 line-height: 1.5;
 
                 svg {
@@ -376,7 +354,4 @@
         padding: 2rem;
     }
 
-    .meta-wrapper {
-        grid-template-columns: 1fr !important;
-    }
 }

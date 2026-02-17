@@ -6,12 +6,14 @@ import React from 'react';
  * @param {string} className - Additional classes
  * @param {React.ReactNode} children - Section content
  */
-const Section = ({ id, className = '', children }) => {
+const Section = React.forwardRef(({ id, className = '', children }, ref) => {
     return (
-        <section id={id} className={`section ${className}`}>
+        <section id={id} className={`section ${className}`} ref={ref}>
             {children}
         </section>
     );
-};
+});
+
+Section.displayName = 'Section';
 
 export default Section;

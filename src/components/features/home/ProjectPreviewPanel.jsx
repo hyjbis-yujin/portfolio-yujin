@@ -17,12 +17,7 @@ const ProjectPreviewPanel = ({ onOpenProject, onScrollTo }) => {
                         style={{
                             '--project-bg': `url(${project.images[0]})`
                         }}
-                    >
-                        {/* Hover Overlay Title */}
-                        <div className="card-overlay">
-                            <span className="preview-title">{project.title}</span>
-                        </div>
-                    </div>
+                    />
                 ))}
 
                 {/* "MORE +" Card */}

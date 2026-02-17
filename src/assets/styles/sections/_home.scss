@@ -3,24 +3,51 @@
 
 /* === Home Section === */
 #home {
+    .home-container {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        overflow: hidden;
+        background-color: #111; // Ensure dark background for glassmorphism
+    }
+
     .home-grid {
         width: 100%;
-        max-width: 80rem;
+        max-width: 1400px; // User request
+        margin: 0 auto;
+        padding: 0 2rem;
         display: grid;
-        // Mobile: Single column
         grid-template-columns: 1fr;
         gap: 3rem;
         align-items: center;
 
-        // Tablet Layout
-        @include mq-tablet {
-            grid-template-columns: repeat(12, 1fr);
-            gap: 4rem; // Slightly reduced from 5rem for tablet
-            align-items: center;
-        }
+        // Transition handled by Framer Motion layout prop
 
         @include mq-desktop {
-            gap: 5rem;
+            // Initial State: Two columns (Content | Hidden) to keep Title centered violently
+            grid-template-columns: 1fr 0px; // Force 0px to prevent content propping
+            gap: 0; // No gap initially for perfect center
+            padding: 0 4rem; // More secured sides
+            height: 100vh; // Full height for vertical centering
+
+            // Expanded State: 40/60 Split
+            &[data-expanded="true"] {
+                grid-template-columns: 4fr 6fr; // 40% 60%
+                gap: 5rem; // Increased to 5rem as per user request
+
+                // TARGETING TITLE AREA FROM HERE to ensure correct selector
+                .home-title-area {
+                    align-items: flex-start;
+                    text-align: left;
+                    padding-left: 0;
+
+                    h1 {
+                        text-align: left;
+                    }
+                }
+            }
         }
     }
 
@@ -28,13 +55,19 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 0.5rem;
-        text-align: center; // Mobile center
+        gap: 1rem;
+        text-align: center;
+        width: 100%;
+        position: relative; // Remove absolute if any
+
+        // Transition handled by Framer Motion layout prop
 
         @include mq-desktop {
-            grid-column: span 5;
-            text-align: left;
-            gap: 1rem;
+            // Initial Desktop State: Centered
+            align-items: center;
+            text-align: center;
+            padding-left: 0;
+            width: 100%; // Ensure container is full width
         }
 
         h1 {
@@ -45,6 +78,14 @@
             line-height: 1.1;
             letter-spacing: -0.05em;
             word-break: keep-all; // Prevent awkward breaks
+            word-break: keep-all; // Prevent awkward breaks
+            width: fit-content; // Important for Layout Animation to move the whole block
+            text-align: center; // Initial state
+
+            // Handle Text Align change via parent state if needed, or explicitly here
+            @include mq-desktop {}
+
+            // Transition handled by Framer Motion
         }
 
         .highlight {
@@ -55,189 +96,231 @@
     .home-panels-area {
         display: grid;
         grid-template-columns: 1fr; // Mobile 1 col
-        gap: 1rem;
+        gap: 1.5rem;
         width: 100%;
-        max-width: 700px;
-        margin: 0 auto; // Center on mobile
-
-        @include mq-tablet {
-            grid-template-columns: repeat(2, 1fr); // Tablet 2 cols
-            gap: 1.25rem;
-        }
+        max-width: 600px; // Mobile max-width
+        margin: 0 auto;
 
         @include mq-desktop {
-            grid-column: span 7;
-            margin: 0; // Reset margin
+            max-width: none;
+            margin: 0;
+            grid-template-columns: 1fr 1fr; // 2 Columns
+            gap: 1.25rem; // User requested 1.25rem
+            align-self: center; // Vertical Center in Hero Grid
+            width: 700px; // User request: Fixed 700px width
         }
 
         .home-panel {
-            background-color: #212121;
-            border-radius: 20px;
+            // ... styles ...
+            width: 100%;
+            height: 100%;
+        }
+
+        /* === Grid Positioning Wrappers === */
+
+        // Profile: Full Width (Row 1)
+        .profile-panel-wrapper {
+            grid-column: 1 / -1;
+            width: 100%;
+        }
+
+        // Tools: Left (Row 2 Col 1)
+        .tools-panel-wrapper {
+            grid-column: span 1;
+            width: 100%;
+            height: 100%; // Fill height
+        }
+
+        // About: Right (Row 2 Col 2)
+        .about-panel-wrapper {
+            grid-column: span 1;
+            width: 100%;
+            height: 100%;
+        }
+
+        .home-panel {
+            background: #212121; // User request: #212121
+            // backdrop-filter: blur(12px); // Removed for solid color
+            // -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            // box-shadow removed as per user request
+
             padding: 24px;
             display: flex;
             flex-direction: column;
             border: none;
-            box-shadow: none;
+            transition: none; // User request: Remove hover effect transitions
 
             @include mq-tablet {
-                padding: 30px;
+                padding: 28px;
             }
 
             @include mq-desktop {
-                padding: 35px;
+                padding: 36px;
+            }
+
+            // User request: Remove hover effects
+        }
+    }
+
+    .home-panel.profile-panel {
+        // Removed grid-column properties from here
+        // preserved visual styles
+
+        padding-left: 24px; // Reset mobile
+
+        @include mq-tablet {
+            padding-left: 3rem;
+        }
+
+        flex-direction: column; // Mobile Stack
+        align-items: flex-start;
+        gap: 1.5rem;
+
+        @include mq-tablet {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        // Desktop: Restore space-between layout and ROW direction
+        @include mq-desktop {
+            flex-direction: row; // Explicitly set to row (User request)
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        // Make sure it fills the wrapper
+        width: 100%;
+        height: 100%;
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+
+            .profile-name {
+                font-size: 18px;
+                font-weight: 700;
+                color: #FFFFFF;
+            }
+
+            .profile-email {
+                font-size: clamp(14px, 2vw, 16px);
+                color: #5A5A5A;
+                font-weight: 500;
+                word-break: break-all;
             }
         }
 
-        /* === Profile Panel === */
-        .profile-panel {
-            grid-column: span 1;
+        .profile-actions {
+            display: flex;
+            flex-direction: row; // Mobile Row
+            gap: 10px;
+            width: 100%;
 
+            // Reset for tablet
             @include mq-tablet {
-                grid-column: span 2;
-            }
-
-            padding-left: 24px; // Reset mobile
-
-            @include mq-tablet {
-                padding-left: 3rem;
-            }
-
-            flex-direction: column; // Mobile Stack
-            align-items: flex-start;
-            gap: 1.5rem;
-
-            @include mq-tablet {
-                flex-direction: row;
-                align-items: center;
-            }
-
-            // Desktop: Restore space-between layout
-            @include mq-desktop {
-                justify-content: space-between;
-            }
-
-            .profile-info {
-                display: flex;
                 flex-direction: column;
-                gap: 0.25rem;
-
-                .profile-name {
-                    font-size: 18px;
-                    font-weight: 700;
-                    color: #FFFFFF;
-                }
-
-                .profile-email {
-                    font-size: clamp(14px, 2vw, 16px);
-                    color: #5A5A5A;
-                    font-weight: 500;
-                    word-break: break-all;
-                }
+                width: auto;
             }
 
-            .profile-actions {
+            .panel-btn {
+                // ... existing btn styles ...
+                flex: 1; // Stretch on mobile
+                height: 48px; // Min touch target
+                background-color: #323232;
+                color: #FFFFFF;
+                border: none;
+                border-radius: 13px;
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: background 0.2s;
                 display: flex;
-                flex-direction: row; // Mobile Row
-                gap: 10px;
-                width: 100%;
+                align-items: center;
+                justify-content: center;
 
                 @include mq-tablet {
-                    flex-direction: column;
-                    width: auto;
+                    width: 155px;
+                    height: 50px;
+                    flex: none;
                 }
 
-                .panel-btn {
-                    flex: 1; // Stretch on mobile
-                    height: 48px; // Min touch target
-                    background-color: #323232;
-                    color: #FFFFFF;
-                    border: none;
-                    border-radius: 13px;
-                    font-size: 14px;
-                    font-weight: 500;
-                    cursor: pointer;
-                    transition: background 0.2s;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+                // ...
 
-                    @include mq-tablet {
-                        width: 155px;
-                        height: 50px;
-                        flex: none;
-                    }
-
-                    @include hover-supported {
-                        &:hover {
-                            background-color: #4c4c4c;
-                        }
+                @include hover-supported {
+                    &:hover {
+                        background-color: #4c4c4c;
                     }
                 }
             }
         }
+    }
 
-        /* === Panel Header === */
-        .panel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.8rem;
+    /* === Panel Header === */
+    .panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.8rem;
 
-            .panel-title {
-                font-size: 17px;
-                font-weight: 600;
-                color: #2CB1EA; // Point color
-            }
-
-            .shortcut-btn {
-                background: none;
-                border: none;
-                // color: #FFFFFF; // Removed color as no text
-                // opacity: 0.5; // Removed opacity
-                cursor: pointer;
-                transition: all 0.3s ease; // Restored smooth transition
-
-                // BG Config
-                width: 21px;
-                height: 13px;
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: contain; // or 21px 13px
-
-                // Specific Icon
-                &.icon-shortcut {
-                    background-image: url('@/assets/icons/default/arrow.png');
-                }
-
-                &:hover {
-                    background-image: url('@/assets/icons/hover/arrow.png');
-                }
-            }
+        .panel-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #2CB1EA; // Point color
         }
 
-        // Button Icons
-        .btn-icon {
-            display: inline-block;
-            width: 15px; // Updated to 15px
-            height: 15px; // Updated to 15px
+        .shortcut-btn {
+            background: none;
+            border: none;
+            // color: #FFFFFF; // Removed color as no text
+            // opacity: 0.5; // Removed opacity
+            cursor: pointer;
+            // transition: all 0.3s ease; // Removed as requested to clean up manual transitions
+
+            // BG Config
+            width: 21px;
+            height: 13px;
             background-repeat: no-repeat;
             background-position: center;
-            background-size: contain;
-            margin-right: 8px;
-            vertical-align: middle;
+            background-size: contain; // or 21px 13px
 
             // Specific Icon
-            &.btn-arrow-icon {
-                background-image: url('@/assets/images/ui/btn-arrow.png');
-                transition: background-image 0.2s; // Smooth transition
+            &.icon-shortcut {
+                background-image: url('@/assets/icons/default/arrow.png');
+            }
+
+            &:hover {
+                background-image: url('@/assets/icons/hover/arrow.png');
             }
         }
-
-        // Hover Effect on Button Parent - Moved to .panel-btn block
     }
+
+    // Button Icons
+    .btn-icon {
+        display: inline-block;
+        width: 15px; // Updated to 15px
+        height: 15px; // Updated to 15px
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-right: 8px;
+        vertical-align: middle;
+
+        // Specific Icon
+        &.btn-arrow-icon {
+            background-image: url('@/assets/images/ui/btn-arrow.png');
+            transition: background-image 0.2s; // Smooth transition
+        }
+    }
+
+    // Hover Effect on Button Parent - Moved to .panel-btn block
 }
 
-/* === Tools Panel === */
+
+
+
 .tools-panel {
     height: 100%; // Ensure fills grid cell
 
@@ -294,7 +377,8 @@
     }
 }
 
-/* === About Panel === */
+
+
 .about-panel {
     height: 100%; // Match height with Tools panel
 
@@ -315,21 +399,30 @@
 }
 
 /* === Project Panel === */
-.project-panel {
-    grid-column: span 1;
+.project-panel-wrapper {
+    grid-column: 1 / -1; // Span full width
+    width: 100%;
+    position: relative;
+    height: 240px; // User request: 240px
+    border-radius: 24px; // Match panel radius
+    overflow: hidden;
 
-    @include mq-tablet {
-        grid-column: span 2;
+    @include mq-desktop {
+        height: 240px; // User request: 240px
     }
+}
+
+.project-panel {
+    // Removed grid-column
+
+    // Height is now inherited or 100% of wrapper
+    height: 100%;
+    width: 100%;
 
     position: relative;
     overflow: hidden;
-    height: clamp(200px, 30vw, 240px); // Fluid height
-
-    // Desktop: Fixed height to match original design
-    @include mq-desktop {
-        height: 240px;
-    }
+    // height: clamp... removed, handled by wrapper if strictly layout related, 
+    // OR inner fills wrapper. Let's keep height on wrapper to be safe for grid.
 
     .project-header {
         z-index: 5;
@@ -353,7 +446,7 @@
     .project-stack {
         position: relative;
         height: 100%;
-        margin-top: 1rem;
+        // margin-top: 1rem; // Removed to match other panels
         display: flex;
 
         .stack-card {
@@ -370,10 +463,9 @@
             background-color: #323232;
             border-radius: 12px;
             position: absolute;
-            bottom: 0;
+            top: 0; // Changed from bottom: 0 to align with header
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s,
-            z-index 0.2s;
+            transition: transform 0.3s ease;
 
             // Stacking Logic (Calculated with SCSS for responsiveness)
             // We assume 3 cards + 1 more button
@@ -385,12 +477,10 @@
 
             &:nth-child(1) {
                 left: 0;
-                z-index: 1;
             }
 
             &:nth-child(2) {
                 left: 20%;
-                z-index: 2;
 
                 @include mq-tablet {
                     left: 30%;
@@ -404,7 +494,6 @@
 
             &:nth-child(3) {
                 left: 40%;
-                z-index: 3;
 
                 @include mq-tablet {
                     left: 60%;
@@ -447,7 +536,6 @@
                     &:hover {
                         transform: translateY(-5px);
                         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-                        z-index: 10 !important;
 
                         .card-overlay {
                             opacity: 1;
@@ -459,7 +547,6 @@
             // Glass Overlay
             &.glass-overlay {
                 left: 60%;
-                z-index: 4;
 
                 @include mq-tablet {
                     left: 90%;

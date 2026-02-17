@@ -1,15 +1,25 @@
-import React from 'react'
+import { motion } from 'framer-motion'
 
-const CareerItem = ({ org, desc, badges = [] }) => {
+const CareerItem = ({ id, org, desc, badges = [], variants }) => {
     return (
-        <div className="info-item">
-            <span className="item-org">{org}</span>
-            <p className="item-desc">{desc}</p>
-            <div className="item-badges">
+        <div className="info-item" aria-label={`${org} - ${desc}`}>
+            <motion.span className="item-org" variants={variants}>
+                {org}
+            </motion.span>
+            <motion.p className="item-desc" variants={variants}>
+                {desc}
+            </motion.p>
+            <motion.div className="item-badges" role="list" variants={variants}>
                 {badges.map((badge, idx) => (
-                    <span key={idx} className="badge-pill">{badge}</span>
+                    <span
+                        key={`${id}-badge-${idx}`}
+                        className="badge-pill"
+                        role="listitem"
+                    >
+                        {badge}
+                    </span>
                 ))}
-            </div>
+            </motion.div>
         </div>
     )
 }

@@ -1,50 +1,74 @@
-import React from 'react'
-import { toast } from 'sonner'
+// import { toast } from 'sonner'
 import Section from '@/components/common/Section'
+import { motion } from 'framer-motion'
+import { cinematicReveal } from '@/styles/animations'
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.2,
+            delayChildren: 0.1
+        }
+    }
+}
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.6, ease: "easeOut" }
+    }
+}
 
 const Contact = () => {
     const handleCopyEmail = () => {
-        navigator.clipboard.writeText("frontend-dev@email.com")
-        toast.success("이메일이 복사되었습니다!", {
-            description: "frontend-dev@email.com"
-        })
+        const email = "frontend-dev@email.com"
+        navigator.clipboard.writeText(email)
+        alert(`이메일이 복사되었습니다! ${email}`)
     }
 
     return (
         <Section id="contact" className="contact-section-overflow">
-            {/* Decorative Background Removed */}
-
-            <div className="contact-container">
+            <motion.div
+                className="contact-container"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.4, margin: "-10% 0px -10% 0px" }}
+            >
                 <div className="contact-message-box">
-                    <h2 className="section-title contact-title">
+                    <motion.h2 className="contact-title" variants={itemVariants}>
                         감사합니다.
-                    </h2>
-                    <p className="contact-desc">
+                    </motion.h2>
+                    <motion.p className="contact-desc" variants={itemVariants}>
                         실제 사용 환경을 고려해 구조와 구현을 단계적으로 정리한 프로젝트들입니다.<br />
                         이러한 경험을 바탕으로 더 안정적인 결과를 만들어가고자 합니다.
-                    </p>
+                    </motion.p>
                 </div>
 
-                <div className="contact-buttons">
-                    {/* Email Button */}
+                <motion.div className="contact-buttons" variants={itemVariants}>
                     <button
                         onClick={handleCopyEmail}
                         className="btn-contact email"
+                        aria-label="이메일 주소 복사하기"
                     >
                         <span>E-Mail</span>
                     </button>
 
-                    {/* Github Button */}
                     <a
                         href="https://github.com"
                         target="_blank"
                         rel="noreferrer"
                         className="btn-contact github"
+                        aria-label="깃허브 방문하기"
                     >
                         <span>GitHub</span>
-                    </a>
-                </div>
-            </div>
+                    </a >
+                </motion.div >
+            </motion.div >
 
             <footer>
                 <div className="footer-container">

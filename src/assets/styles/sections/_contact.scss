@@ -1,104 +1,90 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-// Contact Section
-#contact {
-    .contact-container {
-        max-width: 1300px;
-        width: 100%;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        gap: 4rem; // Updated Gap (Desc-Buttons)
-        position: relative;
-        z-index: 10;
+$contact-btn-border: #323232;
+$footer-text: #434343;
+$footer-border: #212121;
 
-        .contact-message-box {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
+.contact-container {
+    max-width: 1300px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    position: relative;
+    z-index: 10;
+}
 
-        .contact-title {
-            font-size: 40px;
-            margin-bottom: 0;
-        }
+.contact-message-box {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
 
-        .contact-desc {
-            font-size: 18px;
-            color: #818181;
-            line-height: 1.8;
-            margin: 0 auto;
-            width: fit-content;
-            word-break: keep-all;
-        }
-    }
+.contact-title {
+    font-family: $font-title;
+    font-size: 40px;
+    margin-bottom: 0;
+}
 
-    .contact-buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1.5rem;
+.contact-desc {
+    font-size: 18px;
+    color: #818181;
+    line-height: 1.8;
+    margin: 0 auto;
+    width: fit-content;
+    word-break: keep-all;
+}
 
-        @include mq-tablet {
-            flex-direction: row;
-        }
-    }
+.contact-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
 
-    .btn-contact {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 1rem 2rem;
-        border-radius: 15px;
-        font-weight: 400;
-        font-size: 16px;
-        border: 3px solid #323232;
-        transition: all 0.2s;
-        background-color: transparent; // Base transparent
-        color: #ffffff; // Enforce white text for both
-
-        &.email {
-            // background-color removed
-            // color removed (handled by base)
-
-            &:hover {
-                background-color: transparent; // No BG on hover
-                border-color: #ffffff; // White border on hover
-            }
-        }
-
-        &.github {
-            // background-color removed
-            // color removed
-
-            &:hover {
-                background-color: transparent; // No BG on hover
-                border-color: #ffffff; // White border on hover
-            }
-        }
-    }
-
-    footer {
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-        display: flex;
-        justify-content: center;
-
-        .footer-container {
-            width: 1300px;
-            padding: 50px 0; // Padding moved to inner
-            font-size: 16px;
-            color: #434343;
-            border-top: 1px solid #212121; // Border moved to inner
-            text-align: center;
-        }
+    @include mq-tablet {
+        flex-direction: row;
     }
 }
 
-// Utility for centering icon in card header
+.btn-contact {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    font-weight: 400;
+    font-size: 16px;
+    border: 3px solid $contact-btn-border;
+    transition: all $transition-fast;
+    background-color: transparent;
+    color: $text-color;
+
+    &:hover {
+        background-color: transparent;
+        border-color: $text-color;
+    }
+}
+
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-container {
+    width: 1300px;
+    padding: 50px 0;
+    font-size: 16px;
+    color: $footer-text;
+    border-top: 1px solid $footer-border;
+    text-align: center;
+}
+
 .icon-box {
     padding: 1rem;
     border-radius: 50%;

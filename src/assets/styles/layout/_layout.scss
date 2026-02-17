@@ -29,9 +29,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2.3rem; // Updated Gap
+    gap: 2.3rem;
     width: fit-content;
-    padding: 1.9rem 1.5rem; // Updated Padding
+    padding: 1.9rem 1.5rem;
     border: 1px solid #434343;
     border-radius: 100px;
 
@@ -39,22 +39,17 @@
         width: 21px;
         height: 21px;
         background-color: transparent;
-        border-radius: 0;
         border: none;
         cursor: pointer;
-
-        // Background Image Rules
         background-repeat: no-repeat;
         background-position: center;
-        background-size: contain; // Ensure size applies
-
-        transition: transform 0.2s;
+        background-size: contain;
+        transition: transform $transition-fast;
 
         &:hover {
             transform: scale(1.1);
         }
 
-        // Modifier Classes for Icons
         &.btn-home {
             background-image: url('@/assets/icons/default/home.png');
         }
@@ -65,21 +60,16 @@
 
         &.btn-github {
             background-image: url('@/assets/icons/default/github.png');
-            width: 25px; // Updated Size
-            height: 23px; // Updated Size
+            width: 25px;
+            height: 23px;
         }
-
 
         .circle-icon {
             width: 12px;
             height: 12px;
             background-color: #ffffff;
             border-radius: 50%;
-            transition: opacity 0.2s;
-        }
-
-        &:hover {
-            transform: scale(1.1);
+            transition: opacity $transition-fast;
         }
     }
 }
@@ -87,50 +77,46 @@
 // Section Nav (Right)
 .section-nav {
     position: fixed;
-    right: 3rem; // Adjusted spacing
+    right: 3rem;
     top: 50%;
     transform: translateY(-50%);
     z-index: $z-nav;
     display: none;
     flex-direction: column;
-    gap: 1rem; // Tighter spacing for text list
+    gap: 1rem;
     text-align: right;
-    align-items: flex-end; // Ensure flex items align right
+    align-items: flex-end;
 
     @include mq-desktop {
         display: flex;
     }
 
     &.disabled-state {
-        pointer-events: none; // Disable interaction
+        pointer-events: none;
 
         .nav-link {
-            color: $secondary-color !important; // Force #5C5C5C
+            color: $secondary-color !important;
             opacity: 0.5;
         }
     }
 
     .nav-link {
-        font-size: 18px; // Updated from 0.875rem
+        font-size: 18px;
         font-weight: 500;
-        transition: color 0.3s ease;
+        transition: color $transition-normal;
         background: none;
         border: none;
         cursor: pointer;
         padding: 0.25rem 0;
 
         &.inactive {
-            color: $secondary-color; // #5C5C5C
+            color: #5c5c5c;
         }
 
-        &.active {
-            color: #FFFFFF;
-            font-weight: 600; // Updated Weight to 600
-        }
-
+        &.active,
         &:hover {
             color: #FFFFFF;
-            font-weight: 600; // Updated Weight to 600
+            font-weight: 600;
         }
     }
 }

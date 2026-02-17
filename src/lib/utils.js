@@ -1,5 +1,4 @@
-import { clsx } from "clsx"
-
+// Simple class name merger to replace clsx
 export function cn(...inputs) {
-    return clsx(inputs)
+    return inputs.flat().filter(Boolean).join(' ')
 }

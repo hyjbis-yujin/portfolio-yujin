@@ -5,11 +5,13 @@ import MetaGrid from '@/components/ui/MetaGrid'
 const ProjectModalContent = ({ project }) => {
     // Localized meta items
     const metaItems = [
-        { label: 'Type', value: project.meta?.main || 'Fully Responsive' },
-        { label: 'Scale', value: project.meta?.scale || 'Toy Project' },
-        { label: 'Contribution', value: project.meta?.contribution || 'Design 100% / Frontend 100%' },
-        { label: 'Stack', value: project.meta?.stack || 'HTML, CSS3, Javascript' }
-    ]
+        { label: '분류', value: project.meta?.main },
+        { label: '기여도', value: project.meta?.contribution },
+        { label: '규모', value: project.meta?.scale },
+        { label: '기술 스택', value: project.meta?.stack },
+        { label: '프레임워크', value: project.meta?.framework },
+        { label: '라이브러리', value: project.meta?.library }
+    ].filter(item => item.value && String(item.value).trim() !== '')
 
     return (
         <div className="modal-right-section">
@@ -41,16 +43,15 @@ const ProjectModalContent = ({ project }) => {
             {/* Meta Grid */}
             <MetaGrid items={metaItems} />
 
-            <div className="meta-wrapper">
-            </div>
 
             {/* Highlights */}
             <div className="modal-highlights">
-                <h3 className="highlight-title">Contribution</h3>
+                <h3 className="highlight-title">주요 기능</h3>
+
                 <div className="highlight-list">
-                    {(project.highlights || []).map((text, idx) => (
+                    {(project.highlights || []).slice(0, 4).map((text, idx) => (
                         <div key={idx} className="highlight-item">
-                            <Check />
+                            <Check strokeWidth={3} />
                             <span>{text}</span>
                         </div>
                     ))}

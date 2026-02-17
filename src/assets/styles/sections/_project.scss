@@ -1,135 +1,118 @@
 @use '../abstracts/variables' as *;
-@use '../abstracts/mixins' as *;
-@use './shared' as *; // Import shared for internal-scroll
+// Mixins imported via _shared.scss
+@use './shared' as *;
 
-// Project Section
+$project-filter-bg: #434343;
+$project-filter-hover: #555555;
+$project-card-bg: #212121;
+$project-tag-bg: #323232;
+$project-card-height: 230px;
+$project-arrow-top: 57px;
+
 #project {
-    // Section Background to #171717? 
-    // The user said "Section entire background color: #171717".
-    // This usually means the whole section block.
-    // However, global background is typically set in body.
-    // Let's set it here locally if possible or assume container level.
-    // Assuming default is dark charocal/black.
-    background-color: #171717; // Explicit request
+    background-color: $bg-color;
+}
 
-    .project-container {
-        @include internal-scroll;
-        padding-right: 0; // Remove right padding
-        max-width: 1400px; // Slightly wider for arrows
-        width: 100%;
-        display: flex;
-        flex-direction: row; // Row layout for Arrow-Content-Arrow
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
+.project-container {
+    @include internal-scroll;
+    padding-right: 0;
+    max-width: 1400px;
+    width: 100%;
+    @include flex-center;
+    flex-direction: row;
+    gap: 1rem;
 
-        @include mq-tablet {
-            gap: 2rem;
-        }
+    @include mq-tablet {
+        gap: 2rem;
     }
+}
 
-    // New Central Wrapper for Header + Swiper
-    .project-center-column {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        width: 100%;
-        min-width: 0; // Prevent flex overflow
-        gap: 4.5rem; // Space between Header and Grid
+.project-center-column {
+    @include flex-col;
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    gap: 4.5rem;
+}
+
+.project-swiper-area {
+    width: 100%;
+    position: relative;
+    overflow: visible;
+    @include flex-center;
+    flex-direction: row;
+    gap: 1rem;
+
+    @include mq-tablet {
+        gap: 2rem;
     }
+}
 
-    // Swiper Area specific
-    .project-swiper-area {
-        width: 100%;
-        position: relative;
-        overflow: visible;
-
-        // Flex layout for relative positioning of arrows
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem; // Gap between arrows and swiper
-
-        @include mq-tablet {
-            gap: 2rem;
-        }
-    }
-
-    .project-swiper {
-        flex: 1; // Take remaining space
-        width: 100%; // Ensure it fills flex child width
-        height: auto;
-        overflow: hidden;
-        border-radius: 30px;
-        min-width: 0; // Fix flexbox overflow issue
-    }
+.project-swiper {
+    flex: 1;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 30px;
+    min-width: 0;
 }
 
 .filter-btn {
     min-width: 124px;
     height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-center;
     padding: 0 1.5rem;
-    border-radius: 9999px; // Pill shape
-    background-color: #434343;
-    color: #CCCCCC;
+    border-radius: 9999px;
+    background-color: $project-filter-bg;
+    color: rgba($text-color, 0.7);
     border: none;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s;
-    gap: 6px; // Gap for count
+    transition: all $transition-fast;
+    gap: 6px;
 
     .count {
-        display: flex;
+        @include flex-center;
         width: 27px;
         height: 27px;
         padding: 3px;
         font-size: 12px;
-        align-items: center;
-        justify-content: center;
-        background: #00000021;
+        background: rgba(0, 0, 0, 0.13);
         border-radius: 100%;
-        margin-left: 4px; // Fine tune spacing
+        margin-left: 4px;
     }
 
     &:hover {
-        background-color: #555555;
+        background-color: $project-filter-hover;
     }
 
     &.active {
-        background-color: #2CB1EA;
-        color: #FFFFFF;
+        background-color: $primary-color;
+        color: $white-color;
         font-weight: 600;
 
         .count {
-            background: rgba(255, 255, 255, 0.2); // Lighten bg on active
-            color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.2);
+            color: $white-color;
         }
     }
 }
 
 .slider-arrow {
-    position: relative; // Changed to relative
-    top: 57px; // Added as requested
+    position: relative;
+    top: $project-arrow-top;
     background: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
-    transition: all 0.3s;
+    transition: all $transition-normal;
     z-index: 20;
     display: block;
     flex-shrink: 0;
     outline: none;
-
-    // Specific Size Requested
     width: 20px;
     height: 46px;
-
-    // Background Image
     background-image: url('@/assets/images/ui/procect-arrow.svg');
     background-repeat: no-repeat;
     background-position: center;
@@ -145,19 +128,15 @@
         pointer-events: none;
     }
 
-    // Previous Absolute Positioning Removed
-
-
     &.arrow-next {
-        transform: rotate(180deg); // Keep rotation
+        transform: rotate(180deg);
     }
 }
 
-// Header Area: Title + Desc + Filter
 .project-header-area {
     display: flex;
-    flex-direction: row; // Explicit row
-    justify-content: space-between; // Space between Title/Desc and Filter
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     gap: 2rem;
@@ -165,37 +144,40 @@
 
     .header-left {
         display: flex;
-        flex-direction: row; // Explicit row for alignment
-        gap: 1rem; // Reduced gap for "next to" feel
-        align-items: baseline; // Align text baselines
-        flex-wrap: wrap; // Allow wrap on very small screens if needed
+        flex-direction: row;
+        gap: 1rem;
+        align-items: baseline;
+        flex-wrap: wrap;
 
         .section-title {
             margin: 0;
-            white-space: nowrap; // Keep title on one line
+            white-space: nowrap;
             text-align: left;
-            margin-bottom: 0;
+            color: $text-color;
+            margin-bottom: 0.5rem;
         }
 
         .section-desc {
             font-size: 16px;
-            color: #888888;
+            color: $secondary-color;
             font-weight: 400;
             margin: 0;
+            text-align: left;
+            margin-left: 0;
         }
     }
 
     .filter-group {
         display: flex;
         gap: 0.8rem;
-        flex-wrap: nowrap; // Force single line
+        flex-wrap: nowrap;
     }
 }
 
 .project-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem; // Updated Gap
+    gap: 1.5rem;
     width: 100%;
 
     @include mq-tablet {
@@ -204,39 +186,35 @@
 }
 
 .project-card {
-    background-color: #212121; // Updated BG
-    border-radius: 30px; // Updated Radius to 30px
+    background-color: $project-card-bg;
+    border-radius: 30px;
     padding: 0;
     border: none;
     display: flex;
     flex-direction: row;
     align-items: stretch;
     gap: 0;
-    height: 230px;
-    min-height: 230px;
-    transition: transform 0.2s;
+    height: $project-card-height;
+    min-height: $project-card-height;
     overflow: hidden;
-    position: relative; // Context for absolute if needed
+    position: relative;
     cursor: pointer;
 
-    // Left Image Area
     .card-image-area {
         width: 40%;
-        background-color: transparent; // Removed BG
+        background-color: transparent;
         flex-shrink: 0;
-        position: relative; // Context for overlay pill
-        display: flex; // Center the logo
-        align-items: center;
-        justify-content: center;
+        position: relative;
+        @include flex-center;
 
         .image-overlay-pill {
             position: absolute;
-            top: 25px; // Updated Top
-            left: 25px; // Updated Left
+            top: 25px;
+            left: 25px;
             z-index: 2;
 
             .type-pill {
-                color: #fff;
+                color: $white-color;
                 font-size: 13px;
                 padding: 10px 16px;
                 border-radius: 9999px;
@@ -250,47 +228,36 @@
             height: 25px;
             object-fit: contain;
         }
-
-        .img-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #2a2a2a 0%, #333333 100%);
-        }
     }
 
-    // Right Content Area
     .card-content-area {
         width: 60%;
-        padding: 45px 30px 30px 0; // Updated Padding (Top 45px)
-        display: flex;
-        flex-direction: column;
+        padding: 45px 30px 30px 0;
+        @include flex-col;
         justify-content: center;
-        gap: 1rem; // Main Gap
+        gap: 1rem;
         flex-grow: 1;
 
         .card-title {
-            font-size: 17px; // Updated Font Size
-            font-weight: 500; // Updated Weight
-            color: #FFFFFF;
-            margin: 0;
+            font-size: $font-size-lg;
+            font-weight: 500;
+            color: $text-color;
         }
 
         .card-desc {
-            font-size: 16px;
-            color: #9C9C9C;
-            line-height: 1.4;
-            margin: 0;
+            font-size: $font-size-base;
+            color: $secondary-color;
         }
 
         .tags-container {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-top: 0.5rem; // Spacer
+            margin-top: 0.5rem;
 
             .tag {
-                background-color: #323232; // Updated BG
-                color: #FFFFFF;
+                background-color: $project-tag-bg;
+                color: $text-color;
                 font-size: 14px;
                 padding: 10px 16px;
                 border-radius: 11px;

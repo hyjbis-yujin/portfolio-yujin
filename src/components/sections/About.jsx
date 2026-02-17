@@ -1,47 +1,129 @@
-import React from 'react'
-import { User, Code, Zap } from 'lucide-react'
+import React, { useState, useEffect, useRef } from 'react'
+import { User, Code, Zap, MessageSquare, Brain, Rocket } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { cn } from '@/lib/utils'
+import AboutCard from '@/components/ui/AboutCard'
 import Section from '@/components/common/Section'
 import SectionHeader from '@/components/ui/SectionHeader'
-import AboutCard from '@/components/ui/AboutCard'
+
+import { useAboutState } from '@/hooks/useAboutState'
 
 const About = () => {
+    const {
+        activeIndex,
+        isAnimating,
+        sectionRef,
+        handleNext,
+        handlePrev,
+        setIndex,
+        aboutData
+    } = useAboutState()
+
+    // Variants for Deck Animation
+    const variants = {
+        active: {
+            x: "-50%",
+            y: "-50%",
+            opacity: 1,
+            zIndex: 10,
+            scale: 1,
+            transition: { type: "spring", stiffness: 300, damping: 30 }
+        },
+        prev: {
+            x: "calc(-50% - 100px)",
+            y: "-50%",
+            opacity: 0.5,
+            zIndex: 5,
+            scale: 0.9,
+            transition: { duration: 0.4 }
+        },
+        next: {
+            x: "calc(-50% + 100px)",
+            y: "-50%",
+            opacity: 0.5,
+            zIndex: 5,
+            scale: 0.9,
+            transition: { duration: 0.4 }
+        },
+        hiddenLeft: {
+            x: "calc(-50% - 300px)",
+            y: "-50%",
+            opacity: 0,
+            zIndex: 0,
+            scale: 0.7
+        },
+        hiddenRight: {
+            x: "calc(-50% + 300px)",
+            y: "-50%",
+            opacity: 0,
+            zIndex: 0,
+            scale: 0.7
+        }
+    }
+
+    const getCardVariant = (index) => {
+        if (index === activeIndex) return 'active'
+        if (index === activeIndex - 1) return 'prev'
+        if (index === activeIndex + 1) return 'next'
+        if (index < activeIndex - 1) return 'hiddenLeft'
+        return 'hiddenRight'
+    }
+
     return (
-        <Section id="about">
+        <Section id="about" ref={sectionRef}>
             <div className="about-container">
-
-                {/* Header */}
-                <SectionHeader
-                    title="About me"
-                    description="사용자에게 끊김 없는 경험을 제공하고, 디자인 의도를 완벽하게 구현하는 구조적인 코드를 지향합니다."
-                />
-
-                {/* Cards Grid */}
-                <div className="grid-3">
-                    <AboutCard icon={User} title="변화에 적응하며 성장하는 개발자">
-                        <p>
-                            새로운 기술 트렌드를 학습하고 적용하여<br />
-                            최적의 솔루션을 제공하기 위해 노력합니다.<br />
-                            팀원들과 지식을 공유하며 함께 성장하는 것을 즐깁니다.
-                        </p>
-                    </AboutCard>
-
-                    <AboutCard icon={Code} title="유지보수가 용이한 견고한 구조">
-                        <p>
-                            시멘틱 마크업과 재사용 가능한 컴포넌트 설계로<br />
-                            유지보수가 용이한 코드를 작성합니다.<br />
-                            확장성과 웹 표준을 준수하는 개발을 지향합니다.
-                        </p>
-                    </AboutCard>
-
-                    <AboutCard icon={Zap} title="사용자 경험을 고려한 디테일">
-                        <p>
-                            디자인 시안을 픽셀 단위로 정밀하게 구현하며<br />
-                            자연스러운 인터랙션을 더해 완성도를 높입니다.<br />
-                            사용자 경험(UX)을 최우선으로 고려하여 개발합니다.
-                        </p>
-                    </AboutCard>
+                {/* Header wrapper for positioning */}
+                <div className="about-header-wrapper">
+                    <SectionHeader
+                        title="About Me"
+                        subtitle="사용자 경험을 최우선으로 생각하는 프론트엔드 개발자입니다."
+                    />
                 </div>
 
+                <div className="about-deck-container" onClick={handleNext}>
+                    <AnimatePresence initial={false}>
+                        {aboutData.map((item, index) => {
+                            const variantState = getCardVariant(index)
+
+                            return (
+                                <motion.div
+                                    key={index}
+                                    className={cn(
+                                        "about-card-motion-wrapper", // Fixed class name to match SCSS
+                                        index === activeIndex ? "active" : ""
+                                    )}
+                                    variants={variants}
+                                    initial="next"
+                                    animate={variantState}
+                                >
+                                    <AboutCard
+                                        icon={item.icon}
+                                        title={item.title}
+                                    >
+                                        <p className={cn(
+                                            "card-desc",
+                                            index !== activeIndex && "hidden-desc"
+                                        )}>
+                                            {item.desc}
+                                        </p>
+                                    </AboutCard>
+                                </motion.div>
+                            )
+                        })}
+                    </AnimatePresence>
+                </div>
+
+                <div className="deck-indicators">
+                    {aboutData.map((_, i) => (
+                        <div
+                            key={i}
+                            className={cn("indicator", i === activeIndex && "active")}
+                            onClick={() => {
+                                if (!isAnimating) setActiveIndex(i)
+                            }}
+                        />
+                    ))}
+                </div>
             </div>
         </Section>
     )

@@ -2,6 +2,8 @@
 // Global Section Layout & Shared Styles
 // =========================================
 @use '../abstracts/variables' as *;
+@use '../abstracts/variables' as *;
+@forward '../abstracts/mixins';
 @use '../abstracts/mixins' as *;
 
 // Global Section Layout
@@ -14,7 +16,7 @@
     @include flex-center;
     flex-direction: column;
     position: relative;
-    overflow: hidden; // Keep hidden x-overflow
+    overflow-x: hidden; // Keep hidden x-overflow
 
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
@@ -22,36 +24,10 @@
     @include mq-desktop {
         height: 100vh;
         padding: 4rem 2rem;
-        scroll-snap-align: start;
     }
 }
 
-// Internal Scroll Mixin - mostly for desktop panels
-@mixin internal-scroll {
-    max-height: 100%;
-    overflow-y: auto;
-    width: 100%;
-    padding-right: 6px;
-
-    &::-webkit-scrollbar {
-        width: 4px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 4px;
-    }
-
-    @include hover-supported {
-        &::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.4);
-        }
-    }
-}
+// Internal Scroll Mixin moved to _mixins.scss
 
 // Shared Icon Styles
 .tool-box-mini {
