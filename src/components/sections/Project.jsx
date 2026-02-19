@@ -107,7 +107,7 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                                         variants={containerVariants}
                                         initial="hidden"
                                         whileInView="visible"
-                                        viewport={{ once: true, amount: 0.4, margin: "-10% 0px -10% 0px" }}
+                                        viewport={{ once: true, amount: 0.1 }}
                                         key={filter} // Re-animate on filter change
                                     >
                                         {filteredProjects.slice(i * 4, (i + 1) * 4).map((item) => (
@@ -129,7 +129,7 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                                                         <span className="type-pill">{item.type}</span>
                                                     </div>
                                                     <img
-                                                        src={logoBuff}
+                                                        src={item.logo || logoBuff}
                                                         alt={`${item.title} 로고`}
                                                         className="project-logo"
                                                     />

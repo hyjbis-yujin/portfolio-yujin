@@ -224,9 +224,10 @@ $project-arrow-top: 57px;
         }
 
         .project-logo {
-            width: 99px;
-            height: 25px;
             object-fit: contain;
+            // Removed fixed width/height per user request
+            max-width: 100%; // Ensure it doesn't overflow container
+            max-height: 100%;
         }
     }
 

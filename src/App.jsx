@@ -43,9 +43,16 @@ const PortfolioContent = () => {
 
   const handleCloseProject = () => setSelectedProject(null)
 
+  const handleScrollToSection = (sectionId) => {
+    smoothScrollTo(`#${sectionId}`)
+  }
+
   return (
     <MainLayout>
-      <Home onOpenProject={handleOpenProject} />
+      <Home
+        onOpenProject={handleOpenProject}
+        onScrollTo={handleScrollToSection}
+      />
       <About />
       <Skill />
       <Career />

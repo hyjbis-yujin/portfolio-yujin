@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils'
 const SectionHeader = ({ title, description, align = 'center', className }) => {
     return (
         <div className={cn(
+            'section-header', // Added base class for styling hooks
             align === 'center' ? 'text-center' : 'text-left',
             className
         )}>

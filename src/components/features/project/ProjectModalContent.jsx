@@ -1,6 +1,27 @@
 import React from 'react'
 import { Check } from 'lucide-react'
 import MetaGrid from '@/components/ui/MetaGrid'
+import { motion } from 'framer-motion'
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.2
+        }
+    }
+}
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { type: "tween", duration: 0.4, ease: "easeOut" }
+    }
+}
 
 const ProjectModalContent = ({ project }) => {
     // Localized meta items
@@ -14,10 +35,15 @@ const ProjectModalContent = ({ project }) => {
     ].filter(item => item.value && String(item.value).trim() !== '')
 
     return (
-        <div className="modal-right-section">
+        <motion.div
+            className="modal-right-section"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+        >
 
             {/* Header */}
-            <div className="modal-header-group">
+            <motion.div className="modal-header-group" variants={itemVariants}>
                 <h2 id="modal-title" className="modal-title">{project.title}</h2>
 
                 <div className="modal-actions">
@@ -38,14 +64,16 @@ const ProjectModalContent = ({ project }) => {
                         Demo
                     </a>
                 </div>
-            </div>
+            </motion.div>
 
             {/* Meta Grid */}
-            <MetaGrid items={metaItems} />
+            <motion.div variants={itemVariants}>
+                <MetaGrid items={metaItems} />
+            </motion.div>
 
 
             {/* Highlights */}
-            <div className="modal-highlights">
+            <motion.div className="modal-highlights" variants={itemVariants}>
                 <h3 className="highlight-title">주요 기능</h3>
 
                 <div className="highlight-list">
@@ -56,9 +84,9 @@ const ProjectModalContent = ({ project }) => {
                         </div>
                     ))}
                 </div>
-            </div>
+            </motion.div>
 
-        </div>
+        </motion.div>
     )
 }
 

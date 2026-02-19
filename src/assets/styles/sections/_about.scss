@@ -1,133 +1,161 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-$about-card-bg: #212121;
-$about-card-height: 500px;
-$about-card-width: 440px;
+// =========================================
+// About Section Layout (Clean Centering)
+// =========================================
 
 #about {
+    // 1. Container Setup: Full Viewport Height
     position: relative;
-    width: 100%;
-    min-height: 100vh;
-    background-color: $bg-color;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.about-container {
     width: 100%;
     height: 100vh;
+    background-color: $bg-color;
+
+    // 2. Flexbox Centering (Parent)
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
+
+    // 3. Reset Defaults
     padding: 0 2rem;
+    margin: 0;
+    overflow: hidden; // Prevent accidental scroll within the section
 }
 
-.card-index {
-    position: absolute;
-    bottom: 2rem;
-    font-size: 0.9rem;
-    color: rgba($text-color, 0.5);
-    font-family: $font-pixel;
-}
-
-.about-header-wrapper {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 20;
+.about-content-wrapper {
+    // 4. Wrapper: Width Constraint Only
     width: 100%;
-    pointer-events: none;
-}
+    max-width: 1300px;
+    margin: 0 auto;
 
-.about-deck-container {
-    position: relative;
-    height: 480px;
-    width: 100%;
-    margin-top: 4rem;
-    cursor: pointer;
-}
-
-.about-card-motion-wrapper {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 100%;
-    max-width: $about-card-width;
-    height: $about-card-height;
-    pointer-events: none;
+    // 5. Flexbox Structure
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+
+    // [CRITICAL FIX] Center Items Vertically (Revert per user request)
+    justify-content: space-between;
     align-items: center;
-    margin-top: 5rem;
-    perspective: 1000px;
+
+    gap: 8%;
+
+    // Mobile/Tablet: Stack
+    @media (max-width: 1024px) {
+        flex-direction: column;
+        align-items: center; // Center items on mobile
+        gap: 4rem;
+        padding: 0 2rem;
+        text-align: left;
+    }
 }
 
-.about-card {
-    width: 100%;
-    height: 100%;
-    background-color: $about-card-bg;
-    border: 1px solid $border-color;
-    border-radius: 27px;
-    padding: 3rem 2rem;
+// === Left Column: Visual (Title & Image) ===
+.about-visual {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    position: relative;
-    overflow: hidden;
+    align-items: flex-start;
+    gap: 2.5rem;
 
-    .icon-box {
-        margin-bottom: 1.5rem;
-        color: $primary-color;
-        background: rgba($primary-color, 0.1);
-        padding: 1.2rem;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
+    @media (max-width: 1024px) {
+        width: 100%;
         align-items: center;
+        text-align: center;
+        flex: auto;
     }
 
-    .card-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: $text-color;
-        margin-bottom: 1rem;
-        letter-spacing: -0.01em;
+    .about-header-group {
+        width: 100%;
+
+        .section-header {
+            margin-bottom: 0;
+            text-align: left;
+            align-items: flex-start;
+            margin-left: 1.5rem;
+
+            .section-title {
+                margin-bottom: 0;
+            }
+
+            @media (max-width: 1024px) {
+                text-align: center;
+                align-items: center;
+                margin-left: 0;
+
+                .section-title {
+                    margin-bottom: 1.5rem;
+                }
+            }
+        }
     }
 
-    p {
-        font-size: 1rem;
-        color: rgba($text-color, 0.7);
-        line-height: 1.6;
-        word-break: keep-all;
-        margin: 0;
-        opacity: 0.9;
+    .profile-image-wrapper {
+        width: 100%;
+        max-width: 511px;
+        border-radius: 2px;
+        overflow: hidden;
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+
+        @media (max-width: 1024px) {
+            max-width: 100%;
+            aspect-ratio: auto;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: rotate(-2deg);
+        }
     }
 }
 
-// Mobile adjustments
-@include mq-mobile-only {
-    .about-deck-container {
-        height: 450px;
+// === Right Column: Content (Q&A) ===
+.about-content {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+
+    // [CRITICAL FIX] Flex Center for Vertical Alignment
+    justify-content: center;
+
+    @media (max-width: 1024px) {
+        margin-top: 0; // Reset on mobile
+        width: 100%;
+        flex: auto;
     }
 
-    .about-card-motion-wrapper {
-        max-width: 320px;
+    .qa-list {
+        display: flex;
+        flex-direction: column;
+        gap: 3.5rem;
     }
 
-    .about-header-wrapper {
-        top: 5rem;
+    .qa-item {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 
-    .about-card {
-        border-radius: 20px;
+    .qa-question {
+        font-size: 1.25rem;
+        color: $primary-color;
+        font-weight: 600;
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    .qa-answer {
+        font-size: 1.05rem;
+        color: #e0e0e0;
+        line-height: 1.7;
+        font-weight: 300;
+        word-break: keep-all;
+        opacity: 0.9;
+        max-width: 90%;
+
+        @media (max-width: 1024px) {
+            max-width: 100%;
+        }
     }
 }

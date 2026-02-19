@@ -1,131 +1,116 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { User, Code, Zap, MessageSquare, Brain, Rocket } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { cn } from '@/lib/utils'
-import AboutCard from '@/components/ui/AboutCard'
+import React, { useRef, useState, useEffect } from 'react'
+import { motion, useScroll } from 'framer-motion'
 import Section from '@/components/common/Section'
 import SectionHeader from '@/components/ui/SectionHeader'
-
-import { useAboutState } from '@/hooks/useAboutState'
+import { aboutQnA } from '@/data/about'
+import profileImg from '@/assets/images/ui/profile.png'
 
 const About = () => {
-    const {
-        activeIndex,
-        isAnimating,
-        sectionRef,
-        handleNext,
-        handlePrev,
-        setIndex,
-        aboutData
-    } = useAboutState()
+    const containerRef = useRef(null)
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end end"]
+    })
 
-    // Variants for Deck Animation
-    const variants = {
-        active: {
-            x: "-50%",
-            y: "-50%",
+    // State to track if animation should play
+    const [showItem1, setShowItem1] = useState(false)
+    const [showItem2, setShowItem2] = useState(false)
+    const [showItem3, setShowItem3] = useState(false)
+
+    useEffect(() => {
+        const unsubscribe = scrollYProgress.on("change", (latest) => {
+            // Item 1: Trigger immediately (0.01)
+            if (latest > 0.01) setShowItem1(true)
+            else setShowItem1(false)
+
+            // Item 2: Trigger later (0.35) to prevent overlap with Item 1
+            if (latest > 0.35) setShowItem2(true)
+            else setShowItem2(false)
+
+            // Item 3: Trigger later (0.65)
+            if (latest > 0.65) setShowItem3(true)
+            else setShowItem3(false)
+        })
+        return () => unsubscribe()
+    }, [scrollYProgress])
+
+    // Specific Variant for Item 1 (Immediate)
+    const variantsItem1 = {
+        hidden: { opacity: 0, y: 30, filter: 'blur(10px)' },
+        visible: {
             opacity: 1,
-            zIndex: 10,
-            scale: 1,
-            transition: { type: "spring", stiffness: 300, damping: 30 }
-        },
-        prev: {
-            x: "calc(-50% - 100px)",
-            y: "-50%",
-            opacity: 0.5,
-            zIndex: 5,
-            scale: 0.9,
-            transition: { duration: 0.4 }
-        },
-        next: {
-            x: "calc(-50% + 100px)",
-            y: "-50%",
-            opacity: 0.5,
-            zIndex: 5,
-            scale: 0.9,
-            transition: { duration: 0.4 }
-        },
-        hiddenLeft: {
-            x: "calc(-50% - 300px)",
-            y: "-50%",
-            opacity: 0,
-            zIndex: 0,
-            scale: 0.7
-        },
-        hiddenRight: {
-            x: "calc(-50% + 300px)",
-            y: "-50%",
-            opacity: 0,
-            zIndex: 0,
-            scale: 0.7
+            y: 0,
+            filter: 'blur(0px)',
+            transition: { duration: 1.0, ease: "easeOut" }
         }
     }
 
-    const getCardVariant = (index) => {
-        if (index === activeIndex) return 'active'
-        if (index === activeIndex - 1) return 'prev'
-        if (index === activeIndex + 1) return 'next'
-        if (index < activeIndex - 1) return 'hiddenLeft'
-        return 'hiddenRight'
+    // Specific Variant for Item 2/3 (Default)
+    const variantsDefault = {
+        hidden: { opacity: 0, y: 30, filter: 'blur(10px)' },
+        visible: {
+            opacity: 1,
+            y: 0,
+            filter: 'blur(0px)',
+            transition: { duration: 1.0, ease: "easeOut" } // Standard speed for 2/3
+        }
     }
 
     return (
-        <Section id="about" ref={sectionRef}>
-            <div className="about-container">
-                {/* Header wrapper for positioning */}
-                <div className="about-header-wrapper">
-                    <SectionHeader
-                        title="About Me"
-                        subtitle="사용자 경험을 최우선으로 생각하는 프론트엔드 개발자입니다."
-                    />
-                </div>
+        <div ref={containerRef} id="about-track" style={{ height: '200vh', position: 'relative' }}>
+            <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}>
+                <Section id="about">
+                    <div className="about-content-wrapper">
 
-                <div className="about-deck-container" onClick={handleNext}>
-                    <AnimatePresence initial={false}>
-                        {aboutData.map((item, index) => {
-                            const variantState = getCardVariant(index)
+                        {/* Left Column: Title & Image (Static) */}
+                        <div className="about-visual">
+                            <div className="about-header-group">
+                                <SectionHeader
+                                    title="About Me"
+                                    subtitle="사용자 경험을 최우선으로 생각하는 프론트엔드 개발자입니다."
+                                />
+                            </div>
 
-                            return (
-                                <motion.div
-                                    key={index}
-                                    className={cn(
-                                        "about-card-motion-wrapper", // Fixed class name to match SCSS
-                                        index === activeIndex ? "active" : ""
-                                    )}
-                                    variants={variants}
-                                    initial="next"
-                                    animate={variantState}
-                                >
-                                    <AboutCard
-                                        icon={item.icon}
-                                        title={item.title}
-                                    >
-                                        <p className={cn(
-                                            "card-desc",
-                                            index !== activeIndex && "hidden-desc"
-                                        )}>
-                                            {item.desc}
-                                        </p>
-                                    </AboutCard>
-                                </motion.div>
-                            )
-                        })}
-                    </AnimatePresence>
-                </div>
+                            <div className="profile-image-wrapper">
+                                <img src={profileImg} alt="Profile" />
+                            </div>
+                        </div>
 
-                <div className="deck-indicators">
-                    {aboutData.map((_, i) => (
-                        <div
-                            key={i}
-                            className={cn("indicator", i === activeIndex && "active")}
-                            onClick={() => {
-                                if (!isAnimating) setActiveIndex(i)
-                            }}
-                        />
-                    ))}
-                </div>
+                        {/* Right Column: Q&A (Animated) */}
+                        <div className="about-content">
+                            <div className="qa-list">
+                                {aboutQnA.map((item, index) => {
+                                    // Determine animation state
+                                    let shouldShow = false;
+                                    let itemVariants = variantsDefault; // Default variants
+
+                                    if (index === 0) {
+                                        shouldShow = showItem1;
+                                        itemVariants = variantsItem1;
+                                    }
+                                    if (index === 1) shouldShow = showItem2;
+                                    if (index === 2) shouldShow = showItem3;
+
+                                    return (
+                                        <motion.div
+                                            key={item.id}
+                                            className="qa-item"
+                                            initial="hidden"
+                                            animate={shouldShow ? "visible" : "hidden"}
+                                            variants={itemVariants}
+                                        >
+                                            <h3 className="qa-question">{item.question}</h3>
+                                            <p className="qa-answer">{item.answer}</p>
+                                        </motion.div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+
+                    </div>
+                </Section>
             </div>
-        </Section>
+        </div>
     )
 }
 

@@ -1,34 +1,17 @@
-import { User, Code, Zap, MessageSquare, Brain, Rocket } from 'lucide-react'
-
-export const aboutData = [
+export const aboutQnA = [
     {
-        icon: User,
-        title: "사용자 중심",
-        desc: "직관적이고 편리한 UX를 최우선으로 고려합니다."
+        id: 1,
+        question: "Q. 어떤 개발자인가요?",
+        answer: "사용자 경험(UX)을 최우선으로 생각하는 프론트엔드 개발자입니다. 단순히 기능만 구현하는 것이 아니라, 사용자가 서비스를 이용하며 느낄 감정과 편의성까지 고민하며 개발합니다."
     },
     {
-        icon: Zap,
-        title: "성능 최적화",
-        desc: "빠른 로딩과 부드러운 인터랙션을 지향합니다."
+        id: 2,
+        question: "Q. 가장 중요하게 생각하는 가치는?",
+        answer: "‘기본에 충실함’과 ‘원활한 소통’입니다. 견고한 코드는 기본기에서 나오며, 성공적인 프로젝트는 팀원 간의 신뢰와 소통에서 시작된다고 믿습니다."
     },
     {
-        icon: Code,
-        title: "클린 코드",
-        desc: "유지보수가 용이하고 확장 가능한 코드를 작성합니다."
-    },
-    {
-        icon: MessageSquare,
-        title: "원활한 소통",
-        desc: "팀원과의 협업을 중요시하며 적극적으로 소통합니다."
-    },
-    {
-        icon: Brain,
-        title: "지속적 학습",
-        desc: "새로운 기술을 두려워하지 않고 끊임없이 배웁니다."
-    },
-    {
-        icon: Rocket,
-        title: "도전 정신",
-        desc: "어려운 문제 해결을 즐기며 성장을 추구합니다."
+        id: 3,
+        question: "Q. 앞으로의 목표는 무엇인가요?",
+        answer: "기술의 변화를 두려워하지 않고 끊임없이 배우며 성장하는 것입니다. 더 나아가, 제가 가진 기술로 누군가에게 실질적인 도움을 줄 수 있는 서비스를 만들고 싶습니다."
     }
 ]

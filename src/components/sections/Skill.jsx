@@ -67,7 +67,7 @@ const Skill = () => {
                         variants={containerVariants}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, amount: 0.4, margin: "-10% 0px -10% 0px" }}
+                        viewport={{ once: true, amount: 0.1 }}
                         key={activeTab}
                     >
                         {filteredSkills.map((item) => (
