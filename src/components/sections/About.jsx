@@ -3,7 +3,6 @@ import { motion, useScroll } from 'framer-motion'
 import Section from '@/components/common/Section'
 import SectionHeader from '@/components/ui/SectionHeader'
 import { aboutQnA } from '@/data/about'
-import profileImg from '@/assets/images/ui/profile.png'
 
 const About = () => {
     const containerRef = useRef(null)
@@ -72,7 +71,7 @@ const About = () => {
                             </div>
 
                             <div className="profile-image-wrapper">
-                                <img src={profileImg} alt="Profile" />
+                                <img src="/images/ui/profile.png" alt="Profile" />
                             </div>
                         </div>
 

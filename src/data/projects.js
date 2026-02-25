@@ -1,15 +1,4 @@
-import logoBuff from "@/assets/images/projects/logo-buff.png";
-import project01 from "@/assets/images/projects/project-01.jpg";
-import project02 from "@/assets/images/projects/project-02.jpg";
-import project03 from "@/assets/images/projects/project-03.jpg";
-
-// New Logo Imports
-import logoIgest from "@/assets/images/projects/igest-logo.png";
-import logoNaju from "@/assets/images/projects/naju-logo.png";
-import logoYhewg from "@/assets/images/projects/yhewg-logo.png";
-import logoSunlin from "@/assets/images/projects/sunlin-logo.png";
-import logoPort2026 from "@/assets/images/projects/portfolio2026-logo.png";
-import logoPort2022 from "@/assets/images/projects/portfolio2022-logo.png";
+// Removed static logo imports - using dynamic public paths instead
 
 export const projects = [
   // --- Company Projects ---
@@ -19,8 +8,13 @@ export const projects = [
     title: "중앙청소년유해환경감시단",
     desc: "청소년 보호 및 유해환경 감시를 위한 공식 웹사이트 및 관리 시스템.",
     tags: ["React", "Node.js", "MongoDB"],
-    logo: logoYhewg,
-    images: [project01, project01, project01],
+    logo: "/images/projects/logos/yhewg-logo.png",
+    screenshots: [
+      "/images/projects/yhewg/1.jpg",
+      "/images/projects/yhewg/2.jpg",
+      "/images/projects/yhewg/3.jpg",
+      "/images/projects/yhewg/4.jpg"
+    ],
     links: { git: "#", demo: "#" },
     meta: {
       main: "공공 서비스",
@@ -42,8 +36,13 @@ export const projects = [
     title: "아이제스트",
     desc: "차세대 고감도 반도체 기반 진단 기기 및 데이터 분석 플랫폼.",
     tags: ["Vue", "D3.js", "Firebase"],
-    logo: logoIgest,
-    images: [project02, project02, project02],
+    logo: "/images/projects/logos/igest-logo.png",
+    screenshots: [
+      "/images/projects/igest/1.jpg",
+      "/images/projects/igest/2.jpg",
+      "/images/projects/igest/3.jpg",
+      "/images/projects/igest/4.jpg",
+    ],
     links: { git: "#", demo: "#" },
     meta: {
       main: "바이오테크 플랫폼",
@@ -65,8 +64,16 @@ export const projects = [
     title: "네이처이앤티 신문고",
     desc: "윤리경영 실천을 위한 부정/비리 제보 및 익명 신고 시스템.",
     tags: ["HTML", "SCSS", "Javascript"],
-    logo: logoBuff, // Changed by user request
-    images: [logoBuff], // Changed by user request
+    logo: "/images/projects/logos/logo-buff.png",
+    screenshots: [
+      "/images/projects/nature/1.jpg",
+      "/images/projects/nature/2.jpg",
+      "/images/projects/nature/3.jpg",
+      "/images/projects/nature/4.jpg",
+      "/images/projects/nature/5.jpg",
+      "/images/projects/nature/6.jpg",
+      "/images/projects/nature/7.jpg"
+    ],
     links: { git: "#", demo: "#" },
     meta: {
       main: "제보 시스템",
@@ -88,8 +95,11 @@ export const projects = [
     title: "선린대학교 취업창업지원센터",
     desc: "학생들의 취업 및 창업을 지원하기 위한 통합 정보 제공 센터.",
     tags: ["Project Info", "TBD"],
-    logo: logoSunlin,
-    images: [project01],
+    logo: "/images/projects/logos/sunlin-logo.png",
+    screenshots: [
+      "/images/projects/sunlin/1.jpg",
+      "/images/projects/sunlin/2.jpg"
+    ],
     links: { git: "#", demo: "#" },
     meta: {
       main: "대학 기관 웹사이트",
@@ -110,8 +120,13 @@ export const projects = [
     title: "나주문화재단",
     desc: "지역 문화 예술 진흥과 시민 문화 향유를 위한 재단 공식 홈페이지.",
     tags: ["Project Info", "TBD"],
-    logo: logoNaju,
-    images: [project01],
+    logo: "/images/projects/logos/naju-logo.png",
+    screenshots: [
+      "/images/projects/naju/1.jpg",
+      "/images/projects/naju/2.jpg",
+      "/images/projects/naju/3.jpg",
+      "/images/projects/naju/4.jpg"
+    ],
     links: { git: "#", demo: "#" },
     meta: {
       main: "공공 기관 웹사이트",
@@ -134,8 +149,10 @@ export const projects = [
     title: "BUFF",
     desc: "개인 프로젝트 BUFF에 대한 설명입니다.",
     tags: ["Personal", "Project"],
-    logo: logoBuff,
-    images: [logoBuff],
+    logo: "/images/projects/logos/logo-buff.png",
+    screenshots: [
+      "/images/projects/buff/1.png"
+    ],
     links: { git: "#", demo: "#" },
     meta: {
       main: "개인 프로젝트",
@@ -156,8 +173,10 @@ export const projects = [
     title: "여행관리시스템", // New Entry
     desc: "여행 일정 계획 및 경비 관리를 위한 원스톱 솔루션.",
     tags: ["React", "Maps API", "TBD"],
-    logo: logoBuff, // Placeholder
-    images: [logoBuff], // Placeholder
+    logo: "/images/projects/logos/logo-buff.png",
+    screenshots: [
+      "/images/projects/travel/1.png"
+    ],
     links: { git: "#", demo: "#" },
     meta: {
       main: "여행 플랫폼",
@@ -178,8 +197,10 @@ export const projects = [
     title: "챌린저모임",
     desc: "목표 달성을 위한 그룹 챌린지 및 습관 형성 커뮤니티.",
     tags: ["Community", "Challenge"],
-    logo: logoBuff,
-    images: [logoBuff],
+    logo: "/images/projects/logos/logo-buff.png",
+    screenshots: [
+      "/images/projects/challenger/1.png"
+    ],
     links: { git: "#", demo: "#" },
     meta: {
       main: "커뮤니티 플랫폼",
@@ -200,8 +221,14 @@ export const projects = [
     title: "2026 포트폴리오",
     desc: "현재 작업 중인 포트폴리오 사이트 (본 사이트).",
     tags: ["React", "Interactive", "Portfolio"],
-    logo: logoPort2026,
-    images: [logoBuff],
+    logo: "/images/projects/logos/portfolio2026-logo.png",
+    screenshots: [
+      "/images/projects/portfolio2026/1.jpg",
+      "/images/projects/portfolio2026/2.jpg",
+      "/images/projects/portfolio2026/3.jpg",
+      "/images/projects/portfolio2026/4.jpg",
+      "/images/projects/portfolio2026/5.jpg"
+    ],
     links: { git: "#", demo: "#" },
     meta: {
       main: "포트폴리오",
@@ -222,8 +249,18 @@ export const projects = [
     title: "2022 포트폴리오",
     desc: "이전 버전의 개인 포트폴리오 웹사이트 아카이브.",
     tags: ["Archive", "Portfolio"],
-    logo: logoPort2022,
-    images: [logoBuff],
+    logo: "/images/projects/logos/portfolio2022-logo.png",
+    screenshots: [
+      "/images/projects/portfolio2022/1.jpg",
+      "/images/projects/portfolio2022/2.jpg",
+      "/images/projects/portfolio2022/3.jpg",
+      "/images/projects/portfolio2022/4.jpg",
+      "/images/projects/portfolio2022/5.jpg",
+      "/images/projects/portfolio2022/6.jpg",
+      "/images/projects/portfolio2022/7.jpg",
+      "/images/projects/portfolio2022/8.jpg",
+      "/images/projects/portfolio2022/9.jpg"
+    ],
     links: { git: "#", demo: "#" },
     meta: {
       main: "포트폴리오",

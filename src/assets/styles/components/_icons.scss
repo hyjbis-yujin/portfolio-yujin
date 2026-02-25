@@ -45,10 +45,12 @@
         object-fit: contain;
     }
 
-    &:hover {
+    // Trigger hover when wrapper itself is hovered
+    // Or when specific parent containers (like .skill-card, .tool-box) are hovered
+    &:hover,
+    .skill-card:hover &,
+    .tool-box:hover & {
         .icon-default {
-            // Option: Hide default or keep it?
-            // If they are different shapes/colors, bleeding might occur.
             // Hiding is safer for clean switch.
             opacity: 0;
         }

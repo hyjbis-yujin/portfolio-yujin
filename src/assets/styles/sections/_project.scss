@@ -113,13 +113,13 @@ $project-arrow-top: 57px;
     outline: none;
     width: 20px;
     height: 46px;
-    background-image: url('@/assets/images/ui/procect-arrow.svg');
+    background-image: url('/images/ui/procect-arrow.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
 
     &:hover:not(.swiper-button-disabled) {
-        background-image: url('@/assets/images/ui/procect-arrow-hover.svg');
+        background-image: url('/images/ui/procect-arrow-hover.svg');
     }
 
     &.swiper-button-disabled {

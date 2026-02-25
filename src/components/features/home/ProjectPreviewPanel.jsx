@@ -15,7 +15,7 @@ const ProjectPreviewPanel = ({ onOpenProject, onScrollTo }) => {
                         className="stack-card project-preview-card"
                         onClick={() => onOpenProject(project)}
                         style={{
-                            '--project-bg': `url(${project.images[0]})`
+                            '--project-bg': `url(${project.screenshots?.[0] || project.logo})`
                         }}
                     />
                 ))}

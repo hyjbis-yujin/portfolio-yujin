@@ -22,7 +22,11 @@ const titleVariants = {
     expanded: {
         scale: 1,
         letterSpacing: 'normal',
-        transition: { duration: 0.8, ease: "easeInOut" }
+        transition: {
+            type: "spring",
+            stiffness: 70,
+            damping: 20
+        }
     }
 }
 
@@ -96,33 +100,44 @@ const projectVariant = {
 }
 
 const Home = ({ onOpenProject, onScrollTo }) => {
-    const [isExpanded, setIsExpanded] = useState(false)
+    // Initialize as expanded if the page is reloaded mid-scroll.
+    const isLoadedMidPage = typeof window !== 'undefined' ? window.scrollY > 10 : false;
+    const [isExpanded, setIsExpanded] = useState(isLoadedMidPage)
 
     useEffect(() => {
+        if (isExpanded) return;
+
         const timer = setTimeout(() => {
             setIsExpanded(true)
         }, 1200) // 1.2s delay as per user request
         return () => clearTimeout(timer)
-    }, [])
+    }, [isExpanded])
+
+    // If loaded mid-page, skip layout animations entirely to prevent the flashing bug across the viewport.
+    const disableLayoutAnimation = isLoadedMidPage;
 
     return (
         <section id="home" className="home-container">
             <motion.div
                 className="home-grid"
                 data-expanded={isExpanded}
-                layout
+                layout={!isLoadedMidPage}
                 transition={layoutSpring}
             >
                 {/* Title Area */}
                 <motion.div
                     className="home-title-area"
-                    layout
-                    transition={layoutSpring}
-                    variants={titleVariants}
-                    initial="initial"
+                    layout={!isLoadedMidPage}
+                    initial={isLoadedMidPage ? false : "initial"} // initial={false} instantly renders the animate state
                     animate={isExpanded ? "expanded" : "initial"}
+                    variants={titleVariants}
+                    transition={layoutSpring}
                 >
-                    <motion.h1 layout transition={layoutSpring}>
+                    <motion.h1
+                        layout={!isLoadedMidPage}
+                        transition={layoutSpring}
+                        initial={isLoadedMidPage ? false : undefined}
+                    >
                         프론트-엔드<br />
                         <span className="highlight">포트폴리오</span>
                     </motion.h1>
@@ -131,7 +146,7 @@ const Home = ({ onOpenProject, onScrollTo }) => {
                 {/* Panels Area */}
                 <motion.div
                     className="home-panels-area"
-                    initial="hidden"
+                    initial={isLoadedMidPage ? false : "hidden"} // initial={false} skips mount animation
                     animate={isExpanded ? "visible" : "hidden"}
                 // Stagger removed from container to control manually via delays
                 >

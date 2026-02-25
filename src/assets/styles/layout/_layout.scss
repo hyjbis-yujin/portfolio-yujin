@@ -51,15 +51,15 @@
         }
 
         &.btn-home {
-            background-image: url('@/assets/icons/default/home.png');
+            background-image: url('/icons/default/home.png');
         }
 
         &.btn-mail {
-            background-image: url('@/assets/icons/default/mail.png');
+            background-image: url('/icons/default/mail.png');
         }
 
         &.btn-github {
-            background-image: url('@/assets/icons/default/github.png');
+            background-image: url('/icons/default/github.png');
             width: 25px;
             height: 23px;
         }

@@ -3,7 +3,6 @@ import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-import logoBuff from '@/assets/images/projects/logo-buff.png'
 import ProjectModalSlider from '@/components/features/project/ProjectModalSlider'
 import ProjectModalContent from '@/components/features/project/ProjectModalContent'
 
@@ -29,23 +28,39 @@ const ProjectModal = ({ project, onClose }) => {
 
     const handleClose = useCallback(() => {
         if (onClose) onClose()
+        // Wait for modal exit animation before resetting
+        setTimeout(() => setCurrentImageIndex(0), 200)
     }, [onClose])
 
+    // Reset index when a new project is opened
+    useEffect(() => {
+        if (project) {
+            setCurrentImageIndex(0)
+        }
+    }, [project])
+
+    const hasScreenshots = project?.screenshots && project.screenshots.length > 0;
+    const screenshotsLength = hasScreenshots ? project.screenshots.length : 1;
+
     const nextImage = useCallback(() => {
-        setCurrentImageIndex((prev) => (prev + 1) % project.images.length)
-    }, [project.images.length])
+        if (!hasScreenshots) return;
+        setCurrentImageIndex((prev) => (prev + 1) % screenshotsLength)
+    }, [hasScreenshots, screenshotsLength])
 
     const prevImage = useCallback(() => {
-        setCurrentImageIndex((prev) => (prev - 1 + project.images.length) % project.images.length)
-    }, [project.images.length])
+        if (!hasScreenshots) return;
+        setCurrentImageIndex((prev) => (prev - 1 + screenshotsLength) % screenshotsLength)
+    }, [hasScreenshots, screenshotsLength])
 
     useEffect(() => {
         document.body.style.overflow = 'hidden'
 
         const handleKeyDown = (e) => {
             if (e.key === 'Escape') handleClose()
-            if (e.key === 'ArrowRight') nextImage()
-            if (e.key === 'ArrowLeft') prevImage()
+            if (hasScreenshots && screenshotsLength > 1) {
+                if (e.key === 'ArrowRight') nextImage()
+                if (e.key === 'ArrowLeft') prevImage()
+            }
         }
         window.addEventListener('keydown', handleKeyDown)
 
@@ -53,7 +68,7 @@ const ProjectModal = ({ project, onClose }) => {
             document.body.style.overflow = 'unset'
             window.removeEventListener('keydown', handleKeyDown)
         }
-    }, [handleClose, nextImage, prevImage])
+    }, [handleClose, nextImage, prevImage, hasScreenshots, screenshotsLength])
 
     // Portal to body
     return createPortal(
@@ -79,7 +94,7 @@ const ProjectModal = ({ project, onClose }) => {
                         </button>
 
                         <ProjectModalSlider
-                            images={project.images}
+                            screenshots={project.screenshots} // changed from images
                             title={project.title}
                             currentImageIndex={currentImageIndex}
                             setCurrentImageIndex={setCurrentImageIndex}

@@ -15,7 +15,7 @@
 
     .home-grid {
         width: 100%;
-        max-width: 1400px; // User request
+        max-width: 1400px;
         margin: 0 auto;
         padding: 0 2rem;
         display: grid;
@@ -23,21 +23,19 @@
         gap: 3rem;
         align-items: center;
 
-        // Transition handled by Framer Motion layout prop
-
         @include mq-desktop {
-            // Initial State: Two columns (Content | Hidden) to keep Title centered violently
-            grid-template-columns: 1fr 0px; // Force 0px to prevent content propping
-            gap: 0; // No gap initially for perfect center
+            // Initial State: Content | Hidden
+            grid-template-columns: 1fr 0px; // Centers content initially
+            gap: 0;
             padding: 0 4rem; // More secured sides
             height: 100vh; // Full height for vertical centering
 
-            // Expanded State: 40/60 Split
+            // Expanded State: 40/60 Split globally
             &[data-expanded="true"] {
                 grid-template-columns: 4fr 6fr; // 40% 60%
-                gap: 5rem; // Increased to 5rem as per user request
+                gap: 5rem;
 
-                // TARGETING TITLE AREA FROM HERE to ensure correct selector
+
                 .home-title-area {
                     align-items: flex-start;
                     text-align: left;
@@ -60,14 +58,11 @@
         width: 100%;
         position: relative; // Remove absolute if any
 
-        // Transition handled by Framer Motion layout prop
-
         @include mq-desktop {
             // Initial Desktop State: Centered
             align-items: center;
-            text-align: center;
             padding-left: 0;
-            width: 100%; // Ensure container is full width
+            width: 100%;
         }
 
         h1 {
@@ -77,7 +72,6 @@
             font-weight: normal;
             line-height: 1.1;
             letter-spacing: -0.05em;
-            word-break: keep-all; // Prevent awkward breaks
             word-break: keep-all; // Prevent awkward breaks
             width: fit-content; // Important for Layout Animation to move the whole block
             text-align: center; // Initial state
@@ -288,11 +282,11 @@
 
             // Specific Icon
             &.icon-shortcut {
-                background-image: url('@/assets/icons/default/arrow.png');
+                background-image: url('/icons/default/arrow.png');
             }
 
             &:hover {
-                background-image: url('@/assets/icons/hover/arrow.png');
+                background-image: url('/icons/hover/arrow.png');
             }
         }
     }
@@ -310,7 +304,7 @@
 
         // Specific Icon
         &.btn-arrow-icon {
-            background-image: url('@/assets/images/ui/btn-arrow.png');
+            background-image: url('/images/ui/btn-arrow.png');
             transition: background-image 0.2s; // Smooth transition
         }
     }
@@ -348,7 +342,7 @@
 
             // Specific Icons (via Classes)
             &.tool-ai {
-                background-image: url('@/assets/icons/default/tool-ai.png');
+                background-image: url('/icons/default/tool-ai.png');
                 background-size: 28px 28px;
             }
 

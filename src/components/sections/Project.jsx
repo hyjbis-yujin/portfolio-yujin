@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import logoBuff from '@/assets/images/projects/logo-buff.png'
+const FALLBACK_LOGO = '/images/projects/logos/logo-buff.png'
 import ProjectModal from './ProjectModal'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -129,7 +129,7 @@ const Project = ({ selectedProject, onClose, onOpenProject }) => {
                                                         <span className="type-pill">{item.type}</span>
                                                     </div>
                                                     <img
-                                                        src={item.logo || logoBuff}
+                                                        src={item.logo || FALLBACK_LOGO}
                                                         alt={`${item.title} 로고`}
                                                         className="project-logo"
                                                     />

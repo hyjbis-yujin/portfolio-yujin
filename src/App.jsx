@@ -66,9 +66,13 @@ const PortfolioContent = () => {
   )
 }
 
+import { ReactLenis } from '@studio-freight/react-lenis'
+
 function App() {
   return (
-    <PortfolioContent />
+    <ReactLenis root>
+      <PortfolioContent />
+    </ReactLenis>
   )
 }
 

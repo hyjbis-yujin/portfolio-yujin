@@ -12,7 +12,8 @@
 }
 
 html {
-    scroll-behavior: smooth;
+    // Lenis handles smooth scrolling; native scroll-behavior causes conflicts
+    scroll-behavior: auto;
 }
 
 html,
