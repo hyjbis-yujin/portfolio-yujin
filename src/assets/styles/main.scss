@@ -1,42 +1,44 @@
 @use 'abstracts/variables' as *;
 @use 'abstracts/mixins' as *;
 @use 'base/fonts';
-@use 'base/base';
+@use 'base/reset';
 @use 'layout/layout';
 @use 'components/cards';
 @use 'components/badges';
-@use 'components/tabs';
-@use 'components/dialog';
 @use 'components/icons';
 @use 'components/modal';
 
-// Sections
 @use 'sections/shared';
 @use 'sections/home';
+@use 'sections/home-tools';
+@use 'sections/home-about';
+@use 'sections/home-project';
 @use 'sections/about';
 @use 'sections/skill';
 @use 'sections/career';
 @use 'sections/project';
 @use 'sections/contact';
 
-// Global utilities if needed
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+
+  @include mq-tablet {
+      padding: 0 4rem;
+  }
 }
 
-// Helper classes matching common design needs
 .section-title {
-  font-family: $font-title; // Yuseol
-  font-size: 34px; // Updated to 34px as requested
+  font-family: $font-title;
+  font-size: $font-34; 
   font-weight: 700;
   margin-bottom: 2rem;
 }
 
 .section-desc {
-  font-size: clamp(15px, 2vw, 17px);
+  font-size: $font-16;
   color: #868686;
   max-width: 800px;
   margin: 0 auto;
@@ -49,27 +51,8 @@
   color: $secondary-color;
 }
 
-// Custom Cursor (Desktop Only)
 @media (pointer: fine) {
   body {
-    cursor: url('/cursor.svg') 0 0, auto; // Default Custom Cursor
-  }
-
-  // Pointer Cursor (Clickable elements)
-  a,
-  button,
-  [role="button"],
-  input,
-  select,
-  textarea,
-  .card,
-  .glass-overlay,
-  .tab-item,
-  .project-preview-card {
-    cursor: url('/cursor.svg') 0 0, pointer;
-    // User requested: "Basic state: default cursor", "Clickable: pointer cursor". 
-    // If no separate pointer image provided, usually users want the Same image or System pointer.
-    // User said: "Use ONLY provided images". Only cursor.png provided.
-    // Let's use cursor.png effectively replacing the system cursor entirely.
+    cursor: url('/cursor.svg') 0 0, auto;
   }
 }

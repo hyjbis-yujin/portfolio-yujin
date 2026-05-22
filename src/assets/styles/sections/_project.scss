@@ -14,13 +14,16 @@ $project-arrow-top: 57px;
 }
 
 .project-container {
-    @include internal-scroll;
     padding-right: 0;
     max-width: 1400px;
     width: 100%;
     @include flex-center;
     flex-direction: row;
     gap: 1rem;
+
+    @include mq-desktop {
+        @include internal-scroll;
+    }
 
     @include mq-tablet {
         gap: 2rem;
@@ -33,19 +36,41 @@ $project-arrow-top: 57px;
     width: 100%;
     min-width: 0;
     gap: 4.5rem;
+    padding-bottom: 2rem;
+    
+    // Internal scroll only on non-touch (real desktop) - prevents scroll trap on iPad
+    @include mq-desktop {
+        html:not([data-touch]) & {
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+    }
+}
+
+.project-carousel-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+    @include mq-tablet {
+        gap: 2rem;
+    }
 }
 
 .project-swiper-area {
     width: 100%;
     position: relative;
     overflow: visible;
-    @include flex-center;
-    flex-direction: row;
-    gap: 1rem;
-
-    @include mq-tablet {
-        gap: 2rem;
-    }
+    flex: 1; // Take up remaining space between arrows
+    min-width: 0; // Prevent flex blowout
 }
 
 .project-swiper {
@@ -66,7 +91,7 @@ $project-arrow-top: 57px;
     background-color: $project-filter-bg;
     color: rgba($text-color, 0.7);
     border: none;
-    font-size: 14px;
+    font-size: $font-14;
     font-weight: 500;
     cursor: pointer;
     transition: all $transition-fast;
@@ -101,7 +126,6 @@ $project-arrow-top: 57px;
 
 .slider-arrow {
     position: relative;
-    top: $project-arrow-top;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -141,6 +165,22 @@ $project-arrow-top: 57px;
     width: 100%;
     gap: 2rem;
     flex-wrap: wrap;
+    
+    // 카드 그리드 영역(Swiper Area)과 시작/끝 라인을 맞추기 위해 
+    // 좌우 화살표 넓이(20px)와 컨테이너 간격(gap)만큼 padding 부여
+    padding: 0 calc(20px + 1rem);
+
+    @include mq-tablet {
+        padding: 0 calc(20px + 2rem);
+    }
+
+    @media (max-width: 1220px) {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        // 1220px 이하에서 1열로 전환되거나 좁아질 때 중앙 정렬되므로 
+        // 기존 패딩을 유지해도 카드 영역과 기준선이 일치함
+    }
 
     .header-left {
         display: flex;
@@ -149,21 +189,37 @@ $project-arrow-top: 57px;
         align-items: baseline;
         flex-wrap: wrap;
 
+        @media (max-width: 1220px) {
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
         .section-title {
             margin: 0;
             white-space: nowrap;
             text-align: left;
             color: $text-color;
             margin-bottom: 0.5rem;
+
+            @media (max-width: 1220px) {
+                text-align: center;
+                white-space: normal;
+                word-break: keep-all;
+            }
         }
 
         .section-desc {
-            font-size: 16px;
+            font-size: $font-16;
             color: $secondary-color;
             font-weight: 400;
             margin: 0;
             text-align: left;
             margin-left: 0;
+
+            @media (max-width: 1220px) {
+                text-align: center;
+            }
         }
     }
 
@@ -171,17 +227,25 @@ $project-arrow-top: 57px;
         display: flex;
         gap: 0.8rem;
         flex-wrap: nowrap;
+
+        @media (max-width: 1220px) {
+            flex-wrap: wrap; // Wrap like skill section on mobile
+            justify-content: center;
+            width: 100%;
+            margin-top: 1rem;
+        }
     }
 }
 
 .project-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    // Desktop & Tablet & Mobile (down to 500px): Always 2 columns to keep cards in one row
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 1.5rem;
     width: 100%;
 
-    @include mq-tablet {
-        grid-template-columns: repeat(2, 1fr);
+    @media (max-width: 800px) {
+        grid-template-columns: 1fr !important; // Switch to 1 column at 800px
     }
 }
 
@@ -200,12 +264,24 @@ $project-arrow-top: 57px;
     position: relative;
     cursor: pointer;
 
+    @media (max-width: 1220px) {
+        flex-direction: column;
+        height: auto;
+        min-height: auto;
+    }
+
     .card-image-area {
         width: 40%;
         background-color: transparent;
         flex-shrink: 0;
         position: relative;
         @include flex-center;
+
+        @media (max-width: 1220px) {
+            width: 100%;
+            height: clamp(120px, 20vh, 165px); 
+            padding: 3rem 0 0; 
+        }
 
         .image-overlay-pill {
             position: absolute;
@@ -215,7 +291,7 @@ $project-arrow-top: 57px;
 
             .type-pill {
                 color: $white-color;
-                font-size: 13px;
+                font-size: $font-13;
                 padding: 10px 16px;
                 border-radius: 9999px;
                 font-weight: 500;
@@ -239,14 +315,21 @@ $project-arrow-top: 57px;
         gap: 1rem;
         flex-grow: 1;
 
+        @media (max-width: 1220px) {
+            width: 100%;
+            padding: 1rem 1.5rem 2rem; // Reduced padding to save vertical space
+            align-items: center;
+            text-align: center;
+        }
+
         .card-title {
-            font-size: $font-size-lg;
+            font-size: $font-17;
             font-weight: 500;
             color: $text-color;
         }
 
         .card-desc {
-            font-size: $font-size-base;
+            font-size: $font-16;
             color: $secondary-color;
         }
 
@@ -256,10 +339,14 @@ $project-arrow-top: 57px;
             gap: 8px;
             margin-top: 0.5rem;
 
+            @media (max-width: 1220px) {
+                justify-content: center;
+            }
+
             .tag {
                 background-color: $project-tag-bg;
                 color: $text-color;
-                font-size: 14px;
+                font-size: $font-14;
                 padding: 10px 16px;
                 border-radius: 11px;
                 white-space: nowrap;

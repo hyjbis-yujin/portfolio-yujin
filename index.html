@@ -5,6 +5,19 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>portfolio-yujin</title>
+    <!-- Touch device detection: runs before render to avoid flash of wrong layout -->
+    <script>
+      (function() {
+        // Multi-method touch detection to work correctly in Chrome DevTools iPad/tablet emulation
+        var hasTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        // Fallback: check User-Agent for tablet/mobile strings (DevTools sets this correctly)
+        var ua = navigator.userAgent || '';
+        var isTabletUA = /iPad|Android|Mobile|Tablet|iPhone/i.test(ua);
+        if (hasTouch || isTabletUA) {
+          document.documentElement.setAttribute('data-touch', 'true');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

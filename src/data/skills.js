@@ -1,5 +1,4 @@
 export const skills = [
-    // Language
     {
         id: 'html5',
         key: 'HTML5',
@@ -41,7 +40,6 @@ export const skills = [
         hoverIcon: '/icons/hover/ts.svg'
     },
 
-    // Front
     {
         id: 'react',
         key: 'React',
@@ -103,7 +101,6 @@ export const skills = [
         hoverIcon: '/icons/hover/zustand.svg'
     },
 
-    // Tool
     {
         id: 'figma',
         key: 'Figma',

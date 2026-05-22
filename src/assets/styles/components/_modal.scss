@@ -5,9 +5,8 @@
 .project-modal-overlay {
     position: fixed;
     inset: 0;
-    z-index: 9999;
-    background-color: rgba(0, 0, 0, 0.6); // Dark Dim
-    backdrop-filter: blur(8px); // Blur effect
+    z-index: $z-modal-overlay;
+    @include glass-blur(8px, rgba(0, 0, 0, 0.6));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,7 +23,8 @@
     width: 100%;
     max-width: 1300px; // Large width
     height: 60vh; // Fixed height (viewport based)
-    max-height: 800px;
+    min-height: 580px; // Safe minimum height to guarantee enough vertical room for text and action buttons
+    max-height: 90vh; // Protect from overflowing the screen on very small desktop heights
     background-color: #1E1E1E; // Dark Modal BG
     border-radius: 30px;
     display: flex;
@@ -40,12 +40,11 @@
         position: absolute;
         top: 2rem;
         right: 2rem;
-        z-index: 10;
+        z-index: $z-modal-close; // Keep above all slider overlays/elements
         background: transparent;
         border: none;
         color: #888;
-        cursor: pointer;
-        transition: color 0.2s;
+        transition: color $transition-fast;
         padding: 0;
 
         &:hover {
@@ -55,6 +54,11 @@
         svg {
             width: 24px;
             height: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            top: 1rem;
+            right: 1.2rem;
         }
     }
 }
@@ -97,11 +101,10 @@
         flex-direction: row;
         align-items: center;
         gap: 1rem;
-        height: 80px;
 
         .btn-slide {
             width: 32px;
-            height: 100%;
+            height: 84px; // Match standard thumbnail height
             border-radius: 8px;
             background-color: #2C2C2C;
             border: none;
@@ -109,8 +112,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s; // Animate all props including opacity
+            transition: all $transition-fast; // Animate all props including opacity
             opacity: 0.5; // Default opacity
 
             // Icon Background
@@ -139,24 +141,25 @@
             display: flex;
             gap: 0.8rem;
             overflow-x: auto;
-            scrollbar-width: none; // Hide scrollbar
+            @include hide-scrollbar;
             height: 100%;
-
-            &::-webkit-scrollbar {
-                display: none;
-            }
+            align-items: center; // Vertically center thumbnails
 
             .thumb-item {
                 flex: 0 0 calc((100% - 1.6rem) / 3); // 3 items fill row, fewer items keep size
                 max-width: calc((100% - 1.6rem) / 3);
-                height: 100%;
-                // aspect-ratio removed
+                height: 84px; // Standard fixed height across all resolutions
                 border-radius: 8px;
                 overflow: hidden;
                 cursor: pointer;
                 opacity: 0.5;
                 transition: opacity 0.2s, border 0.2s;
                 border: 2px solid transparent;
+
+                @media (max-width: 768px) {
+                    flex: 0 0 calc((100% - 0.8rem) / 2); // 2 items fill row on mobile resolutions
+                    max-width: calc((100% - 0.8rem) / 2);
+                }
 
                 img {
                     width: 100%;
@@ -180,13 +183,14 @@
 // Right Section: Content
 .modal-right-section {
     flex: 1;
-    padding: 4rem 3rem 2.5rem;
-    overflow-y: hidden; // Disable internal scroll
+    padding: 3.5rem 3rem 2.5rem; // Reduced top padding to 3.5rem on desktop per user request
+    overflow-y: auto; // Support internal scroll to prevent button clipping on narrower screens/viewports
+    @include hide-scrollbar;
     display: flex;
     flex-direction: column;
     gap: 3rem;
 
-    // Header: Title + Buttons
+    // Header: Title
     .modal-header-group {
         display: flex;
         align-items: flex-start;
@@ -199,25 +203,32 @@
             // line-height removed
             color: #fff;
         }
+    }
 
-        .modal-actions {
+    // Actions (Moved to bottom)
+    .modal-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: auto; // Auto margin top pushes buttons to the bottom of the flex container!
+        width: 100%; // 100% width
+
+        .btn-action {
+            flex: 1; // 100% width sharing
+            border-radius: 12px; // Reduced roundness from 9999px
+            padding: 0.8rem 1.25rem;
+            font-size: 14px;
+            font-weight: 500;
+            background-color: #2a2a2a; // Dark background for professional high-contrast buttons
+            color: #fff;
+            border: none;
+            transition: background $transition-fast;
+            text-decoration: none; // Link fix
             display: flex;
-            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
 
-            .btn-action {
-                border-radius: 9999px; // Pill
-                padding: 0.5rem 1.25rem;
-                font-size: 14px;
-                font-weight: 500;
-                background-color: #444; // Grey Pill
-                color: #fff;
-                border: none;
-                transition: background 0.2s;
-                text-decoration: none; // Link fix
-
-                &:hover {
-                    background-color: #555;
-                }
+            &:hover {
+                background-color: #3f3f3f; // Interactive hover highlight
             }
         }
     }
@@ -237,7 +248,7 @@
         }
 
         .meta-label {
-            font-size: $font-size-base;
+            font-size: $font-16;
             font-weight: 500;
             color: #fff;
             min-width: 80px;
@@ -245,7 +256,7 @@
         }
 
         .meta-value {
-            font-size: $font-size-sm;
+            font-size: $font-14;
             color: $secondary-color;
         }
 
@@ -338,20 +349,48 @@
 @media (max-width: 1024px) {
     .project-modal-content {
         flex-direction: column;
-        height: 90vh;
+        height: 85vh; // Slightly smaller height for better mobile viewport containment
         overflow-y: auto; // Outer scroll
         max-height: none;
+        padding-top: 0; // Explicitly zero out top padding to prevent background leak
+        
+        // iOS Safari fix for border-radius + overflow hidden leaking background
+        -webkit-transform: translateZ(0);
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
     }
 
-    .modal-left-section,
+    .modal-left-section {
+        flex: none;
+        width: 100%;
+        overflow: hidden; // Ensure background doesn't leak out of border radius
+        padding: 3rem 3rem 2.5rem; // Add top padding here instead for close button space
+        gap: 1.5rem;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+        .modal-main-image-wrapper {
+            height: 280px; // Solid defined height on mobile to prevent collapse
+            border-radius: 16px;
+        }
+
+        @media (max-width: 768px) {
+            padding: 2.5rem 2rem 2rem; // User requested ~2rem top padding to clear the close button
+            
+            .modal-main-image-wrapper {
+                height: 220px; // Slightly shorter viewport on smaller mobile screens
+            }
+        }
+    }
+
     .modal-right-section {
         flex: none;
         width: 100%;
         overflow: visible;
-    }
+        padding: 3rem; // Generous spacious padding for description area
+        gap: 2.5rem;
 
-    .modal-right-section {
-        padding: 2rem;
+        @media (max-width: 768px) {
+            padding: 2.5rem 2rem; // Comfortable padding on smaller smartphone screens
+        }
     }
-
 }

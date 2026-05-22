@@ -9,7 +9,7 @@ const ProjectPreviewPanel = ({ onOpenProject, onScrollTo }) => {
                 <span className="project-desc">기획부터 개발 및 배포까지 전 과정을 주도적으로 수행하며 도전을 해결한 프로젝트</span>
             </div>
             <div className="project-stack">
-                {projects.slice(0, 3).map((project, index) => (
+                {projects.slice(0, 3).map((project) => (
                     <div
                         key={project.id}
                         className="stack-card project-preview-card"

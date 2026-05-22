@@ -1,15 +1,29 @@
-import { useState, useMemo, useRef } from 'react'
+import { useState, useMemo, useRef, useEffect } from 'react'
 import { projects } from '@/data/projects'
 
-/**
- * Custom Hook for managing the Project section state
- * Handles filtering and swiper state.
- */
 export const useProjectState = ({ onOpenProject }) => {
     const [filter, setFilter] = useState('All')
     const swiperRef = useRef(null)
     const [isBeginning, setIsBeginning] = useState(true)
     const [isEnd, setIsEnd] = useState(false)
+    const [itemsPerSlide, setItemsPerSlide] = useState(4)
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 1220) {
+                setItemsPerSlide(4)
+            } else if (window.innerWidth >= 800) {
+                setItemsPerSlide(2)
+            } else {
+                setItemsPerSlide(1)
+            }
+        }
+        
+        handleResize()
+        
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     const filteredProjects = useMemo(() => {
         if (filter === 'All') return projects
@@ -53,7 +67,7 @@ export const useProjectState = ({ onOpenProject }) => {
         if (swiperRef.current) swiperRef.current.slideTo(0)
     }
 
-    const slides = Array.from({ length: Math.ceil(filteredProjects.length / 4) })
+    const slides = Array.from({ length: Math.ceil(filteredProjects.length / itemsPerSlide) })
 
     return {
         filter,
@@ -68,6 +82,8 @@ export const useProjectState = ({ onOpenProject }) => {
         onSlideChange,
         isBeginning,
         isEnd,
-        slides
+        slides,
+        itemsPerSlide
     }
 }
+

@@ -5,22 +5,66 @@
 // About Section Layout (Clean Centering)
 // =========================================
 
+.about-track {
+    height: auto; // Default: natural height for touch/tablet devices
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+    // Only enable scroll-jacking on non-touch (real desktop) device
+    html:not([data-touch]) & {
+        @media (min-width: 1024px) {
+            height: 200vh;
+        }
+    }
+}
+
+.about-sticky-container {
+    position: relative; // Default: normal flow for touch devices
+    height: auto;
+    overflow: visible;
+
+    // Only enable sticky behavior on non-touch (real desktop) device
+    html:not([data-touch]) & {
+        @media (min-width: 1024px) {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+    }
+}
+
 #about {
     // 1. Container Setup: Full Viewport Height
     position: relative;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh; // Changed to min-height to prevent content cutoff on mobile
+    height: auto;
     background-color: $bg-color;
 
     // 2. Flexbox Centering (Parent)
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; // Align top on mobile to prevent title cutoff
+    padding-top: clamp(80px, 12vh, 150px); // Fluid top padding to guarantee appropriate spacing for title
+    padding-bottom: 100px; // Safety bottom padding for long content
+
+    @include mq-desktop {
+        html:not([data-touch]) & {
+            align-items: center;
+            padding-top: 0;
+            padding-bottom: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+    }
 
     // 3. Reset Defaults
-    padding: 0 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     margin: 0;
-    overflow: hidden; // Prevent accidental scroll within the section
+    overflow-x: hidden; // Prevent horizontal scroll on mobile without cutting height
 }
 
 .about-content-wrapper {
@@ -44,14 +88,14 @@
         flex-direction: column;
         align-items: center; // Center items on mobile
         gap: 4rem;
-        padding: 0 2rem;
+        padding: 0; // Removed horizontal padding per user request
         text-align: left;
     }
 }
 
 // === Left Column: Visual (Title & Image) ===
 .about-visual {
-    flex: 1;
+    flex: 0.8;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -62,6 +106,7 @@
         align-items: center;
         text-align: center;
         flex: auto;
+        gap: 1.5rem; // Reduced gap between section title and image per user request
     }
 
     .about-header-group {
@@ -91,14 +136,20 @@
 
     .profile-image-wrapper {
         width: 100%;
-        max-width: 511px;
+        max-width: clamp(320px, 30vw, 260px); // Reduced size and added fluid minimum
+        margin: 0 auto;
         border-radius: 2px;
         overflow: hidden;
         filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
 
         @media (max-width: 1024px) {
-            max-width: 100%;
             aspect-ratio: auto;
+        }
+
+        @include mq-desktop {
+            // Scales smoothly between 500px on large screens down to 450px (-50px) on smaller desktop screens
+            max-width: clamp(400px, 35vw, 500px); 
+            margin: 0;
         }
 
         img {
@@ -128,7 +179,11 @@
     .qa-list {
         display: flex;
         flex-direction: column;
-        gap: 3.5rem;
+        gap: clamp(2.5rem, 5vw, 3.5rem); // Increased mobile gap for more breathing room between questions
+
+        @include mq-desktop {
+            gap: 3.5rem;
+        }
     }
 
     .qa-item {
@@ -138,7 +193,7 @@
     }
 
     .qa-question {
-        font-size: 1.25rem;
+        font-size: $font-20; // Replaced fluid string with unified variable
         color: $primary-color;
         font-weight: 600;
         margin: 0;
@@ -146,7 +201,7 @@
     }
 
     .qa-answer {
-        font-size: 1.05rem;
+        font-size: $font-16; // Replaced fluid string with unified variable
         color: #e0e0e0;
         line-height: 1.7;
         font-weight: 300;

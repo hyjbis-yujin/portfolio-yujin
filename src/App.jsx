@@ -9,29 +9,34 @@ import Skill from '@/components/sections/Skill'
 import Project from '@/components/sections/Project'
 import Contact from '@/components/sections/Contact'
 
-// Internal component to consume context
 const PortfolioContent = () => {
   const { setActiveSection } = useStore()
 
-  // Scroll Spy Logic
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'skill', 'career', 'project', 'contact']
-      const scrollPosition = window.scrollY + window.innerHeight / 3
-
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const { offsetTop, offsetHeight } = element
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section)
-            break
-          }
+    const sections = ['home', 'about', 'skill', 'career', 'project', 'contact']
+    
+    // IntersectionObserver is much more performant than scroll event + getBoundingClientRect.
+    // rootMargin creates a narrow horizontal trigger line at 33.33% from the top of the viewport.
+    // This perfectly matches the exact behavior of `window.scrollY + window.innerHeight / 3`.
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id)
         }
+      })
+    }, {
+      rootMargin: "-33.33% 0px -66.66% 0px",
+      threshold: 0
+    })
+
+    sections.forEach(id => {
+      const element = document.getElementById(id)
+      if (element) {
+        observer.observe(element)
       }
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    })
+
+    return () => observer.disconnect()
   }, [setActiveSection])
 
   const [selectedProject, setSelectedProject] = React.useState(null)

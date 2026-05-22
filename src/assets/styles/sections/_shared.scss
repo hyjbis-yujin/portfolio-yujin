@@ -8,11 +8,15 @@
 
 // Global Section Layout
 .section {
-    // Mobile/Tablet: Natural scroll
+    // Mobile/Tablet/Touch devices: Natural scroll, content-based height
     width: 100%;
-    min-height: 100vh;
     height: auto;
-    padding: 80px 16px; // Mobile padding
+    padding: 80px 1.4rem; // Mobile padding
+
+    @include mq-tablet {
+        padding: 80px 3rem; // Add generous horizontal padding on tablets
+    }
+
     @include flex-center;
     flex-direction: column;
     position: relative;
@@ -20,10 +24,13 @@
 
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
-    // Desktop+: Snap & Full Page
+    // Desktop only (non-touch device at 1024px+): Full page snap
+    // Uses data-touch attribute set by inline script in index.html
     @include mq-desktop {
-        height: 100vh;
-        padding: 4rem 2rem;
+        html:not([data-touch]) & {
+            height: 100vh;
+            padding: 4rem 2rem;
+        }
     }
 }
 

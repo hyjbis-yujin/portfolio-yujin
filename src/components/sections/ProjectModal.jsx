@@ -2,39 +2,25 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLenis } from '@studio-freight/react-lenis'
 
 import ProjectModalSlider from '@/components/features/project/ProjectModalSlider'
 import ProjectModalContent from '@/components/features/project/ProjectModalContent'
+import { useScrollLock } from '@/hooks/useScrollLock'
 
-const overlayVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.2 } },
-    exit: { opacity: 0, transition: { duration: 0.2, delay: 0.1 } }
-}
-
-const modalVariants = {
-    hidden: { scale: 0.95, opacity: 0, y: 20 },
-    visible: {
-        scale: 1,
-        opacity: 1,
-        y: 0,
-        transition: { type: "spring", stiffness: 300, damping: 30 }
-    },
-    exit: { scale: 0.95, opacity: 0, y: 20, transition: { duration: 0.2 } }
-}
+import { overlayVariants, modalVariants } from '@/lib/animations/project'
 
 const ProjectModal = ({ project, onClose }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
     const handleClose = useCallback(() => {
         if (onClose) onClose()
-        // Wait for modal exit animation before resetting
         setTimeout(() => setCurrentImageIndex(0), 200)
     }, [onClose])
 
-    // Reset index when a new project is opened
     useEffect(() => {
         if (project) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setCurrentImageIndex(0)
         }
     }, [project])
@@ -52,9 +38,18 @@ const ProjectModal = ({ project, onClose }) => {
         setCurrentImageIndex((prev) => (prev - 1 + screenshotsLength) % screenshotsLength)
     }, [hasScreenshots, screenshotsLength])
 
-    useEffect(() => {
-        document.body.style.overflow = 'hidden'
+    const lenis = useLenis()
 
+    useEffect(() => {
+        if (lenis) {
+            lenis.stop()
+            return () => lenis.start()
+        }
+    }, [lenis])
+
+    useScrollLock(!!project)
+
+    useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === 'Escape') handleClose()
             if (hasScreenshots && screenshotsLength > 1) {
@@ -65,12 +60,10 @@ const ProjectModal = ({ project, onClose }) => {
         window.addEventListener('keydown', handleKeyDown)
 
         return () => {
-            document.body.style.overflow = 'unset'
             window.removeEventListener('keydown', handleKeyDown)
         }
     }, [handleClose, nextImage, prevImage, hasScreenshots, screenshotsLength])
 
-    // Portal to body
     return createPortal(
         <AnimatePresence>
             {project && (
@@ -87,14 +80,14 @@ const ProjectModal = ({ project, onClose }) => {
                         className="project-modal-content"
                         onClick={(e) => e.stopPropagation()}
                         variants={modalVariants}
+                        data-lenis-prevent
                     >
-                        {/* Close Button */}
                         <button className="btn-close-modal" onClick={handleClose}>
                             <X size={24} />
                         </button>
 
                         <ProjectModalSlider
-                            screenshots={project.screenshots} // changed from images
+                            screenshots={project.screenshots}
                             title={project.title}
                             currentImageIndex={currentImageIndex}
                             setCurrentImageIndex={setCurrentImageIndex}

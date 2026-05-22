@@ -12,7 +12,6 @@
 }
 
 html {
-    // Lenis handles smooth scrolling; native scroll-behavior causes conflicts
     scroll-behavior: auto;
 }
 
@@ -26,13 +25,12 @@ body {
     font-family: $font-family;
     background-color: $bg-color;
     color: $text-color;
-    font-size: $font-size-base;
+    font-size: $font-16;
     font-weight: 400;
     line-height: 1.5;
     overflow-x: hidden;
 }
 
-// Global scrollbar removal for all engines
 ::-webkit-scrollbar {
     display: none !important;
 }
@@ -55,12 +53,23 @@ ol {
 button {
     background: none;
     border: none;
-    cursor: pointer;
     font-family: inherit;
     color: inherit;
 }
 
-// Utilities
+a,
+button,
+[role="button"],
+input,
+select,
+textarea,
+.card,
+.glass-overlay,
+.tab-item,
+.project-preview-card {
+    cursor: pointer;
+}
+
 .text-center {
     text-align: center;
 }

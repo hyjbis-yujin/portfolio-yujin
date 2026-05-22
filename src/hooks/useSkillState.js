@@ -9,10 +9,6 @@ const CATEGORY_CONFIG = {
     tool: { label: 'Tool', icon: PenTool }
 }
 
-/**
- * Custom Hook for managing the Skill section state
- * Handles tab switching and skill filtering.
- */
 export const useSkillState = () => {
     const [activeTab, setActiveTab] = useState('language')
 

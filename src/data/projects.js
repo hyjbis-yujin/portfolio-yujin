@@ -1,7 +1,4 @@
-// Removed static logo imports - using dynamic public paths instead
-
 export const projects = [
-  // --- Company Projects ---
   {
     id: 1,
     type: "Company",
@@ -142,7 +139,6 @@ export const projects = [
     ],
   },
 
-  // --- Personal Projects ---
   {
     id: 6,
     type: "Personal",

@@ -17,8 +17,6 @@ const SectionNav = () => {
         smoothScrollTo(`#${id}`)
     }
 
-    // Removed isHomeActive logic to allow interaction always
-
     return (
         <nav className="section-nav">
             {navItems.map((item) => {
@@ -28,7 +26,6 @@ const SectionNav = () => {
                     <button
                         key={item.id}
                         onClick={() => scrollToSection(item.id)}
-                        // Removed disabled prop
                         className={cn(
                             "nav-link",
                             isActive ? "active" : "inactive"

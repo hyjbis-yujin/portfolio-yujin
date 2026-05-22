@@ -18,22 +18,41 @@
     position: relative;
 }
 
-// Navigation (Left - Quick Buttons)
+// Navigation (Quick Buttons)
 .left-quick-btn {
     position: fixed;
-    left: 3rem;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: $z-nav;
+    z-index: $z-quick-menu;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2.3rem;
     width: fit-content;
-    padding: 1.9rem 1.5rem;
     border: 1px solid #434343;
     border-radius: 100px;
+    @include glass-blur;
+
+    // Mobile View: Bottom Center
+    left: 50%;
+    bottom: 2.5rem; // Simple reliable value - safe-area handled by padding on parent
+    top: auto;
+    transform: translateX(-50%);
+    flex-direction: row;
+    gap: 2.3rem;
+    padding: 1.3rem 1.9rem;
+
+    @media (min-width: 1580px) {
+        // Desktop View: Left Center
+        left: 3rem;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        flex-direction: column;
+        gap: 2.3rem;
+        padding: 1.9rem 1.5rem;
+        border: 1px solid #434343;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
 
     .quick-btn {
         width: 21px;
@@ -87,7 +106,7 @@
     text-align: right;
     align-items: flex-end;
 
-    @include mq-desktop {
+    @media (min-width: 1580px) {
         display: flex;
     }
 

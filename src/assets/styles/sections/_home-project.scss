@@ -1,0 +1,192 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+/* === Project Panel === */
+.project-panel-wrapper {
+  grid-column: 1 / -1; // Span full width
+  width: 100%;
+  position: relative;
+  min-height: 200px; // Reduced from 240px to eliminate excessive empty space
+  height: auto;
+  border-radius: 24px; // Match panel radius
+  overflow: hidden;
+
+  @include mq-desktop {
+    min-height: 200px;
+    height: auto;
+  }
+}
+
+.project-panel {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  // Removed padding-bottom !important to allow uniform inherited padding from .home-panel
+
+  .project-header {
+    z-index: 5;
+    position: relative;
+    display: flex;
+    justify-content: flex-start !important;
+    gap: 1rem;
+    align-items: baseline;
+    flex-wrap: wrap; // Allow wrap for small screens
+
+    .panel-title {
+      color: #2cb1ea;
+    }
+
+    .project-desc {
+      font-size: $font-14;
+      color: #9c9c9c;
+    }
+  }
+
+  .project-stack {
+    position: relative;
+    flex: 1; // Take all remaining space below the header
+    width: 100%;
+    min-height: clamp(80px, 20vw, 104px); // Ensure space for absolute cards
+    margin: 0; // Completely removed top margin as requested
+    display: flex;
+
+    .stack-card {
+      // Define variable for card width to calculate perfect fluid spacing
+      --card-w: clamp(100px, 45%, 217px);
+
+      // On small mobile where 1 card is hidden, make the remaining cards larger to fit the space
+      @media (max-width: 480px) {
+        --card-w: clamp(130px, 60%, 217px);
+      }
+
+      width: var(--card-w);
+      height: clamp(80px, 20vw, 104px);
+
+      // Desktop: Fixed dimensions
+      @include mq-desktop {
+        --card-w: 217px;
+        width: var(--card-w);
+        height: 104px;
+      }
+
+      background-color: #323232;
+      border-radius: 12px;
+      position: absolute;
+      top: 0; // Align to the top of the stack (closer to header)
+      margin-top: 0;
+      // Removed bottom: 0 and margin-bottom: auto to shift extra space to the bottom
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+
+      // Stacking Logic (Calculated perfectly to fit exactly into the box width)
+      &:nth-child(1) {
+        left: 0;
+      }
+      &:nth-child(2) {
+        left: calc((100% - var(--card-w)) / 3 * 1);
+      }
+      &:nth-child(3) {
+        left: calc((100% - var(--card-w)) / 3 * 2);
+      }
+
+      @media (max-width: 480px) {
+        &:nth-child(3) {
+          display: none; // Reduce to 2 screenshots on very small screens
+        }
+        // When reduced to 3 items total (2 cards + 1 more), distribute them evenly across the full width
+        &:nth-child(2) {
+          left: calc((100% - var(--card-w)) / 2 * 1);
+        }
+      }
+
+      // Project Preview Styles
+      &.project-preview-card {
+        background-image: var(--project-bg);
+        background-size: cover;
+        background-position: center;
+        cursor: pointer;
+        overflow: hidden;
+
+        .card-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.6);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+
+        .preview-title {
+          color: white;
+          font-weight: 700;
+          font-size: clamp(12px, 2vw, 16px);
+          text-align: center;
+          padding: 0 0.5rem;
+        }
+
+        @include hover-supported {
+          &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+
+            .card-overlay {
+              opacity: 1;
+            }
+          }
+        }
+      }
+
+      // Glass Overlay
+      &.glass-overlay {
+        // Last item is ALWAYS flush right, perfectly fitting the box width
+        left: calc(100% - var(--card-w));
+
+        @include mq-tablet {
+          transform: none; // Remove transform hack
+        }
+
+        background: #ffffff1f;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        span {
+          font-size: 14px;
+          font-weight: 600;
+          color: #ffffff;
+          letter-spacing: 0.05em;
+        }
+
+        @include hover-supported {
+          transition: transform 0.3s ease;
+
+          // Mobile default behavior (Just lift, no X translate)
+          &:hover {
+            transform: translateY(-5px);
+          }
+
+          // Tablet specific behavior (Maintain translate-x)
+          @include mq-tablet {
+            &:hover {
+              transform: translateY(-5px) translateX(-100%);
+            }
+          }
+
+          // Desktop specific behavior (Reset to just lift)
+          @media (min-width: 1000px) {
+            // Lowered slightly to catch 1010px issue
+            &:hover {
+              transform: translateY(-5px);
+            }
+          }
+        }
+      }
+    }
+  }
+}

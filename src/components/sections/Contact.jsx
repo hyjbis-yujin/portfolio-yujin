@@ -1,4 +1,3 @@
-// import { toast } from 'sonner'
 import Section from '@/components/common/Section'
 import { motion } from 'framer-motion'
 import { cinematicReveal } from '@/styles/animations'
@@ -31,8 +30,9 @@ const Contact = () => {
     }
 
     return (
-        <Section id="contact" className="contact-section-overflow">
-            <motion.div
+        <>
+            <Section id="contact" className="contact-section-overflow">
+                <motion.div
                 className="contact-container"
                 variants={containerVariants}
                 initial="hidden"
@@ -67,16 +67,17 @@ const Contact = () => {
                     >
                         <span>GitHub</span>
                     </a >
-                </motion.div >
-            </motion.div >
-
-            <footer>
-                <div className="footer-container">
-                    본 사이트는 개인 포트폴리오 목적으로 제작되었으며, 상업적 용도로 사용하지 않습니다.
-                    <br /> Copyright ⓒ YUJIN
-                </div>
-            </footer>
-        </Section>
+                </motion.div>
+                </motion.div>
+                
+                <footer>
+                    <div className="footer-container">
+                        본 사이트는 개인 포트폴리오 목적으로 제작되었으며, 상업적 용도로 사용하지 않습니다.
+                        <br /> Copyright ⓒ YUJIN
+                    </div>
+                </footer>
+            </Section>
+        </>
     )
 }
 

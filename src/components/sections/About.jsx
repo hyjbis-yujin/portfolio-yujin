@@ -6,34 +6,54 @@ import { aboutQnA } from '@/data/about'
 
 const About = () => {
     const containerRef = useRef(null)
+    const qaRefs = [useRef(null), useRef(null), useRef(null)]
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"]
     })
 
-    // State to track if animation should play
     const [showItem1, setShowItem1] = useState(false)
     const [showItem2, setShowItem2] = useState(false)
     const [showItem3, setShowItem3] = useState(false)
+    const setters = [setShowItem1, setShowItem2, setShowItem3]
 
     useEffect(() => {
-        const unsubscribe = scrollYProgress.on("change", (latest) => {
-            // Item 1: Trigger immediately (0.01)
-            if (latest > 0.01) setShowItem1(true)
-            else setShowItem1(false)
+        // Detect touch device: matches the inline script in index.html
+        const isTouch = document.documentElement.getAttribute('data-touch') === 'true'
 
-            // Item 2: Trigger later (0.35) to prevent overlap with Item 1
-            if (latest > 0.35) setShowItem2(true)
-            else setShowItem2(false)
+        if (!isTouch) {
+            // Desktop: Use scroll-jacking progress (200vh track)
+            const unsubscribe = scrollYProgress.on("change", (latest) => {
+                if (latest > 0.01) setShowItem1(true)
+                else setShowItem1(false)
 
-            // Item 3: Trigger later (0.65)
-            if (latest > 0.65) setShowItem3(true)
-            else setShowItem3(false)
-        })
-        return () => unsubscribe()
+                if (latest > 0.35) setShowItem2(true)
+                else setShowItem2(false)
+
+                if (latest > 0.65) setShowItem3(true)
+                else setShowItem3(false)
+            })
+            return () => unsubscribe()
+        } else {
+            // Touch device (iPad, mobile): Use IntersectionObserver — show each item when it enters the viewport
+            const observers = qaRefs.map((ref, index) => {
+                if (!ref.current) return null
+                const observer = new IntersectionObserver(
+                    ([entry]) => {
+                        if (entry.isIntersecting) {
+                            setters[index](true)
+                        }
+                    },
+                    { threshold: 0.2 }
+                )
+                observer.observe(ref.current)
+                return observer
+            })
+            return () => observers.forEach(obs => obs?.disconnect())
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [scrollYProgress])
 
-    // Specific Variant for Item 1 (Immediate)
     const variantsItem1 = {
         hidden: { opacity: 0, y: 30, filter: 'blur(10px)' },
         visible: {
@@ -44,24 +64,22 @@ const About = () => {
         }
     }
 
-    // Specific Variant for Item 2/3 (Default)
     const variantsDefault = {
         hidden: { opacity: 0, y: 30, filter: 'blur(10px)' },
         visible: {
             opacity: 1,
             y: 0,
             filter: 'blur(0px)',
-            transition: { duration: 1.0, ease: "easeOut" } // Standard speed for 2/3
+            transition: { duration: 1.0, ease: "easeOut" }
         }
     }
 
     return (
-        <div ref={containerRef} id="about-track" style={{ height: '200vh', position: 'relative' }}>
-            <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}>
+        <div ref={containerRef} id="about-track" className="about-track">
+            <div className="about-sticky-container">
                 <Section id="about">
                     <div className="about-content-wrapper">
 
-                        {/* Left Column: Title & Image (Static) */}
                         <div className="about-visual">
                             <div className="about-header-group">
                                 <SectionHeader
@@ -75,13 +93,11 @@ const About = () => {
                             </div>
                         </div>
 
-                        {/* Right Column: Q&A (Animated) */}
                         <div className="about-content">
                             <div className="qa-list">
                                 {aboutQnA.map((item, index) => {
-                                    // Determine animation state
                                     let shouldShow = false;
-                                    let itemVariants = variantsDefault; // Default variants
+                                    let itemVariants = variantsDefault;
 
                                     if (index === 0) {
                                         shouldShow = showItem1;
@@ -93,6 +109,7 @@ const About = () => {
                                     return (
                                         <motion.div
                                             key={item.id}
+                                            ref={qaRefs[index]}
                                             className="qa-item"
                                             initial="hidden"
                                             animate={shouldShow ? "visible" : "hidden"}

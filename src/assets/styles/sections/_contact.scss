@@ -5,15 +5,44 @@ $contact-btn-border: #323232;
 $footer-text: #434343;
 $footer-border: #212121;
 
+#contact {
+    position: relative; // Establish context for absolute children
+    width: 100%;
+    
+    @media (min-width: 1580px) {
+        height: 100vh;
+        padding: 0 !important; // Strip parent padding to ensure perfect 100vh sizing
+    }
+
+    @media (max-width: 1579px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 80px 20px 0;
+    }
+}
+
 .contact-container {
     max-width: 1300px;
     width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 4rem;
-    position: relative;
-    z-index: 10;
+    // Fluid vertical gap between title area and buttons
+    gap: clamp(2rem, 8vh, 4rem);
+    
+    @media (min-width: 1580px) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+    }
+
+    @media (max-width: 1579px) {
+        position: relative;
+        margin: auto 0;
+    }
 }
 
 .contact-message-box {
@@ -24,12 +53,12 @@ $footer-border: #212121;
 
 .contact-title {
     font-family: $font-title;
-    font-size: 40px;
+    font-size: clamp(28px, 5vw, 40px);
     margin-bottom: 0;
 }
 
 .contact-desc {
-    font-size: 18px;
+    font-size: $font-18;
     color: #818181;
     line-height: 1.8;
     margin: 0 auto;
@@ -39,24 +68,24 @@ $footer-border: #212121;
 
 .contact-buttons {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; 
+    flex-wrap: wrap; 
     align-items: center;
     justify-content: center;
-    gap: 1.5rem;
-
-    @include mq-tablet {
-        flex-direction: row;
-    }
+    // Fluid gap between buttons: 12.8px to 24px
+    gap: clamp(0.8rem, 3vw, 1.5rem);
 }
 
 .btn-contact {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 2rem;
+    // Narrower gap: 6.4px to 9.6px
+    gap: clamp(0.4rem, 1.5vw, 0.6rem);
+    // Increased minimum padding: Vertical 13.6px~16px, Horizontal 24px~32px
+    padding: clamp(0.85rem, 3vw, 1rem) clamp(1.5rem, 5vw, 2rem);
     border-radius: 15px;
     font-weight: 400;
-    font-size: 16px;
+    font-size: $font-16;
     border: 3px solid $contact-btn-border;
     transition: all $transition-fast;
     background-color: transparent;
@@ -70,19 +99,40 @@ $footer-border: #212121;
 
 footer {
     width: 100%;
-    position: absolute;
-    bottom: 0;
     display: flex;
     justify-content: center;
+    
+    @media (min-width: 1580px) {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    @media (max-width: 1579px) {
+        position: static; // Flow naturally after content on mobile
+        padding-top: 4rem; // Give space from the contact container
+    }
 }
 
 .footer-container {
-    width: 1300px;
-    padding: 50px 0;
+    max-width: 1300px;
+    width: 100%;
+    padding: 3rem 2rem; // Update top/bottom padding to 3rem
     font-size: 16px;
     color: $footer-text;
     border-top: 1px solid $footer-border;
     text-align: center;
+
+    // When the Quick Menu moves to the bottom center (< 1580px),
+    // add bottom padding so the footer content isn't hidden behind the floating menu.
+    @media (max-width: 1579px) {
+        padding-bottom: 120px; // Restored original 120px
+    }
+
+    // On tablet/mobile (<= 1023px), make it very close to the quick menu (approx 20px visual gap)
+    @media (max-width: 1023px) {
+        padding-bottom: 140px; // Increased to match the new higher clamp position of the quick menu
+    }
 }
 
 .icon-box {

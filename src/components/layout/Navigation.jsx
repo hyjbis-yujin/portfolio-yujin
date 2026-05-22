@@ -16,21 +16,18 @@ const Navigation = () => {
 
     return (
         <aside className="left-quick-btn">
-            {/* 01: Home Button */}
             <button
                 onClick={handleScrollToHome}
                 className="quick-btn btn-home"
                 aria-label="Go to Home"
             />
 
-            {/* 02: Mail Button */}
             <button
                 onClick={handleEmailCopy}
                 className="quick-btn btn-mail"
                 aria-label="Copy Email"
             />
 
-            {/* 03: Github Button */}
             <a
                 href="https://github.com"
                 target="_blank"

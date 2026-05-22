@@ -1,0 +1,20 @@
+@use "../abstracts/variables" as *;
+
+.about-panel {
+  height: 100%; // Match height with Tools panel
+
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    .tag {
+      background-color: #2c2c2c;
+      color: #ffffff;
+      font-size: $font-14;
+      padding: 8px 16px; // Adjust padding to look like pill
+      border-radius: 9999px;
+      white-space: nowrap;
+    }
+  }
+}

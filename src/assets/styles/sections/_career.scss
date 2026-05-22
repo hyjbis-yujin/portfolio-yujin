@@ -9,7 +9,6 @@ $career-border: #525252;
 
 #career {
     .career-container {
-        @include internal-scroll;
         max-width: 1000px;
         width: 100%;
         display: flex;
@@ -40,7 +39,6 @@ $career-border: #525252;
 .info-card-container {
     background-color: $career-card-bg;
     border-radius: 20px;
-    min-height: $career-min-height;
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -49,17 +47,22 @@ $career-border: #525252;
     @include mq-tablet {
         border-radius: 27px 54px 27px 27px;
     }
+
+    // Ensure the motion wrapper inside fills the container to prevent background peeking
+    > div {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .container-title {
-    font-size: 18px;
+    // Fluid font size: Scales smoothly from 16px on mobile to 18px on desktop
+    font-size: $font-18;
     font-weight: 700;
     color: $text-color;
-    padding: 20px 24px;
-
-    @include mq-tablet {
-        padding: 28px 40px;
-    }
+    // Fluid padding: Horizontal spacing matches .info-items for visual alignment
+    padding: clamp(20px, 4vw, 28px) clamp(32px, 5vw, 40px);
 }
 
 .info-items {
@@ -67,13 +70,13 @@ $career-border: #525252;
     flex-direction: column;
     gap: 2rem;
     background-color: $career-inner-bg;
-    padding: 24px;
+    // Fluid padding: Scales smoothly from 32px on mobile to 40px on tablet/desktop
+    padding: clamp(32px, 5vw, 40px);
     flex-grow: 1;
     border-radius: 20px;
 
     @include mq-tablet {
         border-radius: 27px;
-        padding: 40px;
     }
 }
 
@@ -92,13 +95,15 @@ $career-border: #525252;
 }
 
 .item-org {
-    font-size: 17px;
+    // Fluid font size: Scales smoothly from 16px on mobile to 17px on desktop
+    font-size: clamp(16px, 2.5vw, 17px);
     font-weight: 600;
     color: $primary-color;
 }
 
 .item-desc {
-    font-size: $font-size-base;
+    // Fluid font size: Scales smoothly from 15px on mobile to 17px on desktop
+    font-size: $font-16;
     color: $secondary-color;
     line-height: 1.6;
     word-break: keep-all;

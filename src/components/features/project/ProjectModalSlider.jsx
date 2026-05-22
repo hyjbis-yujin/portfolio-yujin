@@ -15,11 +15,23 @@ const ProjectModalSlider = ({
     // Auto-scroll thumbnails track to keep active item in view
     useEffect(() => {
         if (!trackRef.current) return
+        
+        const isMobile = window.innerWidth <= 768;
+        const threshold = isMobile ? 2 : 3;
+
+        // If the screenshots fit completely within the visible track, freeze the scroll position strictly to 0
+        if (screenshots && screenshots.length <= threshold) {
+            trackRef.current.scrollLeft = 0;
+            return;
+        }
+
         const activeThumb = trackRef.current.children[currentImageIndex]
         if (activeThumb) {
-            activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+            if (screenshots && screenshots.length > threshold) {
+                activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+            }
         }
-    }, [currentImageIndex])
+    }, [currentImageIndex, screenshots])
 
     // Fallback if no screenshots are provided
     if (!screenshots || screenshots.length === 0) {
@@ -54,7 +66,18 @@ const ProjectModalSlider = ({
             {hasMultipleImages && (
                 <div className="modal-slider-controls">
                     <button className="btn-slide prev" onClick={prevImage} aria-label="Previous image"></button>
-                    <div className="thumbnails-track" ref={trackRef}>
+                    <div 
+                        className="thumbnails-track" 
+                        ref={trackRef}
+                        style={{ overflowX: screenshots.length > (window.innerWidth <= 768 ? 2 : 3) ? 'auto' : 'hidden' }}
+                        onScroll={(e) => {
+                            const isMobile = window.innerWidth <= 768;
+                            const threshold = isMobile ? 2 : 3;
+                            if (screenshots && screenshots.length <= threshold) {
+                                e.target.scrollLeft = 0;
+                            }
+                        }}
+                    >
                         {screenshots.map((img, idx) => (
                             <div
                                 key={idx}

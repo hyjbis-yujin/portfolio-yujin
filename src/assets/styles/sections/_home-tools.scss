@@ -1,0 +1,86 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.tools-panel {
+  height: 100%; // Ensure fills grid cell
+
+  .tools-grid {
+    display: grid;
+    gap: 8px; // Adjusted for fit
+
+    // 1023px 이하 전 구간: JS가 주입하는 강제 1줄을 무시하고 자연스럽게 랩핑(Wrap)되도록 설정.
+    // 1024px(데스크탑 55px)에서 내려올 때 사이즈 튀는 현상을 막기 위해 기본 55px을 기준으로 하되,
+    // 모바일 환경(폭이 아주 좁아질 때)에서는 아이콘 크기가 부드럽게 작아지도록 하한선을 40px 까지 허용.
+    @media (max-width: 1023px) {
+      grid-template-columns: repeat(auto-fill, minmax(clamp(40px, 10vw, 55px), 1fr)) !important;
+    }
+
+
+    .tool-box {
+      width: 100%; // Make it fluid on mobile
+      aspect-ratio: 1 / 1; // Maintain square shape automatically
+      background-color: #393939;
+      // Fluid border-radius: Scales naturally with the box size (approx 27% of width),
+      // caps at 15px for desktop, preventing jerky snapping at breakpoints!
+      border-radius: min(27%, 15px);
+
+      @include mq-desktop {
+        width: 55px; // Restore original fixed size on desktop
+        height: 55px;
+        aspect-ratio: auto;
+        // border-radius handled by min() above
+      }
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+
+      background-repeat: no-repeat;
+      background-position: center;
+
+      &.tool-ai {
+        background-image: url("/icons/default/tool-ai.png");
+        background-size: 50% 50%; // Fluid sizing for small screens
+
+        @include mq-desktop {
+          background-size: 28px 28px; // Fixed sizing for desktop
+        }
+      }
+
+      .skill-icon-wrapper img {
+        max-width: 50%; // Adds inner padding on fluid mobile sizes
+        max-height: 50%;
+
+        @include mq-desktop {
+          max-width: 28px;
+          max-height: 28px;
+        }
+      }
+
+      svg {
+        width: 50%;
+        height: 50%;
+        color: #d6d6d6;
+
+        @include mq-desktop {
+          width: 28px;
+          height: 28px;
+        }
+      }
+
+      .tool-label {
+        color: #bebebe;
+        font-weight: 700;
+        font-size: $font-14; // Shrinks to 13px on mobile
+      }
+
+      &.more-box {
+        font-size: clamp(12px, 3.5vw, 16px); // Smoothly scales down on small screens without jerky breakpoint jumps
+        font-weight: 600;
+        color: #ffffff;
+        background-color: #393939;
+      }
+    }
+  }
+}

@@ -45,25 +45,6 @@ const ProjectModalContent = ({ project }) => {
             {/* Header */}
             <motion.div className="modal-header-group" variants={itemVariants}>
                 <h2 id="modal-title" className="modal-title">{project.title}</h2>
-
-                <div className="modal-actions">
-                    <a
-                        href={project.links?.git || '#'}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="btn-action"
-                    >
-                        Git
-                    </a>
-                    <a
-                        href={project.links?.demo || '#'}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="btn-action"
-                    >
-                        Demo
-                    </a>
-                </div>
             </motion.div>
 
             {/* Meta Grid */}
@@ -84,6 +65,26 @@ const ProjectModalContent = ({ project }) => {
                         </div>
                     ))}
                 </div>
+            </motion.div>
+
+            {/* Actions (Moved to bottom) */}
+            <motion.div className="modal-actions" variants={itemVariants}>
+                <a
+                    href={project.links?.git || '#'}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-action"
+                >
+                    Git
+                </a>
+                <a
+                    href={project.links?.demo || '#'}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-action"
+                >
+                    Demo
+                </a>
             </motion.div>
 
         </motion.div>

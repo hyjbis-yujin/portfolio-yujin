@@ -1,7 +1,7 @@
 export const PREMIUM_EASE = [0.25, 0.1, 0.25, 1.0]; // Cubic-bezier for weighted, luxury feel.
 export const TEXT_EASE = [0.16, 1, 0.3, 1]; // Specifically tuned for text focus.
 
-// Cinematic Reveal (for sections/containers)
+
 export const cinematicReveal = {
     hidden: {
         opacity: 0,
@@ -21,7 +21,7 @@ export const cinematicReveal = {
     }
 };
 
-// Staggered Text (for titles)
+
 export const staggerTextContainer = {
     hidden: {},
     visible: {
@@ -53,7 +53,7 @@ export const kineticText = {
     }
 };
 
-// Modal Entry ("Approaching")
+
 export const modalApproach = {
     hidden: {
         opacity: 0,
@@ -80,7 +80,7 @@ export const modalApproach = {
     }
 };
 
-// Skill Grid Stagger
+
 export const gridStagger = {
     hidden: {},
     visible: {

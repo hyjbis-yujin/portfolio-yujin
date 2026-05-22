@@ -1,25 +1,14 @@
-import React, { useState, useMemo } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
-import { gridStagger, gridItemFade } from '@/styles/animations'
-import { Code2, Monitor, PenTool } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { skills } from '@/data/skills'
 import SkillIcon from '@/components/common/SkillIcon'
 import Section from '@/components/common/Section'
-
-// Category Config (Labels and Icons)
-const CATEGORY_CONFIG = {
-    language: { label: 'Language', icon: <Code2 size={16} /> },
-    front: { label: 'Front', icon: <Monitor size={16} /> },
-    tool: { label: 'Tool', icon: <PenTool size={16} /> }
-}
 
 import { useSkillState } from '@/hooks/useSkillState'
 
 const Skill = () => {
     const { activeTab, setActiveTab, filteredSkills, tabs } = useSkillState()
 
-    // Animation Variants
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {

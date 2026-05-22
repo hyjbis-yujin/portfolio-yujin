@@ -17,6 +17,12 @@
     border: 1px solid $border-color;
 }
 
+@mixin glass-blur($blur: 10px, $bg: rgba(23, 23, 23, 0.75)) {
+    background: $bg;
+    backdrop-filter: blur($blur);
+    -webkit-backdrop-filter: blur($blur);
+}
+
 @mixin text-gradient($start, $end) {
     background: linear-gradient(to right, $start, $end);
     -webkit-background-clip: text;
