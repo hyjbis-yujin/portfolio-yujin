@@ -78,7 +78,7 @@
       &.more-box {
         font-size: clamp(12px, 3.5vw, 16px); // Smoothly scales down on small screens without jerky breakpoint jumps
         font-weight: 600;
-        color: #ffffff;
+        color: $text-color;
         background-color: #393939;
       }
     }

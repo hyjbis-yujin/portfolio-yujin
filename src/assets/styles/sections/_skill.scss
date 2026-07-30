@@ -1,7 +1,7 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-$skill-tab-bg: #434343;
+$skill-tab-bg: $btn-inactive;
 $skill-tab-hover: #555555;
 $skill-card-bg: #212121;
 $skill-card-hover: #2a2a2a;
@@ -76,7 +76,7 @@ $skill-icon-bg: #393939;
     align-items: center;
     justify-content: center;
     padding: 0 1.2rem;
-    border-radius: 9999px;
+    border-radius: $radius-full;
     background-color: $skill-tab-bg;
     color: rgba($text-color, 0.7);
     border: none;
@@ -160,21 +160,21 @@ $skill-icon-bg: #393939;
 }
 
 .skill-icon-box {
-    // Fluid box size: 40px to 48px
-    width: clamp(40px, 6vw, 48px);
-    height: clamp(40px, 6vw, 48px);
+    // Fluid box size: 48px to 56px
+    width: clamp(48px, 7vw, 50px);
+    height: clamp(48px, 7vw, 50px);
     background-color: $skill-icon-bg;
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: #ffffff;
+    color: $text-color;
 
-    // Fluid icon size inside the box: 20px to 24px
+    // Fluid icon size inside the box: 24px to 28px, keeping the same padding ratio as before
     .skill-icon-wrapper, svg {
-        width: clamp(20px, 3.5vw, 24px);
-        height: clamp(20px, 3.5vw, 24px);
+        width: clamp(24px, 4.5vw, 28px);
+        height: clamp(24px, 4.5vw, 28px);
         display: flex;
         align-items: center;
         justify-content: center;

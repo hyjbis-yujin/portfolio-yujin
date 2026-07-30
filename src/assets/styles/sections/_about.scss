@@ -8,8 +8,8 @@
 .about-track {
     height: auto; // Default: natural height for touch/tablet devices
     position: relative;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid $border-color-subtle;
+    border-bottom: 1px solid $border-color-subtle;
 
     // Only enable scroll-jacking on non-touch (real desktop) device
     html:not([data-touch]) & {

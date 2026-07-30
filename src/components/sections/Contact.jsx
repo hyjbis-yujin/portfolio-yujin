@@ -24,7 +24,7 @@ const itemVariants = {
 
 const Contact = () => {
     const handleCopyEmail = () => {
-        const email = "frontend-dev@email.com"
+        const email = "hanyujin0104@naver.com"
         navigator.clipboard.writeText(email)
         alert(`이메일이 복사되었습니다! ${email}`)
     }
@@ -44,8 +44,8 @@ const Contact = () => {
                         감사합니다.
                     </motion.h2>
                     <motion.p className="contact-desc" variants={itemVariants}>
-                        실제 사용 환경을 고려해 구조와 구현을 단계적으로 정리한 프로젝트들입니다.<br />
-                        이러한 경험을 바탕으로 더 안정적인 결과를 만들어가고자 합니다.
+                        사용 목적과 이용 환경을 반영해 화면 구성과 전반적인 디자인을 진행한 프로젝트입니다.<br />
+                        더 나은 결과물을 위해 사용성과 디테일을 꾸준히 다듬어가고자 합니다.
                     </motion.p>
                 </div>
 
@@ -59,7 +59,7 @@ const Contact = () => {
                     </button>
 
                     <a
-                        href="https://github.com"
+                        href="https://github.com/hyjbis-yujin"
                         target="_blank"
                         rel="noreferrer"
                         className="btn-contact github"

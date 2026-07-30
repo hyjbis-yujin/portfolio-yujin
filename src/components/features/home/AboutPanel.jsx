@@ -12,12 +12,12 @@ const AboutPanel = ({ onScrollTo }) => {
                 />
             </div>
             <div className="tags-container">
-                <span className="tag"># Reliable</span>
-                <span className="tag"># Creative</span>
-                <span className="tag"># Teamwork</span>
-                <span className="tag"># Growth</span>
-                <span className="tag"># Solution</span>
+                <span className="tag"># UI/UX</span>
+                <span className="tag"># Responsive</span>
+                <span className="tag"># Usability</span>
                 <span className="tag"># Detail</span>
+                <span className="tag"># Growth</span>
+                <span className="tag"># UserFirst</span>
             </div>
         </div>
     )

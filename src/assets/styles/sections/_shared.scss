@@ -22,7 +22,7 @@
     position: relative;
     overflow-x: hidden; // Keep hidden x-overflow
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid $border-color-subtle;
 
     // Desktop only (non-touch device at 1024px+): Full page snap
     // Uses data-touch attribute set by inline script in index.html

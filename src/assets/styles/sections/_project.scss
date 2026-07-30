@@ -2,10 +2,10 @@
 // Mixins imported via _shared.scss
 @use './shared' as *;
 
-$project-filter-bg: #434343;
+$project-filter-bg: $btn-inactive;
 $project-filter-hover: #555555;
 $project-card-bg: #212121;
-$project-tag-bg: #323232;
+$project-tag-bg: $gray-dark;
 $project-card-height: 230px;
 $project-arrow-top: 57px;
 
@@ -87,7 +87,7 @@ $project-arrow-top: 57px;
     height: 50px;
     @include flex-center;
     padding: 0 1.5rem;
-    border-radius: 9999px;
+    border-radius: $radius-full;
     background-color: $project-filter-bg;
     color: rgba($text-color, 0.7);
     border: none;
@@ -293,7 +293,7 @@ $project-arrow-top: 57px;
                 color: $white-color;
                 font-size: $font-13;
                 padding: 10px 16px;
-                border-radius: 9999px;
+                border-radius: $radius-full;
                 font-weight: 500;
                 border: 1px solid #565656;
             }

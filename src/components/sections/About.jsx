@@ -84,7 +84,6 @@ const About = () => {
                             <div className="about-header-group">
                                 <SectionHeader
                                     title="About Me"
-                                    subtitle="사용자 경험을 최우선으로 생각하는 프론트엔드 개발자입니다."
                                 />
                             </div>
 

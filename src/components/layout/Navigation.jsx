@@ -29,7 +29,7 @@ const Navigation = () => {
             />
 
             <a
-                href="https://github.com"
+                href="https://github.com/hyjbis-yujin"
                 target="_blank"
                 rel="noreferrer"
                 className="quick-btn btn-github"

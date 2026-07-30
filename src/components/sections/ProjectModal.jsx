@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useLenis } from '@studio-freight/react-lenis'
 
 import ProjectModalSlider from '@/components/features/project/ProjectModalSlider'
 import ProjectModalContent from '@/components/features/project/ProjectModalContent'
@@ -38,15 +37,6 @@ const ProjectModal = ({ project, onClose }) => {
         setCurrentImageIndex((prev) => (prev - 1 + screenshotsLength) % screenshotsLength)
     }, [hasScreenshots, screenshotsLength])
 
-    const lenis = useLenis()
-
-    useEffect(() => {
-        if (lenis) {
-            lenis.stop()
-            return () => lenis.start()
-        }
-    }, [lenis])
-
     useScrollLock(!!project)
 
     useEffect(() => {
@@ -80,7 +70,6 @@ const ProjectModal = ({ project, onClose }) => {
                         className="project-modal-content"
                         onClick={(e) => e.stopPropagation()}
                         variants={modalVariants}
-                        data-lenis-prevent
                     >
                         <button className="btn-close-modal" onClick={handleClose}>
                             <X size={24} />

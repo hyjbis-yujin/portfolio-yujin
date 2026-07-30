@@ -1,8 +1,8 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-$contact-btn-border: #323232;
-$footer-text: #434343;
+$contact-btn-border: $gray-dark;
+$footer-text: $btn-inactive;
 $footer-border: #212121;
 
 #contact {

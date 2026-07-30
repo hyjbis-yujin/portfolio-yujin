@@ -26,7 +26,7 @@
     justify-content: center;
     align-items: center;
     width: fit-content;
-    border: 1px solid #434343;
+    border: 1px solid $btn-inactive;
     border-radius: 100px;
     @include glass-blur;
 
@@ -48,7 +48,7 @@
         flex-direction: column;
         gap: 2.3rem;
         padding: 1.9rem 1.5rem;
-        border: 1px solid #434343;
+        border: 1px solid $btn-inactive;
         background: transparent;
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
@@ -70,15 +70,15 @@
         }
 
         &.btn-home {
-            background-image: url('/icons/default/home.png');
+            background-image: url('/icons/default/home.svg');
         }
 
         &.btn-mail {
-            background-image: url('/icons/default/mail.png');
+            background-image: url('/icons/default/mail.svg');
         }
 
         &.btn-github {
-            background-image: url('/icons/default/github.png');
+            background-image: url('/icons/default/github.svg');
             width: 25px;
             height: 23px;
         }
@@ -86,7 +86,7 @@
         .circle-icon {
             width: 12px;
             height: 12px;
-            background-color: #ffffff;
+            background-color: $white-color;
             border-radius: 50%;
             transition: opacity $transition-fast;
         }

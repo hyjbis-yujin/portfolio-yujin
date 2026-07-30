@@ -6,7 +6,7 @@ const ProjectPreviewPanel = ({ onOpenProject, onScrollTo }) => {
         <div className="home-panel project-panel">
             <div className="panel-header project-header">
                 <span className="panel-title">Project</span>
-                <span className="project-desc">기획부터 개발 및 배포까지 전 과정을 주도적으로 수행하며 도전을 해결한 프로젝트</span>
+                <span className="project-desc">기획부터 디자인까지 직접 완성하며 사용자 경험과 완성도를 함께 고민한 웹 프로젝트</span>
             </div>
             <div className="project-stack">
                 {projects.slice(0, 3).map((project) => (

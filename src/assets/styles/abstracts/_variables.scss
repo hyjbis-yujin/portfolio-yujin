@@ -2,13 +2,14 @@
 $bg-color: #171717;
 $text-color: #ffffff;
 $primary-color: #2CB1EA;
-$accent-color: $primary-color;
 $secondary-color: #9c9c9c;
 $text-secondary-color: #888;
 $btn-inactive: #434343;
 $white-color: #ffffff;
 $border-color: rgba(255, 255, 255, 0.1);
 $card-bg: rgba(255, 255, 255, 0.05);
+$border-color-subtle: rgba(255, 255, 255, 0.05); // Same value as $card-bg but used for borders
+$gray-dark: #323232; // Shared dark gray used across tags, hover states, and borders
 
 
 $font-title: 'Yuseol', sans-serif;
@@ -24,11 +25,9 @@ $font-14: clamp(13px, 3.5vw, 14px);
 $font-13: clamp(12px, 3vw, 13px);
 
 
-$spacing-unit: 8px;
-$radius-sm: 4px;
 $radius-md: 8px;
-$radius-lg: 12px;
 $radius-xl: 16px;
+$radius-full: 9999px;
 
 
 $transition-fast: 0.2s ease;

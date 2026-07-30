@@ -34,12 +34,12 @@
     flex-wrap: wrap; // Allow wrap for small screens
 
     .panel-title {
-      color: #2cb1ea;
+      color: $primary-color;
     }
 
     .project-desc {
       font-size: $font-14;
-      color: #9c9c9c;
+      color: $secondary-color;
     }
   }
 
@@ -70,14 +70,14 @@
         height: 104px;
       }
 
-      background-color: #323232;
+      background-color: $gray-dark;
       border-radius: 12px;
       position: absolute;
       top: 0; // Align to the top of the stack (closer to header)
       margin-top: 0;
       // Removed bottom: 0 and margin-bottom: auto to shift extra space to the bottom
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
+      transition: transform $transition-normal;
 
       // Stacking Logic (Calculated perfectly to fit exactly into the box width)
       &:nth-child(1) {
@@ -159,12 +159,12 @@
         span {
           font-size: 14px;
           font-weight: 600;
-          color: #ffffff;
+          color: $text-color;
           letter-spacing: 0.05em;
         }
 
         @include hover-supported {
-          transition: transform 0.3s ease;
+          transition: transform $transition-normal;
 
           // Mobile default behavior (Just lift, no X translate)
           &:hover {

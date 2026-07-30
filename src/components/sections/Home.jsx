@@ -49,7 +49,7 @@ const Home = ({ onOpenProject, onScrollTo }) => {
                         transition={layoutSpring}
                         initial={isLoadedMidPage ? false : undefined}
                     >
-                        프론트-엔드<br />
+                        웹-디자이너<br />
                         <span className="highlight">포트폴리오</span>
                     </motion.h1>
                 </motion.div>

@@ -71,14 +71,8 @@ const PortfolioContent = () => {
   )
 }
 
-import { ReactLenis } from '@studio-freight/react-lenis'
-
 function App() {
-  return (
-    <ReactLenis root>
-      <PortfolioContent />
-    </ReactLenis>
-  )
+  return <PortfolioContent />
 }
 
 export default App

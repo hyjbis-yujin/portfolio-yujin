@@ -252,7 +252,7 @@
       background: #212121; // User request: #212121
       // backdrop-filter: blur(12px); // Removed for solid color
       // -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid $border-color-subtle;
       border-radius: 24px;
       // box-shadow removed as per user request
 
@@ -319,7 +319,7 @@
       .profile-name {
         font-size: 18px;
         font-weight: 700;
-        color: #ffffff;
+        color: $text-color;
       }
 
       .profile-email {
@@ -352,8 +352,8 @@
         flex: 1; // Stretch on mobile
         // Removed fixed height, using generous padding instead for better inner spacing
         padding: 18px 20px;
-        background-color: #323232;
-        color: #ffffff;
+        background-color: $gray-dark;
+        color: $text-color;
         border: none;
         border-radius: 13px;
         font-size: $font-14;
@@ -390,7 +390,7 @@
     .panel-title {
       font-size: 17px;
       font-weight: 600;
-      color: #2cb1ea; // Point color
+      color: $primary-color; // Point color
     }
 
     .shortcut-btn {
