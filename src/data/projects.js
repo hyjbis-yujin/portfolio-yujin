@@ -18,7 +18,7 @@ export const projects = [
     links: { github: "#", demo: "https://www.ethics.natureent.com/" },
     meta: {
       main: "기업",
-      duration: "2024.08 - 2024.10",
+      duration: "2025.08 - 2025.09",
       contribution: "디자인 100%",
       device: "반응형",
     },
